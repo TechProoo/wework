@@ -10,9 +10,9 @@ import ImageThree from "../assets/two.jpg";
 
 export const Hero = () => {
   return (
-    <div className="mt-10 md:flex items-center justify-center gap-10 mx-auto">
+    <div className="mt-10 md:flex items-center justify-center gap-20">
       <div className="hero_text">
-        <div className="hero_text_top flex flex-col gap-6">
+        <div className="hero_text_top flex flex-col gap-7">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
             A new way to learn <br />
             <span className="flex items-center gap-2">
@@ -21,15 +21,51 @@ export const Hero = () => {
             </span>
           </h1>
           <p className="text-md w-[400px] ">
-            Rework is here for you with various courses and materials from
+            Wework is here for you with various courses and materials from
             skilled tutors all over the world.
           </p>
           <div className="flex gap-5">
             <button className="comic-button">Get started today</button>
-            <button>Learn More</button>
+            <button className="cta flex mt-2">
+              <span className="hover-underline-animation"> Shop now </span>
+              <svg
+                className="mt-1"
+                id="arrow-horizontal"
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="10"
+                viewBox="0 0 46 16"
+              >
+                <path
+                  id="Path_10"
+                  data-name="Path 10"
+                  d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                  transform="translate(30)"
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
-        <div className="hero_text_bottom"></div>
+        <div className="hero_text_bottom mt-20">
+          <div className="stats-container">
+            <div className="stat-item">
+              <h2>15,2K</h2>
+              <p>Active students</p>
+            </div>
+            <div className="divider" />
+            <div className="stat-item">
+              <h2>4,5K</h2>
+              <p>Tutors</p>
+            </div>
+            <div className="divider" />
+            <div className="stat-item">
+              <div className="icon">
+                <span className="overlapping-circles">◎◎</span>
+              </div>
+              <p>Resources</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="hero_images">
         <div className="flex gap-5">

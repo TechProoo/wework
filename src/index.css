@@ -65,6 +65,60 @@ body {
   transform: translateY(4px);
 }
 
+/* From Uiverse.io by alexmaracinaru */
+.cta {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  letter-spacing: 4px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+  color: #64766a;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: var(--color-text);
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 3px;
+  left: 0;
+  background-color: #64766a;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 .nav_links {
   color: var(--color-primary);
   font-weight: 800;
@@ -213,4 +267,43 @@ body {
   height: 20px;
   border-radius: 74% 26% 54% 46% / 29% 75% 25% 71%;
   background-color: #789c5c;
+}
+
+.stats-container {
+  display: flex;
+  align-items: center;
+
+  font-family: sans-serif;
+  gap: 30px;
+  border-radius: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-item h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.stat-item p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #ddd;
+}
+
+.icon .overlapping-circles {
+  font-size: 1.6rem;
+  letter-spacing: -0.6rem;
 }
