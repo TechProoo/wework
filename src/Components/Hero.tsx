@@ -10,24 +10,26 @@ import ImageThree from "../assets/two.jpg";
 
 export const Hero = () => {
   return (
-    <div className="mt-10 md:flex items-center justify-center gap-20">
+    <div className="flex flex-col md:flex-row md:mt-10 px-3 gap-8 md:gap-5 lg:gap-20 items-center justify-center w-full">
       <div className="hero_text">
         <div className="hero_text_top flex flex-col gap-7">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            A new way to learn <br />
-            <span className="flex items-center gap-2">
-              <Ampersand size={40} />
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+            A new way to learn <br className="hidden md:block" />
+            <span className="inline-flex items-center gap-2">
+              <Ampersand className="inline-block" size={40} />
               earn
             </span>
           </h1>
-          <p className="text-md w-[400px] ">
-            Wework is here for you with various courses and materials from
-            skilled tutors all over the world.
+          <p className="text-md md:w-[400px] ">
+            WeWork is here to support you every step of the way, offering a wide
+            range of expertly designed courses, learning resources, and study
+            materials created by highly skilled tutors and professionals from
+            all over the world.
           </p>
           <div className="flex gap-5">
             <button className="comic-button">Get started today</button>
             <button className="cta flex mt-2">
-              <span className="hover-underline-animation"> Shop now </span>
+              <span className="hover-underline-animation">Explore</span>
               <svg
                 className="mt-1"
                 id="arrow-horizontal"
@@ -67,7 +69,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="hero_images">
+      <div className="hero_images md:mt-0 mt-10 ">
         <div className="flex gap-5">
           <div className="hero_img_ ">
             <div className="blob_one">
