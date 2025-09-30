@@ -2,7 +2,6 @@ import { categories } from "../data/categories";
 import InfoCard from "./InfoCard";
 import { InfoSection } from "./InfoSection";
 import CourseCard from "./Styles/Card";
-import WatchLearnGrow from "./wlg";
 
 export const Courses = () => {
   return (

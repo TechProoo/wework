@@ -4,7 +4,7 @@ import TeamImg1 from "../assets/in.jpg";
 import TeamImg2 from "../assets/gr.jpg";
 import TeamImg3 from "../assets/en.jpg";
 import { Users, Target, ShieldCheck } from "lucide-react";
-import WatchLearnGrow from "../Components/wlg";
+import WatchLearnGrow from "../Components/Wlg";
 
 export const About = () => {
   return (
