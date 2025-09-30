@@ -1,6 +1,6 @@
 import { AlignStartVertical, Star } from "lucide-react";
 import Bg from "../assets/ccc.png";
-import { List_card } from "../Components/Styles/list_card";
+import { List_card } from "../Components/Styles/List_card";
 import { useState } from "react";
 import { dummyCourses } from "../Components/Styles/dummy_courses";
 import Footer from "../Components/Footer";
