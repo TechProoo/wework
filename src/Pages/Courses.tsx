@@ -1,4 +1,4 @@
-import { AlignStartVertical, LaptopMinimalCheck, Star } from "lucide-react";
+import { AlignStartVertical, Star } from "lucide-react";
 import Bg from "../assets/ccc.png";
 import { List_card } from "../Components/Styles/list_card";
 import { useState } from "react";
@@ -89,7 +89,7 @@ export const Courses = () => {
           </div>
         </div>
       </div>
-      <div className="md:mx-5 mx-3 md:mx-auto md:w-11/12 my-10 ">
+      <div className="mx-3 md:mx-auto md:w-11/12 my-10 ">
         <div className="course_head">
           <div className="flex items-center justify-between flex-wrap">
             <div className="flex gap-2 items-center">
@@ -142,7 +142,7 @@ export const Courses = () => {
               100%
             </h2>
             <h3 className="text-xl font-semibold mt-5">Online Access</h3>
-            <p className="text-sm text-gray-600 mt-3 mt-5">
+            <p className="text-sm text-gray-600 mt-3">
               Learn from anywhere, anytime at your own pace
             </p>
           </div>
@@ -151,7 +151,7 @@ export const Courses = () => {
               24/7
             </h2>
             <h3 className="text-xl font-semibold mt-5">Support Available</h3>
-            <p className="text-sm text-gray-600 mt-3 mt-5">
+            <p className="text-sm text-gray-600  mt-5">
               Get help whenever you need it from mentors and community
             </p>
           </div>
@@ -160,7 +160,7 @@ export const Courses = () => {
               95%
             </h2>
             <h3 className="text-xl font-semibold mt-5">Job Placement Rate</h3>
-            <p className="text-sm text-gray-600 mt-3 mt-5">
+            <p className="text-sm text-gray-600 mt-5">
               Most graduates land remote jobs within 6 months
             </p>
           </div>
