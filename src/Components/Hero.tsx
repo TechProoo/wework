@@ -21,10 +21,8 @@ export const Hero = () => {
             </span>
           </h1>
           <p className="text-md md:w-[400px] ">
-            WeWork is here to support you every step of the way, offering a wide
-            range of expertly designed courses, learning resources, and study
-            materials created by highly skilled tutors and professionals from
-            all over the world.
+            Empowering African youth with world-class tech education and
+            connecting them to remote opportunities with global companies.
           </p>
           <div className="flex gap-5">
             <button className="comic-button">Get started today</button>

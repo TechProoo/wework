@@ -24,6 +24,11 @@ body {
   color: var(--color-bg);
 }
 
+.text_lg {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: 900;
+}
+
 .navbar_container {
   padding: 30px;
   position: relative;
@@ -334,7 +339,8 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 5px 5px 0px #3c4d42;
-  width: 230px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .card_cover:hover {
@@ -364,6 +370,162 @@ body {
 
 .card_owner {
   font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.about_us {
+  background-color: white;
+}
+
+.info-card-item {
+  background-color: transparent;
+}
+
+.info-card-title {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+.info-card-subtitle {
+  color: var(--color-secondary);
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.cat_head {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.cat_text {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: var(--color-primary);
+}
+
+.info-section-container h1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: #3c4d42;
+}
+
+.ld_ic {
+  width: 300px;
+  height: 300px;
+  border-radius: 38% 62% 49% 51% / 50% 93% 7% 50%;
+  border: 1px solid #3c4d42;
+  box-shadow: 5px 5px 0px #64766a;
+}
+
+.info_ic h1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.info_ic p {
+  font-size: 17px;
+  color: #8f8e8e;
+  line-height: 30px;
+}
+
+.info_ic p span {
+  color: #3c4d42;
+  font-weight: 600;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.vision_cover {
+  background-color: #f4f2f3;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 5px 5px 0px #64766a;
+}
+
+.vision_cover h1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: #3c4d42;
+}
+
+.vision_cover {
+  /* ...existing code... */
+  color: #3c4d42;
+}
+
+.vision_cover p {
+  color: #7a8a7f;
+}
+
+.vis_h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: #3c4d42;
+}
+
+.vision_cover h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: #3c4d42;
+}
+
+.glass_cd_cover {
+  background-color: rgba(0, 0, 0, 0.192);
+  box-shadow: 5px 5px 0px #3c4d42;
+}
+
+.about_cd {
+  background-color: #f4f2f3;
+  box-shadow: 5px 5px 0px #3c4d42;
+}
+
+@keyframes moveBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-moveBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 600px;
+  object-fit: cover;
+  z-index: 0;
+
+  animation: moveBg 50s ease infinite;
+}
+
+.courses_cover .cc_badge {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  font-weight: bold;
+  border: 2px solid var(--color-bg);
+  box-shadow: 3px 3px 0px var(--color-bg);
+  font-size: 12px;
+}
+
+.courses_cover h1 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: var(--color-bg);
+}
+
+.courses_cover p {
+  color: var(--color-secondary);
+}
+
+.cc_search input {
+  border-color: #3c4d42;
+  box-shadow: 3px 3px 0px var(--color-bg);
+  color: var(--color-bg);
+}
+
+.cc_search input::placeholder {
+  color: var(--color-bg);
 }
 
 @media (max-width: 768px) {
@@ -444,5 +606,33 @@ body {
   .hero_img_2 {
     width: 300px;
     height: 130px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card_cover {
+    max-width: 99vw;
+    padding: 0;
+  }
+  .card_img img {
+    height: 120px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .card_cover {
+    max-width: 380px;
+  }
+  .card_img img {
+    height: 192px;
+  }
+}
+
+@media (min-width: 769px) {
+  .card_cover {
+    max-width: 420px;
+  }
+  .card_img img {
+    height: 224px;
   }
 }

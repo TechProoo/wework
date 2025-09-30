@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (menuOpen) {
@@ -62,38 +64,56 @@ export const Navbar = () => {
         tabIndex={menuOpen ? 0 : -1}
         aria-hidden={!menuOpen && window.innerWidth < 768}
       >
-        <a
-          href="#"
-          className="nav_link active mb-4 md:mb-0"
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `nav_link mb-4 md:mb-0${isActive ? " active" : ""}`
+          }
           tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
           onClick={() => setMenuOpen(false)}
         >
           Home
-        </a>
-        <a
-          href="#"
-          className="nav_link mb-4 md:mb-0"
+        </NavLink>
+        <NavLink
+          to="/courses"
+          className={({ isActive }) =>
+            `nav_link mb-4 md:mb-0${isActive ? " active" : ""}`
+          }
+          tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
+          onClick={() => setMenuOpen(false)}
+        >
+          Courses
+        </NavLink>
+        <NavLink
+          to="/jobs"
+          className={({ isActive }) =>
+            `nav_link mb-4 md:mb-0${isActive ? " active" : ""}`
+          }
+          tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
+          onClick={() => setMenuOpen(false)}
+        >
+          Jobs
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            `nav_link mb-4 md:mb-0${isActive ? " active" : ""}`
+          }
           tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
           onClick={() => setMenuOpen(false)}
         >
           About
-        </a>
-        <a
-          href="#"
-          className="nav_link mb-4 md:mb-0"
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            `nav_link mb-4 md:mb-0${isActive ? " active" : ""}`
+          }
           tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
           onClick={() => setMenuOpen(false)}
         >
-          Services
-        </a>
-        <a
-          href="#"
-          className="nav_link mb-4 md:mb-0"
-          tabIndex={menuOpen || window.innerWidth >= 768 ? 0 : -1}
-          onClick={() => setMenuOpen(false)}
-        >
-          Contact
-        </a>
+          Contacts
+        </NavLink>
         {/* Show button in mobile menu */}
         <div className="nav_button md:hidden mt-4 w-full">
           <button className="comic-button w-full">Get Started</button>
