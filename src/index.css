@@ -404,7 +404,8 @@ body {
 .info-section-container h1 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-weight: 900;
-  color: #3c4d42;
+  color: var(--color-primary);
+  text-shadow: 0 2px 8px #f4f2f3cc;
 }
 
 .ld_ic {
@@ -421,12 +422,12 @@ body {
 
 .info_ic p {
   font-size: 17px;
-  color: #8f8e8e;
+  color: var(--color-secondary);
   line-height: 30px;
 }
 
 .info_ic p span {
-  color: #3c4d42;
+  color: var(--color-primary);
   font-weight: 600;
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -441,28 +442,27 @@ body {
 .vision_cover h1 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-weight: 900;
-  color: #3c4d42;
+  color: var(--color-primary);
 }
 
 .vision_cover {
-  /* ...existing code... */
   color: #3c4d42;
 }
 
 .vision_cover p {
-  color: #7a8a7f;
+  color: var(--color-secondary);
 }
 
 .vis_h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-weight: 900;
-  color: #3c4d42;
+  color: var(--color-primary);
 }
 
 .vision_cover h2 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-weight: 900;
-  color: #3c4d42;
+  color: var(--color-primary);
 }
 
 .glass_cd_cover {
@@ -475,6 +475,19 @@ body {
   box-shadow: 5px 5px 0px #3c4d42;
 }
 
+.animate-moveBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0% 50%;
+  animation: moveBg 16s ease-in-out infinite;
+}
+
 @keyframes moveBg {
   0% {
     background-position: 0% 50%;
@@ -485,18 +498,6 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
-
-.animate-moveBg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 600px;
-  object-fit: cover;
-  z-index: 0;
-
-  animation: moveBg 50s ease infinite;
 }
 
 .courses_cover .cc_badge {
@@ -528,11 +529,26 @@ body {
   color: var(--color-bg);
 }
 
+.course_head h1 {
+  color: #3c4d42;
+}
+
+.courses_why h2 {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+
+.courses_cons p {
+  color: var(--color-secondary);
+}
+
 @media (max-width: 768px) {
   .nav_links {
     position: fixed;
     top: 0;
     right: 0;
+
     height: 100vh;
     width: 80vw;
     max-width: 340px;
@@ -577,18 +593,13 @@ body {
     position: static;
     height: auto;
     width: auto;
-    background: transparent;
-    box-shadow: none;
-    align-items: center;
-    gap: 5vw;
-    padding-top: 0;
-  }
-  .nav_link {
-    border-bottom: none;
-    padding: 0;
-    margin-bottom: 0;
-    text-align: center;
-    padding-left: 0;
+    background .nav_link {
+      border-bottom: none;
+      padding: 0;
+      margin-bottom: 0;
+      text-align: center;
+      padding-left: 0;
+    }
   }
 }
 
