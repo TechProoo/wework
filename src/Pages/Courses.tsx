@@ -97,22 +97,45 @@ export const Courses = () => {
               <span className="font-bold text-3xl">Featured Courses</span>
             </div>
             <div className="flex gap-2 items-center ml-auto">
-              {levels.map((lvl) => (
-                <button
-                  key={lvl}
-                  className={`px-5 py-2 rounded-full border font-semibold text-base transition-all duration-200 ${
-                    filter === lvl
-                      ? "bg-gray-200 border-gray-400"
-                      : "bg-white border-gray-300"
-                  }`}
-                  onClick={() => {
-                    setFilter(lvl);
+              {/* Responsive filter: select on mobile, buttons on desktop */}
+              <div className="block md:hidden w-full">
+                <select
+                  value={filter}
+                  onChange={(e) => {
+                    setFilter(e.target.value);
                     setLimit(5);
                   }}
+                  className="rounded-full px-5 py-2 border font-semibold text-base bg-white text-[var(--color-primary)] border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)] transition-all duration-200 w-full"
                 >
-                  {lvl}
-                </button>
-              ))}
+                  {levels.map((lvl) => (
+                    <option
+                      key={lvl}
+                      value={lvl}
+                      className="text-[var(--color-primary)]"
+                    >
+                      {lvl}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="hidden md:flex gap-2 items-center">
+                {levels.map((lvl) => (
+                  <button
+                    key={lvl}
+                    className={`px-5 py-2 rounded-full border font-semibold text-base transition-all duration-200 ${
+                      filter === lvl
+                        ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
+                        : "bg-white text-[var(--color-primary)] border-[var(--color-accent)]"
+                    }`}
+                    onClick={() => {
+                      setFilter(lvl);
+                      setLimit(5);
+                    }}
+                  >
+                    {lvl}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
