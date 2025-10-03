@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // Accept courses as a prop
 
 type Course = {
@@ -157,9 +158,12 @@ export const List_card: React.FC<ListCardProps> = ({ courses }) => {
               By {course.owner}
             </div>
             {/* CTA */}
-            <button className="mt-4 w-full comic-button text-lg">
+            <Link
+              to={`/courses/${course.id}`}
+              className="mt-4 w-full comic-button text-lg inline-block text-center"
+            >
               Enroll Now
-            </button>
+            </Link>
           </div>
         </div>
       ))}

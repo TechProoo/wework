@@ -4,6 +4,7 @@ import {
   ChevronsLeftRightEllipsis,
   Sparkle,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import ImageOne from "../assets/seven.jpg";
 import ImageTwo from "../assets/five.jpg";
 import ImageThree from "../assets/two.jpg";
@@ -25,8 +26,10 @@ export const Hero = () => {
             connecting them to remote opportunities with global companies.
           </p>
           <div className="flex gap-5">
-            <button className="comic-button">Get started today</button>
-            <button className="cta flex mt-2">
+            <Link to="/signup" className="comic-button">
+              Get started today
+            </Link>
+            <Link to="/about" className="cta flex mt-2">
               <span className="hover-underline-animation">Explore</span>
               <svg
                 className="mt-1"
@@ -43,7 +46,7 @@ export const Hero = () => {
                   transform="translate(30)"
                 ></path>
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
         <div className="hero_text_bottom mt-20">

@@ -1,4 +1,5 @@
 import { AlignStartVertical, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 import Bg from "../assets/ccc.png";
 import { List_card } from "../Components/Styles/List_card";
 import { useState } from "react";
@@ -199,7 +200,9 @@ export const Courses = () => {
             on your goals and background.
           </p>
           <div className="mx-auto flex justify-center mt-10">
-            <button className="comic-button">Get Free Consultation</button>
+            <Link to="/consultation" className="comic-button inline-block">
+              Get Free Consultation
+            </Link>
           </div>
         </div>
       </div>

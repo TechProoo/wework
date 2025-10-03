@@ -1,4 +1,9 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --color-light: #f4f2f3; /* Very light grey (backgrounds) */
   --color-mauve: #c0a9bd; /* Mauve (accents / highlights) */
@@ -17,6 +22,7 @@ body {
   color: var(--color-text);
   font-family: "Poppins", sans-serif;
   /* font-family: "Abril Fatface", serif; */
+  padding-top: 100px; /* Compensate for fixed navbar */
 }
 
 ::selection {
@@ -31,8 +37,30 @@ body {
 
 .navbar_container {
   padding: 30px;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 30;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar_container.navbar_scrolled {
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  transition: transform 0.3s ease;
 }
 
 .logo h1 {
@@ -40,6 +68,15 @@ body {
   font-weight: 900;
   color: var(--color-primary);
   font-family: "Merriweather", serif;
+  transition: font-size 0.3s ease;
+}
+
+.logo.logo_scrolled {
+  transform: scale(0.9);
+}
+
+.logo.logo_scrolled h1 {
+  font-size: 18px;
 }
 
 .comic-button {
@@ -71,7 +108,35 @@ body {
   transform: translateY(4px);
 }
 
-/* From Uiverse.io by alexmaracinaru */
+.comic-button-outline {
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: var(--comic-blue);
+  background-color: transparent;
+  border: 2px solid var(--comic-blue);
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px var(--comic-blue);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: "Merriweather", serif;
+}
+
+.comic-button-outline:hover {
+  background-color: var(--comic-blue);
+  color: #000;
+  border: 2px solid var(--comic-blue);
+  box-shadow: 5px 5px 0px #000;
+}
+
+.comic-button-outline:active {
+  background-color: var(--comic-cyan);
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
 .cta {
   border: none;
   background: none;
@@ -543,6 +608,30 @@ body {
   color: var(--color-secondary);
 }
 
+.jobs-hero-section {
+  background-image: url("../src/assets/p.webp");
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.jobs-hero-content_overlay {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+  gap: 20px;
+  background-color: #000000b0;
+  filter: blur(30px);
+}
+
 @media (max-width: 768px) {
   .nav_links {
     position: fixed;
@@ -646,4 +735,475 @@ body {
   .card_img img {
     height: 224px;
   }
+}
+
+/* Jobs Page Styles */
+.job-card {
+  border-radius: 20px;
+  border: 2px solid var(--color-text);
+  background-color: white;
+  box-shadow: 5px 5px 0px var(--color-text);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.job-type-badge {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.skill-tag {
+  background-color: var(--color-light);
+  color: var(--color-text);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-secondary);
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Jobs Hero Section */
+.jobs-hero-section {
+  background: linear-gradient(
+    135deg,
+    var(--color-bg) 0%,
+    var(--color-light) 100%
+  );
+  position: relative;
+}
+
+.jobs-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      var(--color-accent) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      var(--color-primary) 1px,
+      transparent 1px
+    );
+  background-size: 50px 50px, 30px 30px;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.jobs-hero-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Filter Panel Styles */
+.filter-panel {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-select {
+  border: 2px solid var(--color-text);
+  border-radius: 8px;
+  padding: 12px;
+  background-color: white;
+  font-weight: 500;
+  transition: border-color 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.active-filter-tag {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Responsive adjustments for jobs page */
+@media (max-width: 768px) {
+  .job-card {
+    margin-bottom: 1rem;
+  }
+
+  .jobs-hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .jobs-hero-section p {
+    font-size: 1rem;
+  }
+
+  .filter-panel {
+    padding: 1rem;
+  }
+
+  .filter-panel .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Contact Page Styles */
+.contact-method-card {
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  border: 2px solid var(--color-text);
+  box-shadow: 5px 5px 0px var(--color-text);
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.contact-method-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px var(--color-secondary);
+  border-color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.contact-form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid var(--color-text);
+  box-shadow: 5px 5px 0px var(--color-text);
+}
+
+.contact-info-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 2px solid var(--color-secondary);
+  box-shadow: 3px 3px 0px var(--color-secondary);
+}
+
+.contact-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--color-text);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background: white;
+}
+
+.contact-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.contact-input:hover {
+  border-color: var(--color-secondary);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: white;
+}
+
+.faq-item {
+  background: var(--color-light);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 2px solid var(--color-secondary);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Contact page responsive */
+@media (max-width: 768px) {
+  .contact-method-card {
+    padding: 1.5rem;
+  }
+
+  .contact-form-card {
+    padding: 1.5rem;
+  }
+
+  .contact-info-card {
+    padding: 1rem;
+  }
+
+  .contact-input {
+    padding: 0.75rem;
+  }
+}
+
+/* About Page Styles */
+.about-team-avatar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-team-avatar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, var(--comic-purple), var(--comic-cyan));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.about-team-avatar:hover::before {
+  opacity: 0.3;
+}
+
+.about-team-avatar img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-team-avatar:hover img {
+  transform: scale(1.1);
+}
+
+.about-content-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(20px);
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-content-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.about-value-card {
+  background: linear-gradient(135deg, var(--comic-blue), var(--comic-purple));
+  transform: scale(1) rotate(0deg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-value-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  transform: scale(0);
+  transition: transform 0.6s ease;
+}
+
+.about-value-card:hover {
+  transform: scale(1.05) rotate(-2deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.about-value-card:hover::before {
+  transform: scale(1);
+}
+
+.about-milestone-card {
+  background: linear-gradient(135deg, var(--comic-green), var(--comic-cyan));
+  border-left: 6px solid var(--comic-orange);
+  transform: translateX(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.about-milestone-card::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--comic-orange), var(--comic-red));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+
+.about-milestone-card:hover {
+  transform: translateX(10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.about-milestone-card:hover::after {
+  transform: scaleY(1);
+}
+
+.about-team-card {
+  background: linear-gradient(135deg, var(--comic-purple), var(--comic-blue));
+  transform: translateY(0) rotate(0deg);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-team-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+.about-team-card:hover {
+  transform: translateY(-15px) rotate(3deg);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.about-team-card:hover::before {
+  left: 100%;
+}
+
+/* About page responsive */
+@media (max-width: 768px) {
+  .about-milestone-card:hover {
+    transform: translateX(5px);
+  }
+
+  .about-team-card:hover {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  .about-value-card:hover {
+    transform: scale(1.02) rotate(-1deg);
+  }
+}
+
+/* Login Page Styles */
+.login-card {
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-input {
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+  font-family: "Poppins", sans-serif;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 3px 3px 0px var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.login-info-card {
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: 3px 3px 0px var(--color-primary);
+  transform: translateX(3px);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

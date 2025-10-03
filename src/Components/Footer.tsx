@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="w-full bg-[#f4f2f3] border-t border-[#64766a] mt-20 py-10 px-4 text-[#3c4d42]">
@@ -14,30 +16,30 @@ const Footer = () => {
           </span>
         </div>
         <div className="flex flex-col md:flex-row gap-4 items-center">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="hover:underline hover:text-[#94a7ae] font-semibold"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/courses"
             className="hover:underline hover:text-[#94a7ae] font-semibold"
           >
             Courses
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/about"
             className="hover:underline hover:text-[#94a7ae] font-semibold"
           >
             Community
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/contact"
             className="hover:underline hover:text-[#94a7ae] font-semibold"
           >
             Contact
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col items-center md:items-end gap-2">
           <span className="text-sm">

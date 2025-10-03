@@ -1,4 +1,5 @@
 import { Rocket } from "lucide-react";
+import { Link } from "react-router-dom";
 import GlassCard from "./glass_card";
 import WatchLearnGrow from "./Wlg";
 
@@ -43,7 +44,9 @@ export const InfoSection = () => {
                 </p>
               </div>
               <div className="mt-10">
-                <button className="comic-button">Join Us</button>
+                <Link to="/signup" className="comic-button inline-block">
+                  Join Us
+                </Link>
               </div>
             </div>
           </div>
@@ -72,7 +75,9 @@ export const InfoSection = () => {
               </div>
             </div>
             <div className="mt-10">
-              <button className="comic-button">Elevate your career</button>
+              <Link to="/courses" className="comic-button inline-block">
+                Elevate your career
+              </Link>
             </div>
           </div>
         </div>
@@ -109,7 +114,9 @@ export const InfoSection = () => {
               Join the first cohort of changemakers and help us shape the future
               of tech education in Africa.
             </p>
-            <button className="comic-button mt-10">Join the Movement!</button>
+            <Link to="/signup" className="comic-button mt-10 inline-block">
+              Join the Movement!
+            </Link>
           </div>
         </div>
       </div>

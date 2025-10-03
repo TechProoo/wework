@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     if (menuOpen) {
@@ -15,11 +16,27 @@ export const Navbar = () => {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="navbar_container flex justify-between items-center relative">
+    <nav
+      className={`navbar_container flex justify-between items-center relative ${
+        scrolled ? "navbar_scrolled" : ""
+      }`}
+    >
       <a
         href="#"
-        className="logo z-20 focus:outline-none focus:ring-2 focus:ring-accent rounded"
+        className={`logo z-20 focus:outline-none focus:ring-2 focus:ring-accent rounded ${
+          scrolled ? "logo_scrolled" : ""
+        }`}
       >
         <h1>
           WE<span>WORK.</span>
@@ -113,14 +130,35 @@ export const Navbar = () => {
         >
           Contacts
         </NavLink>
-        {/* Show button in mobile menu */}
-        <div className="nav_button md:hidden mt-4 w-full">
-          <button className="comic-button w-full">Get Started</button>
+        {/* Show buttons in mobile menu */}
+        <div className="nav_button md:hidden mt-4 w-full space-y-3">
+          <NavLink
+            to="/signup"
+            className="comic-button w-full block text-center"
+            onClick={() => setMenuOpen(false)}
+          >
+            Get Started
+          </NavLink>
+          <NavLink
+            to="/login"
+            className="comic-button-outline w-full border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 block text-center"
+            onClick={() => setMenuOpen(false)}
+          >
+            Login
+          </NavLink>
         </div>
       </div>
-      {/* Show button in desktop */}
-      <div className="nav_button ">
-        <button className="comic-button hidden md:block">Get Started</button>
+      {/* Show buttons in desktop */}
+      <div className="nav_button flex items-center gap-4">
+        <NavLink
+          to="/login"
+          className="comic-button-outline hidden md:block border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 px-6 py-2 rounded-lg font-bold"
+        >
+          Login
+        </NavLink>
+        <NavLink to="/signup" className="comic-button hidden md:block">
+          Get Started
+        </NavLink>
       </div>
       {/* Overlay for mobile menu */}
       <div

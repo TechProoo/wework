@@ -2,6 +2,7 @@ import { categories } from "../data/categories";
 import InfoCard from "./InfoCard";
 import { InfoSection } from "./InfoSection";
 import CourseCard from "./Styles/Card";
+import { Link } from "react-router-dom";
 
 export const Courses = () => {
   return (
@@ -19,7 +20,9 @@ export const Courses = () => {
           </div>
         </div>
         <div className="flex justify-center mt-10">
-          <button className="mx-auto comic-button">View All</button>
+          <Link to="/courses" className="mx-auto comic-button">
+            View All
+          </Link>
         </div>
       </div>
       <div className="about_us mt-20 py-10">
