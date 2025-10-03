@@ -73,8 +73,6 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
-
       <main className="flex-grow py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
@@ -91,7 +89,7 @@ export const Login = () => {
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Login Form */}
-            <div className="login-card sticky top-20">
+            <div className="login-card md:sticky top-20">
               <div className="text-center mb-8">
                 <h2
                   className="text-2xl font-bold mb-2"
