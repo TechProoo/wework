@@ -25,7 +25,7 @@ body {
 }
 
 .text_lg {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-family: 900;
 }
 
@@ -39,7 +39,7 @@ body {
   font-size: 20px;
   font-weight: 900;
   color: var(--color-primary);
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .comic-button {
@@ -55,7 +55,7 @@ body {
   box-shadow: 5px 5px 0px #000;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .comic-button:hover {
@@ -155,7 +155,7 @@ body {
 .hero_text_top h1 {
   font-weight: 900;
   line-height: 1.2;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   text-wrap: wrap;
 
   color: var(--color-text);
@@ -327,7 +327,7 @@ body {
 .p_courses h1 {
   font-weight: 900;
   line-height: 1.2;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   text-wrap: wrap;
   color: var(--color-text);
   margin-bottom: 20px;
@@ -369,7 +369,7 @@ body {
 }
 
 .card_owner {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .about_us {
@@ -387,22 +387,22 @@ body {
 
 .info-card-subtitle {
   color: var(--color-secondary);
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .cat_head {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
 }
 
 .cat_text {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   color: var(--color-primary);
 }
 
 .info-section-container h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
   text-shadow: 0 2px 8px #f4f2f3cc;
@@ -417,7 +417,7 @@ body {
 }
 
 .info_ic h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .info_ic p {
@@ -429,7 +429,7 @@ body {
 .info_ic p span {
   color: var(--color-primary);
   font-weight: 600;
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
 }
 
 .vision_cover {
@@ -440,7 +440,7 @@ body {
 }
 
 .vision_cover h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
 }
@@ -454,13 +454,13 @@ body {
 }
 
 .vis_h2 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
 }
 
 .vision_cover h2 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
 }
@@ -510,7 +510,7 @@ body {
 }
 
 .courses_cover h1 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-bg);
 }
@@ -534,7 +534,7 @@ body {
 }
 
 .courses_why h2 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: "Merriweather", serif;
   font-weight: 900;
   color: var(--color-primary);
 }
