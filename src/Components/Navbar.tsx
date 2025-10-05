@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export const Navbar = () => {
+  const { user, isAuthenticated, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -132,33 +134,78 @@ export const Navbar = () => {
         </NavLink>
         {/* Show buttons in mobile menu */}
         <div className="nav_button md:hidden mt-4 w-full space-y-3">
-          <NavLink
-            to="/signup"
-            className="comic-button w-full block text-center"
-            onClick={() => setMenuOpen(false)}
-          >
-            Get Started
-          </NavLink>
-          <NavLink
-            to="/login"
-            className="comic-button-outline w-full border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 block text-center"
-            onClick={() => setMenuOpen(false)}
-          >
-            Login
-          </NavLink>
+          {isAuthenticated ? (
+            <>
+              <div className="text-center p-2 text-sm text-gray-600">
+                Welcome, {user?.firstName || user?.companyName || user?.email}!
+              </div>
+              <NavLink
+                to="/dashboard"
+                className="comic-button w-full block text-center"
+                onClick={() => setMenuOpen(false)}
+              >
+                Dashboard
+              </NavLink>
+              <button
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
+                className="comic-button-outline w-full border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 block text-center"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/signup"
+                className="comic-button w-full block text-center"
+                onClick={() => setMenuOpen(false)}
+              >
+                Get Started
+              </NavLink>
+              <NavLink
+                to="/login"
+                className="comic-button-outline w-full border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 block text-center"
+                onClick={() => setMenuOpen(false)}
+              >
+                Login
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
       {/* Show buttons in desktop */}
       <div className="nav_button flex items-center gap-4">
-        <NavLink
-          to="/login"
-          className="comic-button-outline hidden md:block border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 px-6 py-2 rounded-lg font-bold"
-        >
-          Login
-        </NavLink>
-        <NavLink to="/signup" className="comic-button hidden md:block">
-          Get Started
-        </NavLink>
+        {isAuthenticated ? (
+          <div className="hidden md:flex items-center gap-4">
+            <span className="text-sm text-gray-600">
+              Welcome, {user?.firstName || user?.companyName || user?.email}!
+            </span>
+            <NavLink to="/dashboard" className="comic-button">
+              Dashboard
+            </NavLink>
+            <button
+              onClick={logout}
+              className="comic-button-outline border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 px-6 py-2 rounded-lg font-bold"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <>
+            <NavLink
+              to="/login"
+              className="comic-button-outline hidden md:block border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 px-6 py-2 rounded-lg font-bold"
+            >
+              Login
+            </NavLink>
+            <NavLink to="/signup" className="comic-button hidden md:block">
+              Get Started
+            </NavLink>
+          </>
+        )}
       </div>
       {/* Overlay for mobile menu */}
       <div

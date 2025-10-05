@@ -2,9 +2,14 @@ import { Navbar } from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { Eye, EyeOff, Users, Globe, Award } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -57,12 +62,23 @@ export const Login = () => {
 
     setIsSubmitting(true);
 
-    // Simulate login process
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const result = await login(formData.email, formData.password);
 
-    alert("Login successful! Welcome back to WeWork.");
-    setFormData({ email: "", password: "", rememberMe: false });
-    setIsSubmitting(false);
+      if (result.success) {
+        alert("Login successful! Welcome back to WeWork.");
+
+        // Redirect to intended page or dashboard
+        const from = location.state?.from?.pathname || "/dashboard";
+        navigate(from, { replace: true });
+      } else {
+        setErrors({ submit: result.error || "Login failed" });
+      }
+    } catch (error) {
+      setErrors({ submit: "An error occurred during login" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const stats = [
@@ -91,7 +107,7 @@ export const Login = () => {
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Login Form */}
-            <div className="login-card sticky top-20">
+            <div className="login-card md:sticky top-20">
               <div className="text-center mb-8">
                 <h2
                   className="text-2xl font-bold mb-2"
@@ -177,6 +193,12 @@ export const Login = () => {
                     Forgot password?
                   </Link>
                 </div>
+
+                {errors.submit && (
+                  <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300">
+                    {errors.submit}
+                  </div>
+                )}
 
                 <button
                   type="submit"
