@@ -12,9 +12,14 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export const Signup = () => {
+  const { signup } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [currentStep, setCurrentStep] = useState<
     "selection" | "student" | "company"
   >("selection");
@@ -199,9 +204,24 @@ export const Signup = () => {
     if (!validateStudentForm()) return;
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    alert("Student registration successful! Welcome to WeWork.");
-    setIsSubmitting(false);
+
+    try {
+      const result = await signup(studentData, "student");
+
+      if (result.success) {
+        alert("Student registration successful! Welcome to WeWork.");
+
+        // Redirect to intended page or dashboard
+        const from = location.state?.from?.pathname || "/dashboard";
+        navigate(from, { replace: true });
+      } else {
+        setErrors({ submit: result.error || "Registration failed" });
+      }
+    } catch (error) {
+      setErrors({ submit: "An error occurred during registration" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCompanySubmit = async (e: React.FormEvent) => {
@@ -209,9 +229,24 @@ export const Signup = () => {
     if (!validateCompanyForm()) return;
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    alert("Company registration successful! Welcome to WeWork.");
-    setIsSubmitting(false);
+
+    try {
+      const result = await signup(companyData, "company");
+
+      if (result.success) {
+        alert("Company registration successful! Welcome to WeWork.");
+
+        // Redirect to intended page or dashboard
+        const from = location.state?.from?.pathname || "/dashboard";
+        navigate(from, { replace: true });
+      } else {
+        setErrors({ submit: result.error || "Registration failed" });
+      }
+    } catch (error) {
+      setErrors({ submit: "An error occurred during registration" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderUserTypeSelection = () => (
@@ -762,6 +797,12 @@ export const Signup = () => {
                   </p>
                 )}
 
+                {errors.submit && (
+                  <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300">
+                    {errors.submit}
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -1257,6 +1298,12 @@ export const Signup = () => {
                   <p className="mb-4 text-sm text-red-600">
                     {errors.agreeToTerms}
                   </p>
+                )}
+
+                {errors.submit && (
+                  <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-300">
+                    {errors.submit}
+                  </div>
                 )}
 
                 <button
