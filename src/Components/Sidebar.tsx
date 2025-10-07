@@ -202,7 +202,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
               letterSpacing: "-0.02em",
             }}
           >
-            TechPro
+            WEWORK
           </span>
         </div>
       </div>

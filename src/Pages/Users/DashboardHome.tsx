@@ -170,7 +170,7 @@ export const DashboardHome = () => {
                     </div>
                     <div>
                       <h1 className="text-2xl lg:text-4xl font-bold bg-gradient-to-r from-white via-[var(--color-light)] to-white bg-clip-text text-transparent">
-                        Welcome to TechPro!
+                        Welcome to WEWORK!
                       </h1>
                       <p className="text-white/80 text-sm lg:text-base">
                         Your journey to tech excellence starts here

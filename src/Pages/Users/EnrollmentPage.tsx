@@ -194,7 +194,7 @@ export const EnrollmentPage = () => {
 
       return {
         id: tutorialId,
-        instructor: "TechPro Learning",
+        instructor: "WEWORK Learning",
         instructorAvatar: "/api/placeholder/60/60",
         instructorTitle: "Interactive Learning Platform",
         instructorRating: 4.9,
@@ -450,7 +450,7 @@ export const EnrollmentPage = () => {
                     </div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">
-                        TechPro Learning
+                        WEWORK Learning
                       </h3>
                       <p className="text-gray-600 mb-3">
                         Interactive Learning Platform

@@ -1,9 +1,9 @@
-# REWORK
+# WEWORK
 
 A modern, mobile-first landing page built with React and Node.js.  
 Designed to help organizations showcase remote work and skills programs with a clean, muted color palette.
 
-![REWORK Screenshot](./screenshot.png) <!-- Optional: add your own screenshot -->
+![WEWORK Screenshot](./screenshot.png) <!-- Optional: add your own screenshot -->
 
 ## 🌟 Features
 
@@ -39,8 +39,8 @@ Installation
 
 Clone the repo:
 
-git clone https://github.com/your-username/rework.git
-cd rework
+git clone https://github.com/your-username/wework.git
+cd wework
 
 Install dependencies:
 
@@ -64,7 +64,7 @@ Open http://localhost:3000
 to see the landing page.
 
 📂 Project Structure
-rework/
+wework/
 ├─ public/ # Static assets
 ├─ src/
 │ ├─ components/ # Reusable UI components
@@ -91,6 +91,6 @@ file for details.
 Contributions, issues, and feature requests are welcome!
 Feel free to fork the repo and submit a pull request.
 
-✨ About REWORK
+✨ About WEWORK
 
-REWORK is inspired by the need to connect African talent with global opportunities. It’s a starting point for landing pages promoting remote work, training programs, or tech skill initiatives.
+WEWORK is inspired by the need to connect African talent with global opportunities. It’s a starting point for landing pages promoting remote work, training programs, or tech skill initiatives.

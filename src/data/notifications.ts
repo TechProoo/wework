@@ -105,7 +105,7 @@ export const notifications: Notification[] = [
     actionUrl: "/dashboard/events",
     actionText: "RSVP",
     sender: {
-      name: "TechPro Academy",
+      name: "WEWORK Academy",
       avatar: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150",
       role: "Education Team",
     },

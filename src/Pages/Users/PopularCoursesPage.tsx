@@ -58,7 +58,7 @@ const PopularCoursesPage = () => {
     {
       id: "1",
       title: "Complete Web Development Bootcamp",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Web Development",
       level: "Beginner",
@@ -92,7 +92,7 @@ const PopularCoursesPage = () => {
     {
       id: "2",
       title: "Python for Data Science and Machine Learning",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Data Science",
       level: "Intermediate",
@@ -126,7 +126,7 @@ const PopularCoursesPage = () => {
     {
       id: "3",
       title: "UI/UX Design Complete Course",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Design",
       level: "Beginner",
@@ -160,7 +160,7 @@ const PopularCoursesPage = () => {
     {
       id: "4",
       title: "React - The Complete Guide",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Web Development",
       level: "Intermediate",
@@ -195,7 +195,7 @@ const PopularCoursesPage = () => {
     {
       id: "5",
       title: "Mobile App Development with Flutter",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Mobile Development",
       level: "Intermediate",
@@ -229,7 +229,7 @@ const PopularCoursesPage = () => {
     {
       id: "6",
       title: "Cybersecurity Fundamentals",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "Cybersecurity",
       level: "Beginner",
@@ -377,7 +377,7 @@ const PopularCoursesPage = () => {
             <span className="text-white text-xs font-bold">TP</span>
           </div>
           <span className="text-sm font-medium text-gray-700">
-            Created by TechPro
+            Created by WEWORK
           </span>
         </div>
 
@@ -488,7 +488,7 @@ const PopularCoursesPage = () => {
               <span className="text-white text-xs font-bold">TP</span>
             </div>
             <span className="text-sm font-medium text-gray-700">
-              Created by TechPro
+              Created by WEWORK
             </span>
           </div>
 
@@ -537,7 +537,7 @@ const PopularCoursesPage = () => {
   return (
     <DashboardLayout
       title="Popular Courses"
-      subtitle="Explore our most popular tutorials - expertly crafted by the TechPro team"
+      subtitle="Explore our most popular tutorials - expertly crafted by the WEWORK team"
       icon={<TrendingUp size={18} className="text-white" />}
       className="space-y-6"
       removeTopPadding={true}
@@ -653,7 +653,7 @@ const PopularCoursesPage = () => {
             className="text-xl lg:text-2xl font-bold mb-3"
             style={{ fontFamily: "Merriweather, serif" }}
           >
-            🌟 Most Popular Tutorials - Created by TechPro!
+            🌟 Most Popular Tutorials - Created by WEWORK!
           </h2>
           <p className="text-white/90 mb-6 text-sm lg:text-base">
             Our expert team crafts each tutorial with hands-on exercises and

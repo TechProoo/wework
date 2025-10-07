@@ -113,7 +113,7 @@ export const CoursesPage = () => {
     {
       id: "1",
       title: "Complete React Developer Course 2024",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "web-dev",
       level: "Intermediate",
@@ -146,7 +146,7 @@ export const CoursesPage = () => {
     {
       id: "2",
       title: "UI/UX Design Fundamentals",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "design",
       level: "Beginner",
@@ -178,7 +178,7 @@ export const CoursesPage = () => {
     {
       id: "3",
       title: "Python for Data Science",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "data-science",
       level: "Intermediate",
@@ -211,7 +211,7 @@ export const CoursesPage = () => {
     {
       id: "4",
       title: "Flutter Mobile App Development",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "mobile",
       level: "Advanced",
@@ -244,7 +244,7 @@ export const CoursesPage = () => {
     {
       id: "5",
       title: "Digital Marketing Mastery",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "business",
       level: "Beginner",
@@ -277,7 +277,7 @@ export const CoursesPage = () => {
     {
       id: "6",
       title: "Node.js Backend Development",
-      instructor: "TechPro Team",
+      instructor: "WEWORK Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "web-dev",
       level: "Advanced",
@@ -549,7 +549,7 @@ export const CoursesPage = () => {
                       {course.title}
                     </h3>
                     <p className="text-sm text-gray-600 mb-2">
-                      Created by TechPro
+                      Created by WEWORK
                     </p>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -864,7 +864,7 @@ export const CoursesPage = () => {
                     <User size={14} className="text-white" />
                   </div>
                   <span className="text-sm text-gray-700 font-medium">
-                    Created by TechPro
+                    Created by WEWORK
                   </span>
                 </div>
 
