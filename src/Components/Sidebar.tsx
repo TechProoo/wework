@@ -14,8 +14,8 @@ import {
   Building,
   Users,
   Calendar,
-  SchoolIcon,
   MessageCircle,
+  BarChart4Icon,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -80,22 +80,17 @@ export const Sidebar: React.FC<SidebarProps> = () => {
     };
   }, [isMobileOpen, isMobile]);
 
-  // Handle sidebar hover effect for main content with improved responsiveness
-  const handleSidebarMouseEnter = () => {
+  // Handle sidebar toggle for main content
+  const handleSidebarToggle = () => {
     if (!isMobile) {
-      setIsCollapsed(false);
-      document.body.classList.add("sidebar-expanded");
-      // Dispatch event for layout components
-      document.dispatchEvent(new CustomEvent("sidebar-expanded"));
-    }
-  };
-
-  const handleSidebarMouseLeave = () => {
-    if (!isMobile) {
-      setIsCollapsed(true);
-      document.body.classList.remove("sidebar-expanded");
-      // Dispatch event for layout components
-      document.dispatchEvent(new CustomEvent("sidebar-collapsed"));
+      setIsCollapsed(!isCollapsed);
+      if (!isCollapsed) {
+        document.body.classList.remove("sidebar-expanded");
+        document.dispatchEvent(new CustomEvent("sidebar-collapsed"));
+      } else {
+        document.body.classList.add("sidebar-expanded");
+        document.dispatchEvent(new CustomEvent("sidebar-expanded"));
+      }
     }
   };
 
@@ -179,66 +174,87 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   ];
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-gradient-to-b from-white to-gray-50">
+    <div className="flex flex-col h-full bg-gradient-to-br from-[var(--color-light)] via-[var(--color-light)]/80 to-white/50 backdrop-blur-xl">
       {/* Logo/Brand */}
-      <div className="p-3 sm:p-4 lg:p-6 border-b border-gray-200 bg-white">
+      <div className="p-4 lg:p-6 border-b border-[var(--color-slate)]/20 bg-white/80 backdrop-blur-sm">
         <div
           className={`flex items-center ${
             isMobileOpen ? "justify-start" : "justify-center lg:justify-start"
-          } gap-3`}
+          } gap-3 cursor-pointer group/logo`}
+          onClick={handleSidebarToggle}
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
-            <SchoolIcon color="#fff" size={isSmallScreen ? 16 : 20} />
+          <div className="relative w-10 h-10 sm:w-10 sm:h-10 bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 flex-shrink-0 group-hover/logo:shadow-xl group-hover/logo:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-3">
+            <BarChart4Icon
+              color="#fff"
+              size={isSmallScreen ? 18 : 18}
+              className="drop-shadow-sm"
+            />
+            <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300"></div>
           </div>
           <span
-            className={`font-extrabold text-xl sm:text-2xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] bg-clip-text text-transparent whitespace-nowrap overflow-hidden transition-all duration-300 ${
+            className={`font-black text-xl sm:text-2xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-primary)] to-[var(--color-accent)] bg-clip-text text-transparent whitespace-nowrap overflow-hidden transition-all duration-500 ${
               isMobileOpen || !isCollapsed
-                ? "opacity-100 max-w-full"
-                : "opacity-0 lg:group-hover:opacity-100 max-w-0 lg:group-hover:max-w-full"
+                ? "opacity-100 max-w-full transform translate-x-0"
+                : "opacity-0 max-w-0 transform -translate-x-2"
             }`}
-            style={{ fontFamily: "Comic Sans MS, cursive" }}
+            style={{
+              fontFamily: "Inter, -apple-system, sans-serif",
+              letterSpacing: "-0.02em",
+            }}
           >
-            WeWork
+            TechPro
           </span>
         </div>
       </div>
 
       {/* User Info */}
-      <div className="p-3 sm:p-4 lg:p-6 border-b border-gray-100 bg-white">
+      <div className="p-4 lg:p-6 border-b border-[var(--color-slate)]/10 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
         <div
           className={`flex items-center ${
             isMobileOpen ? "justify-start" : "justify-center lg:justify-start"
           } gap-3 sm:gap-4`}
         >
-          <div className="relative flex-shrink-0">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center shadow-lg">
-              <User size={isSmallScreen ? 18 : 22} className="text-white" />
+          <div className="relative flex-shrink-0 group/avatar">
+            <div className="w-11 h-11 sm:w-11 sm:h-11 bg-gradient-to-br from-[var(--color-accent)] via-[var(--color-primary)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/20 ring-2 ring-white/50 group-hover/avatar:shadow-xl group-hover/avatar:shadow-[var(--color-primary)]/30 transition-all duration-300 group-hover/avatar:scale-105">
+              <User
+                size={isSmallScreen ? 20 : 24}
+                className="text-white drop-shadow-sm"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-2xl"></div>
             </div>
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full border-2 border-white"></div>
+            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full border-3 border-white shadow-sm">
+              <div className="w-full h-full bg-[var(--color-primary)] rounded-full animate-pulse"></div>
+            </div>
           </div>
           <div
-            className={`flex-1 min-w-0 overflow-hidden transition-all duration-300 ${
+            className={`flex-1 min-w-0 overflow-hidden transition-all duration-500 ${
               isMobileOpen || !isCollapsed
-                ? "opacity-100 max-w-full"
-                : "opacity-0 lg:group-hover:opacity-100 max-w-0 lg:group-hover:max-w-full"
+                ? "opacity-100 max-w-full transform translate-x-0"
+                : "opacity-0 max-w-0 transform -translate-x-3"
             }`}
           >
-            <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate whitespace-nowrap">
+            <p className="text-sm sm:text-base font-bold text-[var(--color-text)] truncate whitespace-nowrap mb-0.5">
               {user?.userType === "student"
                 ? `${user?.firstName} ${user?.lastName}`
                 : user?.companyName || user?.email}
             </p>
-            <p className="text-xs text-gray-500 capitalize flex items-center gap-1 whitespace-nowrap">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              {user?.userType} Account
-            </p>
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--color-text)]">
+              <div className="flex items-center gap-1.5">
+                <div className="w-2 h-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full shadow-sm"></div>
+                <span className="font-medium capitalize">{user?.userType}</span>
+              </div>
+              <span className="text-[var(--color-slate)]">•</span>
+              <span className="text-[var(--color-slate)] font-medium">
+                Online
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-2 lg:p-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-        {sidebarItems.map((item) => (
+      <nav className="flex-1 p-3 lg:p-4 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-[var(--color-slate)]/50 scrollbar-track-transparent">
+        {sidebarItems.map((item, index) => (
           <NavLink
             key={item.id}
             to={item.path}
@@ -250,44 +266,56 @@ export const Sidebar: React.FC<SidebarProps> = () => {
                   isMobileOpen
                     ? "justify-start"
                     : "justify-center lg:justify-start"
-                } gap-3 sm:gap-4 px-3 lg:px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 group relative hover:scale-[1.02] active:scale-[0.98]
-                ${
-                  isActive
-                    ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white shadow-lg transform"
-                    : "text-gray-700 hover:bg-white hover:shadow-md"
-                }
+                } gap-3 sm:gap-4 px-1 rounded-2xl text-sm font-semibold transition-all duration-300 group relative hover:scale-[1.02] active:scale-[0.98] ${
+                isActive
+                  ? "bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-primary)]/25 transform ring-1 ring-white/20"
+                  : "text-[var(--color-text)] hover:bg-white/80 hover:shadow-md hover:shadow-[var(--color-slate)]/20 hover:text-[var(--color-primary)] backdrop-blur-sm"
+              }
               `;
             }}
-            title={isCollapsed && !isMobile ? item.label : undefined} // Tooltip for collapsed state
+            title={isCollapsed && !isMobile ? item.label : undefined}
+            style={{
+              animationDelay: `${index * 50}ms`,
+              animation: "slideInFromLeft 0.4s ease-out forwards",
+            }}
           >
             {({ isActive }) => {
               return (
                 <>
-                  <span
+                  <div
                     className={`
-                    transition-all duration-300 flex-shrink-0
+                    relative flex items-center justify-center w-8 h-8 rounded-xl transition-all duration-300 flex-shrink-0
                     ${
                       isActive
-                        ? "text-white"
-                        : "text-gray-500 group-hover:text-[var(--color-primary)]"
+                        ? "bg-white/20 text-white shadow-sm"
+                        : "text-[var(--color-slate)] group-hover:text-[var(--color-primary)] group-hover:bg-[var(--color-light)] group-hover:scale-110"
                     }
                   `}
                   >
                     {React.cloneElement(item.icon, {
-                      size: isSmallScreen ? 16 : 20,
+                      size: isSmallScreen ? 16 : 18,
+                      className: "drop-shadow-sm",
                     })}
-                  </span>
+                  </div>
                   <span
-                    className={`font-medium whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                    className={`font-semibold whitespace-nowrap overflow-hidden transition-all duration-500 ${
                       isMobileOpen || !isCollapsed
-                        ? "opacity-100 max-w-full"
-                        : "opacity-0 lg:group-hover:opacity-100 max-w-0 lg:group-hover:max-w-full"
+                        ? "opacity-100 max-w-full transform translate-x-0"
+                        : "opacity-0 max-w-0 transform -translate-x-2"
                     }`}
                   >
                     {item.label}
                   </span>
                   {isActive && (isMobileOpen || !isCollapsed) && (
-                    <div className="ml-auto w-2 h-2 bg-white rounded-full animate-pulse transition-all duration-300"></div>
+                    <div className="ml-auto flex items-center gap-1">
+                      <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                      <div className="w-1 h-1 bg-white/60 rounded-full animate-pulse delay-75"></div>
+                    </div>
+                  )}
+                  {!isActive && (isMobileOpen || !isCollapsed) && (
+                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
+                    </div>
                   )}
                 </>
               );
@@ -297,30 +325,29 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       </nav>
 
       {/* Footer Actions */}
-      <div className="p-3 lg:p-4 border-t border-gray-100 space-y-3 flex-shrink-0 bg-white">
+      <div className="p-4 border-t border-[var(--color-slate)]/20 bg-gradient-to-br from-white via-[var(--color-light)]/50 to-white/30 backdrop-blur-sm space-y-2 flex-shrink-0">
         <button
           onClick={handleLogout}
-          className={`flex items-center ${
-            isMobileOpen ? "justify-start" : "justify-center lg:justify-start"
-          } gap-3 sm:gap-4 px-3 lg:px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-700 transition-all duration-300 w-full group hover:scale-[1.02] active:scale-[0.98]`}
+          className={`flex items-center gap-3 px-4 py-3 text-slate-700 rounded-2xl hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-600 transition-all duration-300 cursor-pointer group hover:scale-[1.02] active:scale-[0.98] hover:shadow-md hover:shadow-red-200/50 w-full ${
+            isCollapsed && !isMobile ? "justify-center" : "justify-start"
+          }`}
           title={isCollapsed && !isMobile ? "Logout" : undefined}
         >
-          <LogOut
-            size={isSmallScreen ? 16 : 18}
-            className="group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
-          />
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-red-100 transition-all duration-300 group-hover:scale-110">
+            <LogOut className="w-4 h-4 text-slate-600 group-hover:text-red-500 transition-colors duration-300 drop-shadow-sm" />
+          </div>
           <span
-            className={`whitespace-nowrap overflow-hidden transition-all duration-300 ${
+            className={`text-sm font-semibold whitespace-nowrap overflow-hidden transition-all duration-500 ${
               isMobileOpen || !isCollapsed
-                ? "opacity-100 max-w-full"
-                : "opacity-0 lg:group-hover:opacity-100 max-w-0 lg:group-hover:max-w-full"
+                ? "opacity-100 max-w-full transform translate-x-0"
+                : "opacity-0 max-w-0 transform -translate-x-2"
             }`}
           >
             Logout
           </span>
-          {(isMobileOpen || !isCollapsed) && (
-            <div className="ml-auto transition-all duration-300 text-xs">↗</div>
-          )}
+          <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="w-1 h-1 bg-red-400 rounded-full"></div>
+          </div>
         </button>
       </div>
     </div>
@@ -365,12 +392,12 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             ? isMobileOpen
               ? "translate-x-0 w-80 sm:w-80"
               : "-translate-x-full w-80 sm:w-80"
-            : // Desktop behavior
-              "translate-x-0 w-20 hover:w-64"
+            : // Desktop behavior - now click-based instead of hover
+            isCollapsed
+            ? "translate-x-0 w-20"
+            : "translate-x-0 w-64"
         }
       `}
-        onMouseEnter={handleSidebarMouseEnter}
-        onMouseLeave={handleSidebarMouseLeave}
         style={{
           transition: isMobile
             ? "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)"

@@ -15,9 +15,16 @@ import { ProtectedRoute } from "./Components/ProtectedRoute";
 import { PublicOnlyRoute } from "./Components/PublicOnlyRoute";
 import { CoursesPage } from "./Pages/Users/Courses_page";
 import { JobsPage } from "./Pages/Users/Jobs_page";
-import { ConsultationPage } from "./Pages/Users/ConsultationPage";
+import ConsultationPage from "./Pages/Users/ConsultationPage";
 import { MessagesPage } from "./Pages/Users/MessagesPage";
 import { Notification } from "./Pages/Users/Notification";
+import EnrollmentPage from "./Pages/Users/EnrollmentPage";
+import CategoryPage from "./Pages/Users/CategoryPage";
+import LearningGoals from "./Pages/Users/LearningGoals";
+import Community from "./Pages/Users/Community";
+import SkillAssessmentPage from "./Pages/Users/SkillAssessmentPage";
+import PopularCoursesPage from "./Pages/Users/PopularCoursesPage";
+import TutorialViewPage from "./Pages/Users/TutorialViewPage";
 
 function App() {
   return (
@@ -106,6 +113,62 @@ function App() {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/courses/enroll/:courseId"
+          element={
+            <ProtectedRoute>
+              <EnrollmentPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/tutorial/:courseId"
+          element={
+            <ProtectedRoute>
+              <TutorialViewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/category/:categoryId"
+          element={
+            <ProtectedRoute>
+              <CategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/goals"
+          element={
+            <ProtectedRoute>
+              <LearningGoals />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/community"
+          element={
+            <ProtectedRoute>
+              <Community />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/skill-assessment"
+          element={
+            <ProtectedRoute>
+              <SkillAssessmentPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/popular-courses"
+          element={
+            <ProtectedRoute>
+              <PopularCoursesPage />
             </ProtectedRoute>
           }
         />

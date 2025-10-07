@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { DashboardLayout } from "../../Components/DashboardLayout";
-import {
-  notifications,
-  type Notification as NotificationType,
-} from "../../data/notifications";
+import { type Notification as NotificationType } from "../../data/notifications";
 import {
   Bell,
   MessageCircle,
@@ -23,10 +20,13 @@ import {
 } from "lucide-react";
 
 export const Notification = () => {
-  const [allNotifications, setAllNotifications] =
-    useState<NotificationType[]>(notifications);
-  const [filteredNotifications, setFilteredNotifications] =
-    useState<NotificationType[]>(notifications);
+  // Empty notifications for new user experience
+  const [allNotifications, setAllNotifications] = useState<NotificationType[]>(
+    []
+  );
+  const [filteredNotifications, setFilteredNotifications] = useState<
+    NotificationType[]
+  >([]);
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isMobileView, setIsMobileView] = useState<boolean>(false);
@@ -186,8 +186,8 @@ export const Notification = () => {
 
   return (
     <DashboardLayout
-      title="Notifications"
-      subtitle={`${unreadCount} unread notifications`}
+      title="Stay Connected"
+      subtitle="Never miss important updates, messages, and opportunities"
       icon={<Bell className="w-6 h-6 text-[var(--color-primary)]" />}
       actions={
         <div className="flex items-center gap-2">
@@ -266,19 +266,59 @@ export const Notification = () => {
             <div className="flex-1 overflow-y-auto">
               {filteredNotifications.length === 0 ? (
                 <div className="flex items-center justify-center h-full p-8">
-                  <div className="text-center space-y-3">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-                      <Bell size={32} className="text-gray-400" />
+                  <div className="text-center space-y-6 max-w-md mx-auto">
+                    <div className="relative">
+                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                        <Bell size={36} className="text-white" />
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                        <Star size={16} className="text-yellow-800" />
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        No notifications found
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        Welcome to Your Notification Center!
                       </h3>
-                      <p className="text-gray-600">
-                        {searchQuery
-                          ? "Try adjusting your search terms"
-                          : "You're all caught up!"}
+                      <p className="text-gray-600 leading-relaxed mb-4">
+                        This is where you'll stay updated on everything
+                        important. As you engage with the platform, you'll
+                        receive:
                       </p>
+                      <div className="space-y-3 text-left">
+                        <div className="flex items-center gap-3 text-sm text-gray-700">
+                          <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <MessageCircle
+                              size={14}
+                              className="text-blue-600"
+                            />
+                          </div>
+                          <span>New messages from mentors and connections</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-700">
+                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <Briefcase size={14} className="text-green-600" />
+                          </div>
+                          <span>Job application updates and opportunities</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-700">
+                          <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                            <BookOpen size={14} className="text-purple-600" />
+                          </div>
+                          <span>
+                            Course progress and achievement notifications
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-gray-700">
+                          <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                            <Award size={14} className="text-orange-600" />
+                          </div>
+                          <span>Achievements and milestone celebrations</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="text-sm text-gray-500 bg-gray-50 rounded-lg p-4">
+                      💡 <strong>Tip:</strong> Start exploring courses and
+                      connecting with others to see your first notifications!
                     </div>
                   </div>
                 </div>

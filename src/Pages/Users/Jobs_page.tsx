@@ -65,69 +65,8 @@ export const JobsPage = () => {
   const [selectedLocation, setSelectedLocation] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
 
-  // Mock data for job applications
-  const applications: JobApplication[] = [
-    {
-      id: "1",
-      jobTitle: "Senior React Developer",
-      company: "TechCorp Inc.",
-      companyLogo: "/api/placeholder/40/40",
-      appliedDate: "2024-10-01",
-      status: "interview",
-      salary: "$80,000 - $120,000",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      interviewDate: "2024-10-08",
-      nextStep: "Technical interview scheduled",
-    },
-    {
-      id: "2",
-      jobTitle: "UI/UX Designer",
-      company: "Design Studio",
-      companyLogo: "/api/placeholder/40/40",
-      appliedDate: "2024-09-28",
-      status: "reviewing",
-      salary: "$65,000 - $85,000",
-      location: "New York, NY",
-      type: "Full-time",
-      nextStep: "Portfolio review in progress",
-    },
-    {
-      id: "3",
-      jobTitle: "Frontend Developer Intern",
-      company: "StartupXYZ",
-      companyLogo: "/api/placeholder/40/40",
-      appliedDate: "2024-09-25",
-      status: "accepted",
-      salary: "$25/hour",
-      location: "Remote",
-      type: "Internship",
-      nextStep: "Onboarding starts Monday",
-    },
-    {
-      id: "4",
-      jobTitle: "Full Stack Engineer",
-      company: "Enterprise Solutions",
-      companyLogo: "/api/placeholder/40/40",
-      appliedDate: "2024-09-20",
-      status: "rejected",
-      salary: "$90,000 - $130,000",
-      location: "Seattle, WA",
-      type: "Full-time",
-    },
-    {
-      id: "5",
-      jobTitle: "Mobile App Developer",
-      company: "AppMakers Ltd",
-      companyLogo: "/api/placeholder/40/40",
-      appliedDate: "2024-09-15",
-      status: "pending",
-      salary: "$70,000 - $100,000",
-      location: "Austin, TX",
-      type: "Full-time",
-      nextStep: "Application under review",
-    },
-  ];
+  // Mock data for job applications - empty for new user
+  const applications: JobApplication[] = [];
 
   // Mock data for job listings
   const jobListings: JobListing[] = [
@@ -286,8 +225,8 @@ export const JobsPage = () => {
 
   return (
     <DashboardLayout
-      title="Job Applications"
-      subtitle="Track your applications and discover new opportunities"
+      title="Find Your Dream Job"
+      subtitle="Discover amazing opportunities and start your career journey today"
       icon={<Briefcase size={18} className="text-white" />}
       actions={topNavActions}
       className="space-y-6"
@@ -296,72 +235,76 @@ export const JobsPage = () => {
       {/* Stats Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mt-10">
         {/* Total Applications */}
-        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-blue-600/5 rounded-bl-3xl"></div>
+        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
                 <Briefcase size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1.5 rounded-full border border-blue-200">
+                <span className="text-xs font-semibold text-[var(--color-primary)] bg-[var(--color-light)] px-3 py-1.5 rounded-full border border-[var(--color-slate)]/20">
                   Active
                 </span>
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+              <h3 className="text-3xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300">
                 {applicationStats.total}
               </h3>
-              <p className="text-sm font-medium text-gray-600">
-                Total Applications
+              <p className="text-sm font-medium text-[var(--color-slate)]">
+                Ready to Apply
               </p>
             </div>
           </div>
         </div>
 
         {/* Pending Applications */}
-        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-yellow-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-400/10 to-yellow-600/5 rounded-bl-3xl"></div>
+        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-accent)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-accent)]/10 to-[var(--color-slate)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-500/25 group-hover:shadow-yellow-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-accent)]/25 group-hover:shadow-[var(--color-accent)]/40 transition-all duration-300 group-hover:scale-110">
                 <Clock size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-yellow-700 bg-yellow-100 px-3 py-1.5 rounded-full border border-yellow-200">
+                <span className="text-xs font-semibold text-[var(--color-accent)] bg-[var(--color-light)] px-3 py-1.5 rounded-full border border-[var(--color-accent)]/20">
                   Pending
                 </span>
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="text-3xl font-bold text-gray-900 group-hover:text-yellow-600 transition-colors duration-300">
+              <h3 className="text-3xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors duration-300">
                 {applicationStats.pending}
               </h3>
-              <p className="text-sm font-medium text-gray-600">Under Review</p>
+              <p className="text-sm font-medium text-[var(--color-slate)]">
+                Start Exploring
+              </p>
             </div>
           </div>
         </div>
 
         {/* Interviews Scheduled */}
-        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-400/10 to-purple-600/5 rounded-bl-3xl"></div>
+        <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
                 <Calendar size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full border border-purple-200">
+                <span className="text-xs font-semibold text-[var(--color-primary)] bg-[var(--color-light)] px-3 py-1.5 rounded-full border border-[var(--color-primary)]/20">
                   Upcoming
                 </span>
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="text-3xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
+              <h3 className="text-3xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300">
                 {applicationStats.interview}
               </h3>
-              <p className="text-sm font-medium text-gray-600">Interviews</p>
+              <p className="text-sm font-medium text-[var(--color-slate)]">
+                Future Success
+              </p>
             </div>
           </div>
         </div>
@@ -381,10 +324,12 @@ export const JobsPage = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="text-3xl font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+              <h3 className="text-3xl font-bold text-[var(--color-text)] group-hover:text-green-600 transition-colors duration-300">
                 {applicationStats.accepted}
               </h3>
-              <p className="text-sm font-medium text-gray-600">Offers</p>
+              <p className="text-sm font-medium text-[var(--color-slate)]">
+                Your Goal
+              </p>
             </div>
           </div>
         </div>
@@ -431,24 +376,24 @@ export const JobsPage = () => {
       </div>
 
       {/* Enhanced Search and Filters */}
-      <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100 p-6 lg:p-8">
+      <div className="bg-gradient-to-br from-white to-[var(--color-light)] rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-6 lg:p-8">
         <div className="space-y-6">
           {/* Search Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className="text-lg font-semibold text-[var(--color-text)]">
                 {activeTab === "applications"
                   ? "Search Applications"
                   : "Find Your Next Opportunity"}
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--color-slate)] mt-1">
                 {activeTab === "applications"
                   ? "Track and manage your job application status"
                   : "Discover jobs that match your skills and preferences"}
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-[var(--color-slate)]">
                 {activeTab === "applications"
                   ? `${filteredApplications.length} applications`
                   : `${filteredJobs.length} jobs available`}
@@ -550,13 +495,53 @@ export const JobsPage = () => {
         </div>
       </div>
 
+      {/* Welcome Banner for New Users */}
+      {activeTab === "applications" && applications.length === 0 && (
+        <div className="relative bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-slate)] rounded-2xl shadow-2xl border border-[var(--color-slate)]/20 p-8 text-white overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-tr-full"></div>
+          <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-[var(--color-accent)]/40 rounded-full animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-[var(--color-accent)]/50 rounded-full animate-pulse delay-300"></div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm ring-2 ring-[var(--color-accent)]/30">
+                <Briefcase size={24} className="text-white" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold">
+                  Welcome to Your Job Journey!
+                </h2>
+                <p className="text-white/80">
+                  Ready to find your dream career?
+                </p>
+              </div>
+            </div>
+            <p className="text-white/90 mb-6 leading-relaxed">
+              Start exploring thousands of opportunities that match your skills
+              and interests. Your next career move is just a click away!
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => setActiveTab("discover")}
+                className="bg-white text-[var(--color-primary)] px-6 py-3 rounded-xl font-semibold hover:bg-[var(--color-light)] transition-colors shadow-lg"
+              >
+                Explore Jobs
+              </button>
+              <button className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30">
+                Build Profile
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Enhanced Content Area */}
       {activeTab === "applications" ? (
         <div className="space-y-6">
           {filteredApplications.map((application) => (
             <div
               key={application.id}
-              className="group relative bg-gradient-to-r from-white to-gray-50/50 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+              className="group relative bg-gradient-to-r from-white to-[var(--color-light)]/50 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
             >
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent rounded-bl-full"></div>
@@ -568,18 +553,18 @@ export const JobsPage = () => {
                       <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <Building size={24} className="text-white" />
                       </div>
-                      <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-white border-2 border-gray-200 rounded-full flex items-center justify-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-white border-2 border-[var(--color-slate)]/20 rounded-full flex items-center justify-center">
+                        <span className="w-2 h-2 bg-[var(--color-primary)] rounded-full"></span>
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <h3 className="md:text-xl font-bold text-gray-900 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                      <h3 className="md:text-xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300">
                         {application.jobTitle}
                       </h3>
-                      <p className="text-gray-600 font-medium">
+                      <p className="text-[var(--color-slate)] font-medium">
                         {application.company}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-[var(--color-slate)]">
                         Applied{" "}
                         {new Date(application.appliedDate).toLocaleDateString(
                           "en-US",
@@ -728,69 +713,77 @@ export const JobsPage = () => {
           {filteredJobs.map((job) => (
             <div
               key={job.id}
-              className="group relative bg-gradient-to-r from-white to-blue-50/30 rounded-2xl shadow-lg border border-gray-200 p-8 hover:shadow-2xl hover:border-blue-300/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+              className="group relative bg-gradient-to-r from-white to-[var(--color-light)]/30 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-2xl hover:border-[var(--color-primary)]/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
             >
               {/* Background decorations */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-bl-full"></div>
-              <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-green-400/10 to-transparent rounded-tr-full"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--color-primary)]/10 to-transparent rounded-bl-full"></div>
+              <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent rounded-tr-full"></div>
 
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-start gap-6 flex-1">
-                    <div className="relative">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <Building size={24} className="text-white" />
+                    <div className="relative flex flex-col sm:flex-row gap-4 sm:gap-6 items-start w-full">
+                      {/* Logo */}
+                      <div className="relative flex-shrink-0">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Building size={24} className="text-white" />
+                        </div>
+                        <div className="absolute -top-2 -right-2 w-6 h-6 bg-white border-2 border-[var(--color-primary)]/20 rounded-full flex items-center justify-center">
+                          <span className="w-2 h-2 bg-[var(--color-primary)] rounded-full animate-pulse"></span>
+                        </div>
                       </div>
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-white border-2 border-green-200 rounded-full flex items-center justify-center">
-                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                      </div>
-                    </div>
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[var(--color-primary)] transition-colors duration-300">
-                          {job.title}
-                        </h3>
-                        <span className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
-                          {job.match}% Match
-                        </span>
-                        {job.match > 90 && (
-                          <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs font-medium">
-                            Perfect Fit!
+                      {/* Main Info */}
+                      <div className="flex-1 space-y-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h3 className="text-lg sm:text-xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                            {job.title}
+                          </h3>
+                          <span className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            {job.match}% Match
                           </span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <p className="text-gray-600 font-semibold">
-                          {job.company}
-                        </p>
-                        <span className="text-gray-400">•</span>
-                        <p className="text-sm text-gray-500">
-                          Posted{" "}
-                          {new Date(job.postedDate).toLocaleDateString(
-                            "en-US",
-                            { month: "short", day: "numeric" }
+                          {job.match > 90 && (
+                            <span className="bg-[var(--color-accent)]/20 text-[var(--color-accent)] px-2 py-1 rounded-full text-xs font-medium">
+                              Perfect Fit!
+                            </span>
                           )}
-                        </p>
-                      </div>
-                      <p className="text-gray-700 leading-relaxed">
-                        {job.description}
-                      </p>
-
-                      {/* Enhanced Skills Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {job.requirements.slice(0, 4).map((req, index) => (
-                          <span
-                            key={index}
-                            className="bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-sm font-medium hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors cursor-pointer"
-                          >
-                            {req}
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="text-[var(--color-slate)] font-semibold">
+                            {job.company}
+                          </p>
+                          <span className="text-[var(--color-slate)]/50">
+                            •
                           </span>
-                        ))}
-                        {job.requirements.length > 4 && (
-                          <button className="text-[var(--color-primary)] text-sm font-medium hover:underline">
-                            +{job.requirements.length - 4} more skills
-                          </button>
-                        )}
+                          <p className="text-sm text-[var(--color-slate)]">
+                            Posted{" "}
+                            {new Date(job.postedDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
+                          </p>
+                        </div>
+                        <p className="text-[var(--color-text)] leading-relaxed text-sm sm:text-base">
+                          {job.description}
+                        </p>
+                        {/* Enhanced Skills Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {job.requirements.slice(0, 4).map((req, index) => (
+                            <span
+                              key={index}
+                              className="bg-white border border-[var(--color-slate)]/20 text-[var(--color-text)] px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors cursor-pointer"
+                            >
+                              {req}
+                            </span>
+                          ))}
+                          {job.requirements.length > 4 && (
+                            <button className="text-[var(--color-primary)] text-xs sm:text-sm font-medium hover:underline">
+                              +{job.requirements.length - 4} more skills
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -822,75 +815,86 @@ export const JobsPage = () => {
 
                 {/* Enhanced Info Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
+                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-[var(--color-slate)]/10 hover:shadow-md transition-shadow">
                     <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
                       <DollarSign size={18} className="text-green-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                      <p className="text-xs text-[var(--color-slate)] uppercase tracking-wide font-medium">
                         Salary Range
                       </p>
-                      <p className="font-bold text-gray-900">{job.salary}</p>
+                      <p className="font-bold text-[var(--color-text)]">
+                        {job.salary}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                      <MapPin size={18} className="text-blue-600" />
+                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-[var(--color-slate)]/10 hover:shadow-md transition-shadow">
+                    <div className="w-10 h-10 bg-[var(--color-primary)]/10 rounded-xl flex items-center justify-center">
+                      <MapPin
+                        size={18}
+                        className="text-[var(--color-primary)]"
+                      />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                      <p className="text-xs text-[var(--color-slate)] uppercase tracking-wide font-medium">
                         Location
                       </p>
-                      <p className="font-bold text-gray-900">{job.location}</p>
+                      <p className="font-bold text-[var(--color-text)]">
+                        {job.location}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-gray-100 hover:shadow-md transition-shadow">
-                    <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                      <Clock size={18} className="text-purple-600" />
+                  <div className="flex items-center gap-3 p-4 bg-white/80 rounded-xl border border-[var(--color-slate)]/10 hover:shadow-md transition-shadow">
+                    <div className="w-10 h-10 bg-[var(--color-accent)]/10 rounded-xl flex items-center justify-center">
+                      <Clock size={18} className="text-[var(--color-accent)]" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+                      <p className="text-xs text-[var(--color-slate)] uppercase tracking-wide font-medium">
                         Job Type
                       </p>
-                      <p className="font-bold text-gray-900">{job.type}</p>
+                      <p className="font-bold text-[var(--color-text)]">
+                        {job.type}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 {/* Enhanced Action Buttons */}
-                <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between pt-6 border-t border-[var(--color-slate)]/20">
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-600 font-medium">
+                      <Star className="w-4 h-4 text-[var(--color-accent)] fill-current" />
+                      <span className="text-sm text-[var(--color-slate)] font-medium">
                         Great match for your profile
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <button className="flex items-center gap-2 px-5 py-3 text-gray-700 hover:text-[var(--color-primary)] bg-white border-2 border-gray-200 hover:border-[var(--color-primary)] rounded-xl transition-all duration-300 hover:shadow-md font-medium">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3 w-full sm:w-auto">
+                    <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 text-[var(--color-text)] hover:text-[var(--color-primary)] bg-white border-2 border-[var(--color-slate)]/20 hover:border-[var(--color-primary)] rounded-xl transition-all duration-300 hover:shadow-md font-medium">
                       <ExternalLink size={16} />
-                      View Details
+                      <span className="hidden xs:inline">View Details</span>
+                      <span className="inline xs:hidden">Details</span>
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-semibold">
+                    <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-semibold">
                       <Send size={16} />
-                      Apply Now
+                      <span className="hidden xs:inline">Apply Now</span>
+                      <span className="inline xs:hidden">Apply</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Quick Apply Preview */}
                 {job.match > 85 && (
-                  <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl">
+                  <div className="mt-4 p-4 bg-gradient-to-r from-[var(--color-light)] to-white border border-[var(--color-primary)]/20 rounded-xl">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-[var(--color-primary)] rounded-lg flex items-center justify-center">
                         <Target size={16} className="text-white" />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-blue-900">
+                        <p className="text-sm font-semibold text-[var(--color-text)]">
                           Quick Apply Available
                         </p>
-                        <p className="text-xs text-blue-700">
+                        <p className="text-xs text-[var(--color-slate)]">
                           Your profile matches this role perfectly. Apply with
                           one click!
                         </p>
@@ -907,22 +911,22 @@ export const JobsPage = () => {
       {/* Empty State */}
       {((activeTab === "applications" && filteredApplications.length === 0) ||
         (activeTab === "discover" && filteredJobs.length === 0)) && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Briefcase size={32} className="text-gray-400" />
+        <div className="bg-white rounded-xl shadow-sm border border-[var(--color-slate)]/20 p-12 text-center">
+          <div className="w-16 h-16 bg-[var(--color-light)] rounded-full flex items-center justify-center mx-auto mb-4">
+            <Briefcase size={32} className="text-[var(--color-slate)]" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <h3 className="text-lg font-medium text-[var(--color-text)] mb-2">
             {activeTab === "applications"
               ? "No applications found"
               : "No jobs found"}
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--color-slate)] mb-4">
             {activeTab === "applications"
               ? "Try adjusting your search or status filter to find applications."
               : "Try adjusting your search criteria to discover more opportunities."}
           </p>
           {activeTab === "discover" && (
-            <button className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-accent)] transition-colors">
+            <button className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-lg hover:shadow-md transition-all duration-300">
               Browse All Jobs
             </button>
           )}

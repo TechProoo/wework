@@ -1,5 +1,6 @@
 import { DashboardLayout } from "../../Components/DashboardLayout";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   BookOpen,
   Search,
@@ -31,9 +32,15 @@ interface Course {
   thumbnail: string;
   progress?: number;
   isEnrolled: boolean;
-  lessons: number;
   description: string;
   tags: string[];
+  tutorial: {
+    id: string;
+    stepCount: number;
+    estimatedTime: string;
+    difficulty: "Easy" | "Medium" | "Hard";
+    topics: string[];
+  };
 }
 
 interface Category {
@@ -45,10 +52,16 @@ interface Category {
 }
 
 export const CoursesPage = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLevel, setSelectedLevel] = useState("all");
   const [sortBy, setSortBy] = useState("popular");
+
+  // Handle course enrollment - go directly to tutorial
+  const handleEnrollNow = (courseId: string) => {
+    navigate(`/dashboard/tutorial/${courseId}`);
+  };
 
   // Mock data - replace with API calls
   const categories: Category[] = [
@@ -56,42 +69,42 @@ export const CoursesPage = () => {
       id: "all",
       name: "All Courses",
       icon: "📚",
-      count: 156,
+      count: 6,
       color: "bg-blue-100 text-blue-700",
     },
     {
       id: "web-dev",
       name: "Web Development",
       icon: "💻",
-      count: 42,
+      count: 2,
       color: "bg-green-100 text-green-700",
     },
     {
       id: "design",
       name: "UI/UX Design",
       icon: "🎨",
-      count: 28,
+      count: 1,
       color: "bg-purple-100 text-purple-700",
     },
     {
       id: "data-science",
       name: "Data Science",
       icon: "📊",
-      count: 35,
+      count: 1,
       color: "bg-orange-100 text-orange-700",
     },
     {
       id: "mobile",
       name: "Mobile Development",
       icon: "📱",
-      count: 22,
+      count: 1,
       color: "bg-pink-100 text-pink-700",
     },
     {
       id: "business",
       name: "Business",
       icon: "💼",
-      count: 29,
+      count: 1,
       color: "bg-yellow-100 text-yellow-700",
     },
   ];
@@ -100,7 +113,7 @@ export const CoursesPage = () => {
     {
       id: "1",
       title: "Complete React Developer Course 2024",
-      instructor: "Sarah Johnson",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "web-dev",
       level: "Intermediate",
@@ -111,17 +124,29 @@ export const CoursesPage = () => {
       price: 89.99,
       originalPrice: 199.99,
       thumbnail: "/api/placeholder/400/300",
-      progress: 65,
-      isEnrolled: true,
-      lessons: 45,
+      progress: 0,
+      isEnrolled: false,
       description:
         "Master React from basics to advanced concepts with real-world projects",
       tags: ["React", "JavaScript", "Frontend"],
+      tutorial: {
+        id: "react-tutorial-1",
+        stepCount: 8,
+        estimatedTime: "45 minutes",
+        difficulty: "Medium",
+        topics: [
+          "Components",
+          "State Management",
+          "Hooks",
+          "Router",
+          "API Integration",
+        ],
+      },
     },
     {
       id: "2",
       title: "UI/UX Design Fundamentals",
-      instructor: "Michael Chen",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "design",
       level: "Beginner",
@@ -134,14 +159,26 @@ export const CoursesPage = () => {
       thumbnail: "/api/placeholder/400/300",
       progress: 0,
       isEnrolled: false,
-      lessons: 32,
       description: "Learn the principles of great design and user experience",
       tags: ["UI/UX", "Design", "Figma"],
+      tutorial: {
+        id: "uiux-tutorial-2",
+        stepCount: 6,
+        estimatedTime: "35 minutes",
+        difficulty: "Easy",
+        topics: [
+          "Design Principles",
+          "Color Theory",
+          "Typography",
+          "Wireframing",
+          "Prototyping",
+        ],
+      },
     },
     {
       id: "3",
       title: "Python for Data Science",
-      instructor: "Dr. Amanda Rodriguez",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "data-science",
       level: "Intermediate",
@@ -152,17 +189,29 @@ export const CoursesPage = () => {
       price: 99.99,
       originalPrice: 249.99,
       thumbnail: "/api/placeholder/400/300",
-      progress: 25,
-      isEnrolled: true,
-      lessons: 58,
+      progress: 0,
+      isEnrolled: false,
       description:
         "Complete guide to Python programming for data analysis and machine learning",
       tags: ["Python", "Data Science", "Machine Learning"],
+      tutorial: {
+        id: "python-ds-tutorial-3",
+        stepCount: 10,
+        estimatedTime: "60 minutes",
+        difficulty: "Medium",
+        topics: [
+          "Python Basics",
+          "Pandas",
+          "NumPy",
+          "Data Visualization",
+          "Machine Learning Intro",
+        ],
+      },
     },
     {
       id: "4",
       title: "Flutter Mobile App Development",
-      instructor: "James Wilson",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "mobile",
       level: "Advanced",
@@ -175,14 +224,27 @@ export const CoursesPage = () => {
       thumbnail: "/api/placeholder/400/300",
       progress: 0,
       isEnrolled: false,
-      lessons: 67,
       description: "Build cross-platform mobile apps with Flutter and Dart",
       tags: ["Flutter", "Dart", "Mobile"],
+      tutorial: {
+        id: "flutter-tutorial-4",
+        stepCount: 12,
+        estimatedTime: "75 minutes",
+        difficulty: "Hard",
+        topics: [
+          "Dart Fundamentals",
+          "Widgets",
+          "State Management",
+          "Navigation",
+          "API Integration",
+          "Publishing",
+        ],
+      },
     },
     {
       id: "5",
       title: "Digital Marketing Mastery",
-      instructor: "Emma Thompson",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "business",
       level: "Beginner",
@@ -195,15 +257,27 @@ export const CoursesPage = () => {
       thumbnail: "/api/placeholder/400/300",
       progress: 0,
       isEnrolled: false,
-      lessons: 38,
       description:
         "Complete digital marketing course covering SEO, social media, and advertising",
       tags: ["Marketing", "SEO", "Social Media"],
+      tutorial: {
+        id: "marketing-tutorial-5",
+        stepCount: 7,
+        estimatedTime: "40 minutes",
+        difficulty: "Easy",
+        topics: [
+          "SEO Basics",
+          "Social Media Strategy",
+          "Content Marketing",
+          "Analytics",
+          "Campaign Creation",
+        ],
+      },
     },
     {
       id: "6",
       title: "Node.js Backend Development",
-      instructor: "Alex Kumar",
+      instructor: "TechPro Team",
       instructorAvatar: "/api/placeholder/40/40",
       category: "web-dev",
       level: "Advanced",
@@ -214,19 +288,32 @@ export const CoursesPage = () => {
       price: 119.99,
       originalPrice: 279.99,
       thumbnail: "/api/placeholder/400/300",
-      progress: 80,
-      isEnrolled: true,
-      lessons: 52,
+      progress: 0,
+      isEnrolled: false,
       description:
         "Build scalable backend applications with Node.js and Express",
       tags: ["Node.js", "Backend", "API"],
+      tutorial: {
+        id: "nodejs-tutorial-6",
+        stepCount: 9,
+        estimatedTime: "55 minutes",
+        difficulty: "Hard",
+        topics: [
+          "Express Setup",
+          "Routing",
+          "Middleware",
+          "Database Integration",
+          "Authentication",
+          "API Design",
+        ],
+      },
     },
   ];
 
   const filteredCourses = courses.filter((course) => {
     const matchesSearch =
       course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.instructor.toLowerCase().includes(searchQuery.toLowerCase());
+      course.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory =
       selectedCategory === "all" || course.category === selectedCategory;
     const matchesLevel =
@@ -235,9 +322,6 @@ export const CoursesPage = () => {
   });
 
   const enrolledCourses = courses.filter((course) => course.isEnrolled);
-  const completedCourses = enrolledCourses.filter(
-    (course) => (course.progress || 0) === 100
-  );
   const inProgressCourses = enrolledCourses.filter(
     (course) => (course.progress || 0) > 0 && (course.progress || 0) < 100
   );
@@ -268,8 +352,8 @@ export const CoursesPage = () => {
 
   return (
     <DashboardLayout
-      title="My Courses"
-      subtitle="Continue learning and explore new skills"
+      title="Explore Courses"
+      subtitle="Discover courses with interactive tutorials - one tutorial per course"
       icon={<BookOpen size={18} className="text-white" />}
       actions={topNavActions}
       className="space-y-6"
@@ -286,17 +370,17 @@ export const CoursesPage = () => {
                 <BookOpen size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-green-700 bg-green-100 px-3 py-1.5 rounded-full border border-green-200">
-                  +12%
+                <span className="text-xs font-semibold text-blue-700 bg-blue-100 px-3 py-1.5 rounded-full border border-blue-200">
+                  New
                 </span>
                 <span className="text-xs text-gray-500 mt-1">
-                  vs last month
+                  Start learning
                 </span>
               </div>
             </div>
             <div className="space-y-2">
               <h3 className="text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                {enrolledCourses.length}
+                0
               </h3>
               <p className="text-sm font-medium text-gray-600">
                 Enrolled Courses
@@ -304,7 +388,7 @@ export const CoursesPage = () => {
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
                   className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
-                  style={{ width: "75%" }}
+                  style={{ width: "0%" }}
                 ></div>
               </div>
             </div>
@@ -320,23 +404,23 @@ export const CoursesPage = () => {
                 <CheckCircle size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-full border border-emerald-200">
-                  +8%
+                <span className="text-xs font-semibold text-gray-700 bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">
+                  Goal
                 </span>
                 <span className="text-xs text-gray-500 mt-1">
-                  vs last month
+                  Earn certificates
                 </span>
               </div>
             </div>
             <div className="space-y-2">
               <h3 className="text-3xl font-bold text-gray-900 group-hover:text-green-600 transition-colors duration-300">
-                {completedCourses.length}
+                0
               </h3>
               <p className="text-sm font-medium text-gray-600">Completed</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
                   className="bg-gradient-to-r from-green-500 to-green-600 h-1.5 rounded-full transition-all duration-500"
-                  style={{ width: "60%" }}
+                  style={{ width: "0%" }}
                 ></div>
               </div>
             </div>
@@ -352,23 +436,21 @@ export const CoursesPage = () => {
                 <TrendingUp size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full border border-purple-200">
-                  +15%
+                <span className="text-xs font-semibold text-orange-700 bg-orange-100 px-3 py-1.5 rounded-full border border-orange-200">
+                  Ready
                 </span>
-                <span className="text-xs text-gray-500 mt-1">
-                  vs last month
-                </span>
+                <span className="text-xs text-gray-500 mt-1">Start today</span>
               </div>
             </div>
             <div className="space-y-2">
               <h3 className="text-3xl font-bold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
-                {inProgressCourses.length}
+                0
               </h3>
               <p className="text-sm font-medium text-gray-600">In Progress</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
                   className="bg-gradient-to-r from-orange-500 to-orange-600 h-1.5 rounded-full transition-all duration-500"
-                  style={{ width: "45%" }}
+                  style={{ width: "0%" }}
                 ></div>
               </div>
             </div>
@@ -384,29 +466,62 @@ export const CoursesPage = () => {
                 <Award size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
-                <span className="text-xs font-semibold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full border border-amber-200">
-                  +5%
+                <span className="text-xs font-semibold text-purple-700 bg-purple-100 px-3 py-1.5 rounded-full border border-purple-200">
+                  Earn
                 </span>
                 <span className="text-xs text-gray-500 mt-1">
-                  vs last month
+                  Complete courses
                 </span>
               </div>
             </div>
             <div className="space-y-2">
               <h3 className="text-3xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
-                24
+                0
               </h3>
               <p className="text-sm font-medium text-gray-600">Certificates</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
                   className="bg-gradient-to-r from-purple-500 to-purple-600 h-1.5 rounded-full transition-all duration-500"
-                  style={{ width: "90%" }}
+                  style={{ width: "0%" }}
                 ></div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Welcome Banner for New Users */}
+      {enrolledCourses.length === 0 && (
+        <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl p-6 lg:p-8 text-white">
+          <div className="max-w-3xl">
+            <h2
+              className="text-xl lg:text-2xl font-bold mb-3"
+              style={{ fontFamily: "Merriweather, serif" }}
+            >
+              Ready to Start Your Learning Journey? 🚀
+            </h2>
+            <p className="text-white/90 mb-6 text-sm lg:text-base">
+              Explore our course library where each course includes one
+              comprehensive interactive tutorial. Build your tech skills with
+              hands-on learning that gets you coding from day one.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => navigate("/dashboard/popular-courses")}
+                className="comic-button-outline bg-white text-[var(--color-primary)] hover:bg-gray-100 border-white"
+              >
+                Browse Popular Courses
+              </button>
+              <button
+                onClick={() => navigate("/dashboard/skill-assessment")}
+                className="comic-button-outline border-white text-white hover:bg-white/10"
+              >
+                Take Skill Assessment
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Continue Learning Section */}
       {inProgressCourses.length > 0 && (
@@ -434,7 +549,7 @@ export const CoursesPage = () => {
                       {course.title}
                     </h3>
                     <p className="text-sm text-gray-600 mb-2">
-                      by {course.instructor}
+                      Created by TechPro
                     </p>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -458,6 +573,135 @@ export const CoursesPage = () => {
         </div>
       )}
 
+      {/* Recommended Courses for New Users */}
+      {enrolledCourses.length === 0 && (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Perfect Courses to Get Started
+            </h2>
+            <span className="text-sm text-gray-500">
+              Handpicked for beginners
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div
+              onClick={() => {
+                setSelectedCategory("web-dev");
+                setSelectedLevel("all");
+                document
+                  .getElementById("courses-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+            >
+              <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-white text-lg">💻</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+                Web Development
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">
+                Start with HTML, CSS, and JavaScript fundamentals
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory("web-dev");
+                  setSelectedLevel("all");
+                  document
+                    .getElementById("courses-section")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="comic-button w-full text-sm"
+              >
+                Explore
+              </button>
+            </div>
+
+            <div
+              onClick={() => {
+                setSelectedCategory("design");
+                setSelectedLevel("all");
+                document
+                  .getElementById("courses-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+            >
+              <div className="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-white text-lg">🎨</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors duration-300">
+                UI/UX Design
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">
+                Learn design principles and user experience
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory("design");
+                  setSelectedLevel("all");
+                  document
+                    .getElementById("courses-section")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="comic-button w-full text-sm"
+              >
+                Explore
+              </button>
+            </div>
+
+            <div
+              onClick={() => {
+                setSelectedCategory("data-science");
+                setSelectedLevel("all");
+                document
+                  .getElementById("courses-section")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+            >
+              <div className="w-12 h-12 mx-auto mb-3 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <span className="text-white text-lg">📊</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-green-700 transition-colors duration-300">
+                Data Science
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">
+                Dive into data analysis and machine learning
+              </p>
+              <button
+                onClick={() => {
+                  setSelectedCategory("data-science");
+                  setSelectedLevel("all");
+                  document
+                    .getElementById("courses-section")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="comic-button w-full text-sm"
+              >
+                Explore
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-gray-50 rounded-lg p-4 text-center">
+            <p className="text-sm text-gray-600 mb-3">
+              <span className="font-semibold">Not sure where to start?</span>{" "}
+              Take our quick skill assessment to get personalized course
+              recommendations.
+            </p>
+            <button
+              onClick={() => navigate("/dashboard/skill-assessment")}
+              className="comic-button-outline text-sm px-6"
+            >
+              Take Assessment
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Search and Filters */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div className="flex flex-col lg:flex-row gap-4 mb-6">
@@ -468,7 +712,7 @@ export const CoursesPage = () => {
             />
             <input
               type="text"
-              placeholder="Search courses, instructors, or topics..."
+              placeholder="Search courses with interactive tutorials..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
@@ -495,8 +739,6 @@ export const CoursesPage = () => {
               <option value="popular">Most Popular</option>
               <option value="newest">Newest</option>
               <option value="rating">Highest Rated</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
             </select>
           </div>
         </div>
@@ -527,7 +769,10 @@ export const CoursesPage = () => {
       </div>
 
       {/* Courses Grid */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <div
+        id="courses-section"
+        className="bg-white rounded-xl shadow-sm border border-gray-100 p-6"
+      >
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold text-gray-900">
             All Courses ({filteredCourses.length})
@@ -570,13 +815,9 @@ export const CoursesPage = () => {
                   </span>
                 </div>
                 <div className="absolute top-4 right-4">
-                  {course.isEnrolled ? (
+                  {course.isEnrolled && (
                     <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium">
                       Enrolled
-                    </span>
-                  ) : (
-                    <span className="bg-white text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
-                      ${course.price}
                     </span>
                   )}
                 </div>
@@ -623,7 +864,7 @@ export const CoursesPage = () => {
                     <User size={14} className="text-white" />
                   </div>
                   <span className="text-sm text-gray-700 font-medium">
-                    {course.instructor}
+                    Created by TechPro
                   </span>
                 </div>
 
@@ -645,28 +886,52 @@ export const CoursesPage = () => {
                   </div>
                 </div>
 
+                {/* Tutorial Information */}
+                <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Play size={14} className="text-blue-600" />
+                    <span className="text-sm font-medium text-blue-700">
+                      Interactive Tutorial
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                    <div className="flex items-center gap-1">
+                      <CheckCircle size={12} />
+                      <span>{course.tutorial.stepCount} steps</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock size={12} />
+                      <span>{course.tutorial.estimatedTime}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Award size={12} />
+                      <span>{course.tutorial.difficulty}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <BookOpen size={12} />
+                      <span>{course.tutorial.topics.length} topics</span>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between">
                   {course.isEnrolled ? (
-                    <button className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-accent)] transition-colors flex-1">
+                    <button
+                      onClick={() => handleEnrollNow(course.id)}
+                      className="flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-accent)] transition-colors flex-1"
+                    >
                       <Play size={16} />
-                      {course.progress === 0 ? "Start Course" : "Continue"}
+                      {course.progress === 0
+                        ? "Start Tutorial"
+                        : "Continue Tutorial"}
                     </button>
                   ) : (
-                    <>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-gray-900">
-                          ${course.price}
-                        </span>
-                        {course.originalPrice && (
-                          <span className="text-sm text-gray-500 line-through">
-                            ${course.originalPrice}
-                          </span>
-                        )}
-                      </div>
-                      <button className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-accent)] transition-colors">
-                        Enroll Now
-                      </button>
-                    </>
+                    <button
+                      onClick={() => handleEnrollNow(course.id)}
+                      className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg hover:bg-[var(--color-accent)] transition-colors"
+                    >
+                      Start Tutorial
+                    </button>
                   )}
                 </div>
               </div>
