@@ -219,11 +219,6 @@ export const MessagesPage = () => {
     }
   };
 
-  const totalUnread = conversations.reduce(
-    (sum, conv) => sum + conv.unreadCount,
-    0
-  );
-
   return (
     <DashboardLayout>
       <div className="h-[calc(100vh-50px)] bg-white rounded-2xl shadow-lg overflow-hidden">
