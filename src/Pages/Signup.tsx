@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import {
   GraduationCap,
   Building2,
@@ -38,6 +39,8 @@ interface CompanyData {
 }
 
 const Signup: React.FC = () => {
+  const navigate = useNavigate();
+  const { signup } = useAuth();
   const [currentStep, setCurrentStep] = useState<
     "selection" | "student" | "company"
   >("selection");
@@ -150,12 +153,21 @@ const Signup: React.FC = () => {
 
     setLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Student signup:", studentData);
-      // Handle success (redirect, show success message, etc.)
+      const result = await signup(studentData, "student");
+
+      if (result.success) {
+        // Success! AuthContext automatically logs in the user
+        // Redirect to student dashboard
+        navigate("/dashboard");
+      } else {
+        // Handle signup error
+        setErrors({
+          submit: result.error || "Signup failed. Please try again.",
+        });
+      }
     } catch (error) {
       console.error("Student signup error:", error);
+      setErrors({ submit: "An unexpected error occurred. Please try again." });
     } finally {
       setLoading(false);
     }
@@ -167,12 +179,21 @@ const Signup: React.FC = () => {
 
     setLoading(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Company signup:", companyData);
-      // Handle success (redirect, show success message, etc.)
+      const result = await signup(companyData, "company");
+
+      if (result.success) {
+        // Success! AuthContext automatically logs in the user
+        // Redirect to company dashboard
+        navigate("/company/dashboard");
+      } else {
+        // Handle signup error
+        setErrors({
+          submit: result.error || "Signup failed. Please try again.",
+        });
+      }
     } catch (error) {
       console.error("Company signup error:", error);
+      setErrors({ submit: "An unexpected error occurred. Please try again." });
     } finally {
       setLoading(false);
     }
@@ -667,6 +688,16 @@ const Signup: React.FC = () => {
               </div>
             </div>
 
+            {/* Submit Error Display */}
+            {errors.submit && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                  {errors.submit}
+                </p>
+              </div>
+            )}
+
             {/* Enhanced Submit Button */}
             <Button
               type="submit"
@@ -984,6 +1015,16 @@ const Signup: React.FC = () => {
                 placeholder="Tell us about your company, mission, and what makes you unique..."
               />
             </div>
+
+            {/* Submit Error Display */}
+            {errors.submit && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                  <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                  {errors.submit}
+                </p>
+              </div>
+            )}
 
             {/* Enhanced Submit Button */}
             <div className="pt-4">

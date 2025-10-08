@@ -7,7 +7,7 @@ import {
   Target,
   Shield,
   Building2,
-  GraduationCap,
+  Star,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -100,242 +100,323 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--color-light)]">
-      {/* Header */}
-      <div className="bg-white border-b border-[var(--color-slate)]/10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-forest-200/20 to-mauve-200/20 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-mauve-200/20 to-forest-200/20 blur-3xl"></div>
+      </div>
+
+      {/* Enhanced Header */}
+      <div className="relative z-10 bg-white/80 backdrop-blur-sm border-b border-white/30 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-sm">W</span>
-              </div>
-              <span className="text-xl font-bold text-[var(--color-text)]">
+            <Link to="/" className="flex items-center gap-3 group">
+              <span className="text-2xl font-bold bg-gradient-to-r from-forest-600 to-mauve-600 bg-clip-text">
                 WEWORK
               </span>
             </Link>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">New to WEWORK?</span>
+              <span className="text-sm text-slate-600 hidden sm:block">
+                New to WEWORK?
+              </span>
               <Link
                 to="/signup"
-                className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-xl hover:bg-[var(--color-primary)]/90 transition-colors text-sm font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white rounded-full shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 font-medium"
               >
-                Sign Up
+                <span>Sign Up</span>
+                <ArrowRight size={16} />
               </Link>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="flex min-h-[calc(100vh-80px)]">
-        {/* Left Side - Form */}
+      <div className="flex min-h-[calc(100vh-80px)] relative z-10">
+        {/* Left Side - Enhanced Form */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8">
-          <div className="w-full max-w-md">
-            <div className="text-center mb-8">
-              <h1 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-2">
-                Welcome Back
+          <div className="w-full max-w-lg">
+            {/* Enhanced Header */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 mb-6 shadow-sm">
+                <Sparkles size={16} className="text-mauve-600" />
+                <span className="text-sm font-medium text-slate-600">
+                  Welcome Back
+                </span>
+              </div>
+
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-forest-600 via-slate-700 to-forest-800 bg-clip-text text-transparent mb-4 leading-tight">
+                Sign In to
+                <span className="block text-mauve-600">WEWORK</span>
               </h1>
-              <p className="text-gray-600">
-                Sign in to access your learning dashboard
+
+              <p className="text-xl text-slate-600 leading-relaxed">
+                Access your personalized learning dashboard and continue your
+                tech journey
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[var(--color-text)] mb-2"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
-                  placeholder="Enter your email"
-                  required
-                />
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600">{errors.email}</p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-[var(--color-text)] mb-2"
-                >
-                  Password
-                </label>
-                <div className="relative">
+            {/* Enhanced Form Card */}
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white/30 shadow-xl shadow-slate-200/50 p-8 md:p-10">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Email Field */}
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-slate-700 mb-3"
+                  >
+                    Email Address
+                  </label>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    name="password"
-                    value={formData.password}
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
-                    placeholder="Enter your password"
+                    className="w-full px-4 py-4 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg"
+                    placeholder="Enter your email address"
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
+                  {errors.email && (
+                    <p className="mt-2 text-sm text-red-500 flex items-center gap-1">
+                      <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
-                {errors.password && (
-                  <p className="mt-2 text-sm text-red-600">{errors.password}</p>
-                )}
-              </div>
 
-              <div className="flex items-center justify-between">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    name="rememberMe"
-                    checked={formData.rememberMe}
-                    onChange={handleInputChange}
-                    className="w-4 h-4 text-[var(--color-primary)] bg-white border-gray-300 rounded focus:ring-[var(--color-primary)] focus:ring-2"
-                  />
-                  <span className="ml-2 text-sm text-gray-600">
-                    Remember me
-                  </span>
-                </label>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm font-medium text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-
-              {errors.submit && (
-                <div className="p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl">
-                  {errors.submit}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-medium flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  "Signing In..."
-                ) : (
-                  <>
-                    Sign In
-                    <ArrowRight size={16} />
-                  </>
-                )}
-              </button>
-
-              <div className="text-center pt-6 border-t border-gray-200">
-                <p className="text-sm text-gray-600 mb-4">
-                  Don't have an account?{" "}
-                  <Link
-                    to="/signup"
-                    className="font-medium text-[var(--color-primary)] hover:text-[var(--color-primary)]/80 transition-colors"
+                {/* Password Field */}
+                <div>
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-semibold text-slate-700 mb-3"
                   >
-                    Sign up for free
-                  </Link>
-                </p>
-                <div className="relative mb-4">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-4 pr-12 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
                   </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-[var(--color-light)] text-gray-500">
-                      or
+                  {errors.password && (
+                    <p className="mt-2 text-sm text-red-500 flex items-center gap-1">
+                      <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+                      {errors.password}
+                    </p>
+                  )}
+                </div>
+
+                {/* Enhanced Options */}
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center cursor-pointer group">
+                    <div className="relative">
+                      <input
+                        type="checkbox"
+                        name="rememberMe"
+                        checked={formData.rememberMe}
+                        onChange={handleInputChange}
+                        className="w-5 h-5 text-forest-500 bg-white border-2 border-slate-200 rounded focus:ring-forest-400 focus:ring-2"
+                      />
+                    </div>
+                    <span className="ml-3 text-sm font-medium text-slate-600 group-hover:text-slate-800 transition-colors">
+                      Remember me
                     </span>
-                  </div>
+                  </label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-sm font-semibold text-forest-600 hover:text-forest-700 transition-colors hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
                 </div>
-                <Link
-                  to="/company/login"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--color-accent)] text-[var(--color-accent)] rounded-xl hover:bg-[var(--color-accent)] hover:text-white transition-colors text-sm font-medium"
+
+                {/* Enhanced Error Display */}
+                {errors.submit && (
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                    <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                      <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                      {errors.submit}
+                    </p>
+                  </div>
+                )}
+
+                {/* Enhanced Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
                 >
-                  <Building2 size={16} />
-                  Company Login
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-3">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <span>Signing In...</span>
+                    </div>
+                  ) : (
+                    <>
+                      <span>Sign In</span>
+                      <ArrowRight size={20} />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Enhanced Login Footer */}
+            <div className="text-center mt-8">
+              <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
+                <span className="text-slate-600">Don't have an account?</span>
+                <Link
+                  to="/signup"
+                  className="text-forest-600 hover:text-forest-700 font-semibold transition-colors duration-200 hover:underline"
+                >
+                  Sign up for free
                 </Link>
               </div>
-            </form>
+
+              <div className="relative my-8">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-200" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-500 font-medium">
+                    or
+                  </span>
+                </div>
+              </div>
+
+              <Link
+                to="/company/login"
+                className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border-2 border-mauve-200 text-mauve-600 hover:bg-mauve-50 hover:border-mauve-300 transition-all duration-300 px-6 py-3 rounded-full shadow-lg shadow-mauve-500/10 hover:shadow-mauve-500/20 font-semibold"
+              >
+                <Building2 size={20} />
+                <span>Company Login</span>
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Right Side - Info */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] p-8 items-center justify-center">
-          <div className="max-w-md text-white">
-            <div className="mb-8">
-              <Sparkles size={48} className="mb-4" />
-              <h2 className="text-3xl font-bold mb-4">
-                Join Africa's Leading Tech Community
-              </h2>
-              <p className="text-lg opacity-90 mb-6">
-                Transform your career with industry-leading courses, mentorship,
-                and job placement support.
-              </p>
-            </div>
+        {/* Right Side - Enhanced Info Panel */}
+        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-forest-600 via-slate-700 to-forest-800 p-8 lg:p-12 relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-20 -translate-y-20"></div>
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white/10 rounded-full translate-x-20 translate-y-20"></div>
+            <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-mauve-400/20 rounded-full -translate-x-16 -translate-y-16"></div>
+          </div>
 
-            <div className="space-y-6 mb-8">
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-white/20 rounded-lg">
-                  <Users size={24} />
+          <div className="relative flex items-center justify-center w-full">
+            <div className="max-w-md">
+              {/* Enhanced Header */}
+              <div className="mb-10">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 mb-6 shadow-lg">
+                  <Sparkles className="w-5 h-5 text-mauve-200" />
+                  <span className="text-sm font-medium text-white/90">
+                    Welcome to WEWORK
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">5,000+ Students</h3>
-                  <p className="opacity-90 text-sm">
-                    Trained across Africa in cutting-edge tech skills
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-white/20 rounded-lg">
-                  <Target size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">95% Job Placement</h3>
-                  <p className="opacity-90 text-sm">
-                    Direct pathway to employment with top companies
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-white/20 rounded-lg">
-                  <Shield size={24} />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Industry Certified</h3>
-                  <p className="opacity-90 text-sm">
-                    Recognized credentials that employers trust
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <GraduationCap size={20} />
+                <h2 className="text-4xl font-bold text-white mb-6 leading-tight">
+                  Join Africa's Leading
+                  <span className="block text-mauve-200">Tech Community</span>
+                </h2>
+
+                <p className="text-xl text-white/80 leading-relaxed">
+                  Transform your career with industry-leading courses,
+                  mentorship, and job placement support
+                </p>
+              </div>
+
+              {/* Enhanced Stats Cards */}
+              <div className="space-y-6 mb-10">
+                <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-br from-mauve-400 to-mauve-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-mauve-500/30">
+                    <Users className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-xl mb-1">
+                      50K+ Active Users
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      Trained across Africa in cutting-edge tech skills
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-semibold">Success Story</div>
-                  <div className="text-sm opacity-75">
-                    From student to software engineer
+
+                <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
+                    <Target className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-xl mb-1">
+                      500+ Companies
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      Direct pathway to employment with top companies
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-yellow-500/30">
+                    <Shield className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-xl mb-1">
+                      95% Success Rate
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      Recognized credentials that employers trust
+                    </p>
                   </div>
                 </div>
               </div>
-              <p className="text-sm opacity-90 italic">
-                "WEWORK transformed my life. In 6 months, I went from zero
-                coding knowledge to landing my dream job at a top tech company
-                in Lagos."
-              </p>
-              <div className="mt-3 text-xs opacity-75">
-                - Adaora K., Full Stack Developer
+
+              {/* Enhanced Testimonial */}
+              <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-xl">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="/src/assets/one.jpg"
+                    alt="Success story"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-lg flex-shrink-0"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-white/95 mb-4 italic text-lg leading-relaxed">
+                      "WEWORK transformed my life. In 6 months, I went from zero
+                      coding knowledge to landing my dream job at a top tech
+                      company."
+                    </p>
+                    <div>
+                      <p className="text-white font-semibold text-lg">
+                        Adaora K.
+                      </p>
+                      <p className="text-mauve-200 text-sm font-medium">
+                        Full Stack Developer
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
