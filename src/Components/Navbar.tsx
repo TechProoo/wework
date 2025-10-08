@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { LogoutModal } from "./LogoutModal";
 
 export const Navbar = () => {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     if (menuOpen) {
@@ -148,7 +150,7 @@ export const Navbar = () => {
               </NavLink>
               <button
                 onClick={() => {
-                  logout();
+                  setShowLogoutModal(true);
                   setMenuOpen(false);
                 }}
                 className="comic-button-outline w-full border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 block text-center"
@@ -187,7 +189,7 @@ export const Navbar = () => {
               Dashboard
             </NavLink>
             <button
-              onClick={logout}
+              onClick={() => setShowLogoutModal(true)}
               className="comic-button-outline border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 px-6 py-2 rounded-lg font-bold"
             >
               Logout
@@ -195,12 +197,14 @@ export const Navbar = () => {
           </div>
         ) : (
           <>
-            <NavLink
-              to="/login"
-              className="comic-button-outline hidden md:block border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 px-6 py-2 rounded-lg font-bold"
-            >
-              Login
-            </NavLink>
+            <div className="hidden md:flex items-center gap-2">
+              <NavLink
+                to="/login"
+                className="comic-button-outline border-2 border-[var(--comic-blue)] text-[var(--comic-blue)] bg-transparent hover:bg-[var(--comic-blue)] hover:text-black transition-all duration-300 px-4 py-2 rounded-lg font-bold text-sm"
+              >
+                Login
+              </NavLink>
+            </div>
             <NavLink to="/signup" className="comic-button hidden md:block">
               Get Started
             </NavLink>
@@ -217,6 +221,12 @@ export const Navbar = () => {
         onClick={() => setMenuOpen(false)}
         aria-hidden="true"
       ></div>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+      />
     </nav>
   );
 };

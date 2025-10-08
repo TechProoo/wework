@@ -28,7 +28,7 @@ interface AuthContextType {
     email: string,
     password: string
   ) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  logout: (clearAllData?: boolean) => void;
   signup: (
     userData: any,
     userType: "student" | "company"
@@ -161,9 +161,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = (clearAllData = false) => {
+    // Always remove current session
     localStorage.removeItem("wework_user");
     localStorage.removeItem("wework_token");
+
+    // If clearAllData is true, remove all stored user data
+    if (clearAllData) {
+      localStorage.removeItem("wework_users");
+      console.log("All user data cleared from localStorage");
+    }
+
     setUser(null);
     setIsAuthenticated(false);
   };

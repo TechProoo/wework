@@ -6,13 +6,14 @@ import { Contact } from "./Pages/Contact";
 import { Courses } from "./Pages/Courses";
 import { Jobs } from "./Pages/Jobs";
 import { Login } from "./Pages/Login";
-import { Signup } from "./Pages/Signup";
+import Signup from "./Pages/Signup";
 import { Consultation } from "./Pages/Consultation";
 import { DashboardHome } from "./Pages/Users/DashboardHome";
 import { Profile } from "./Pages/Users/Profile";
 import { Settings } from "./Pages/Users/Settings";
 import { ProtectedRoute } from "./Components/ProtectedRoute";
 import { PublicOnlyRoute } from "./Components/PublicOnlyRoute";
+import { CompanyProtectedRoute } from "./Components/CompanyProtectedRoute";
 import { CoursesPage } from "./Pages/Users/Courses_page";
 import { JobsPage } from "./Pages/Users/Jobs_page";
 import ConsultationPage from "./Pages/Users/ConsultationPage";
@@ -25,6 +26,9 @@ import Community from "./Pages/Users/Community";
 import SkillAssessmentPage from "./Pages/Users/SkillAssessmentPage";
 import PopularCoursesPage from "./Pages/Users/PopularCoursesPage";
 import TutorialViewPage from "./Pages/Users/TutorialViewPage";
+import CompanyDashboard from "./Pages/Company/DashboardPage";
+import CompanyLogin from "./Pages/Company/LoginPage";
+import CompanySignup from "./Pages/Company/SignupPage";
 
 function App() {
   return (
@@ -45,6 +49,14 @@ function App() {
         />
         <Route
           path="/signup"
+          element={
+            <PublicOnlyRoute>
+              <Signup />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/signup/student"
           element={
             <PublicOnlyRoute>
               <Signup />
@@ -170,6 +182,32 @@ function App() {
             <ProtectedRoute>
               <PopularCoursesPage />
             </ProtectedRoute>
+          }
+        />
+
+        {/* Company Routes */}
+        <Route
+          path="/company/login"
+          element={
+            <PublicOnlyRoute>
+              <CompanyLogin />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/company/signup"
+          element={
+            <PublicOnlyRoute>
+              <CompanySignup />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/company/dashboard"
+          element={
+            <CompanyProtectedRoute>
+              <CompanyDashboard />
+            </CompanyProtectedRoute>
           }
         />
       </Routes>

@@ -1,6 +1,7 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { LogoutModal } from "./LogoutModal";
 import {
   Home,
   User,
@@ -22,12 +23,12 @@ import { useState, useEffect } from "react";
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Handle responsive behavior
   useEffect(() => {
@@ -95,8 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   };
 
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    setShowLogoutModal(true);
   };
 
   const sidebarItems = [
@@ -406,6 +406,12 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       >
         <SidebarContent />
       </aside>
+
+      {/* Logout Modal */}
+      <LogoutModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+      />
     </>
   );
 };

@@ -30,26 +30,175 @@ body.dashboard-layout {
   padding-top: 0;
 }
 
-/* Mobile sidebar improvements */
-@media (max-width: 1023px) {
-  body.dashboard-layout {
-    padding-top: 0;
-  }
+/* Company dashboard specific styles */
+body.company-dashboard-layout {
+  padding-top: 0;
+}
 
-  /* Prevent horizontal scrolling when sidebar is open */
-  body.sidebar-open {
-    overflow-x: hidden;
-  }
+/* Auth pages specific styles */
+body.auth-layout {
+  padding-top: 0;
+}
 
-  /* Mobile sidebar slide animation */
-  .sidebar-mobile-enter {
-    transform: translateX(-100%);
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
 
-  .sidebar-mobile-enter-active {
-    transform: translateX(0);
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Utility classes for WEWORK colors */
+.text-forest-50 {
+  color: #f0f4f1;
+}
+.text-forest-100 {
+  color: #d9e5db;
+}
+.text-forest-200 {
+  color: #b3cbb7;
+}
+.text-forest-300 {
+  color: #8db093;
+}
+.text-forest-400 {
+  color: #78996f;
+}
+.text-forest-500 {
+  color: var(--color-forest);
+}
+.text-forest-600 {
+  color: #5a6b60;
+}
+.text-forest-700 {
+  color: #4f5e55;
+}
+.text-forest-800 {
+  color: #3c4d42;
+}
+.text-forest-900 {
+  color: #283329;
+}
+
+.bg-forest-50 {
+  background-color: #f0f4f1;
+}
+.bg-forest-100 {
+  background-color: #d9e5db;
+}
+.bg-forest-200 {
+  background-color: #b3cbb7;
+}
+.bg-forest-300 {
+  background-color: #8db093;
+}
+.bg-forest-400 {
+  background-color: #78996f;
+}
+.bg-forest-500 {
+  background-color: var(--color-forest);
+}
+.bg-forest-600 {
+  background-color: #5a6b60;
+}
+.bg-forest-700 {
+  background-color: #4f5e55;
+}
+
+.text-mauve-50 {
+  color: #f7f4f6;
+}
+.text-mauve-100 {
+  color: #ede5eb;
+}
+.text-mauve-200 {
+  color: #dbc9d6;
+}
+.text-mauve-300 {
+  color: #c9adc1;
+}
+.text-mauve-400 {
+  color: var(--color-mauve);
+}
+.text-mauve-500 {
+  color: #b092a6;
+}
+.text-mauve-600 {
+  color: #9e7b91;
+}
+.text-mauve-700 {
+  color: #8b647c;
+}
+
+.bg-mauve-50 {
+  background-color: #f7f4f6;
+}
+.bg-mauve-100 {
+  background-color: #ede5eb;
+}
+.bg-mauve-200 {
+  background-color: #dbc9d6;
+}
+.bg-mauve-300 {
+  background-color: #c9adc1;
+}
+.bg-mauve-400 {
+  background-color: var(--color-mauve);
+}
+.bg-mauve-500 {
+  background-color: #b092a6;
+}
+.bg-mauve-600 {
+  background-color: #9e7b91;
+}
+
+.border-forest-200 {
+  border-color: #b3cbb7;
+}
+.border-forest-300 {
+  border-color: #8db093;
+}
+.border-forest-400 {
+  border-color: #78996f;
+}
+.border-mauve-200 {
+  border-color: #dbc9d6;
+}
+.border-mauve-300 {
+  border-color: #c9adc1;
 }
 
 /* Smooth transitions for sidebar content */
@@ -1301,6 +1450,28 @@ Example usage:
 
   .about-value-card:hover {
     transform: scale(1.02) rotate(-1deg);
+  }
+}
+
+/* Mobile sidebar improvements */
+@media (max-width: 1023px) {
+  body.dashboard-layout {
+    padding-top: 0;
+  }
+
+  /* Prevent horizontal scrolling when sidebar is open */
+  body.sidebar-open {
+    overflow-x: hidden;
+  }
+
+  /* Mobile sidebar slide animation */
+  .sidebar-mobile-enter {
+    transform: translateX(-100%);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-mobile-enter-active {
+    transform: translateX(0);
   }
 }
 

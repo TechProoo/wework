@@ -7,16 +7,6 @@ export const InfoSection = () => {
   return (
     <div className="info-section-container mt-20 pt-20 bg-white py-10 px-5 ">
       <div className="relative">
-        {/* Decorative bubbles for this section */}
-        <div className="absolute top-0 left-0 w-24 h-24 bg-[var(--color-accent)] opacity-30 rounded-full blur-2xl z-0"></div>
-        <div className="absolute top-10 right-10 w-32 h-32 bg-[var(--color-primary)] opacity-20 rounded-full blur-2xl z-0"></div>
-        <div className="absolute bottom-0 left-1/2 w-16 h-16 bg-yellow-300 opacity-25 rounded-full blur-2xl z-0"></div>
-        <div className="absolute bottom-0 right-0 w-20 h-20 bg-[var(--color-secondary)] opacity-20 rounded-full blur-2xl z-0"></div>
-        <div className="absolute top-1/3 left-1/4 w-12 h-12 bg-yellow-300 opacity-30 rounded-full blur-2xl z-0"></div>
-        <div className="absolute top-2/3 right-1/3 w-14 h-14 bg-[var(--color-accent)] opacity-25 rounded-full blur-2xl z-0"></div>
-        <div className="absolute top-24 left-2/3 w-10 h-10 bg-[var(--color-primary)] opacity-20 rounded-full blur-2xl z-0"></div>
-        <div className="absolute bottom-16 right-1/4 w-8 h-8 bg-[var(--color-secondary)] opacity-30 rounded-full blur-2xl z-0"></div>
-        <div className="absolute bottom-32 left-10 w-16 h-16 bg-yellow-300 opacity-20 rounded-full blur-2xl z-0"></div>
         <h1 className="text-center text-5xl md:w-9/12 mx-auto relative z-10">
           The ultimate space to sharpen your technical skills
         </h1>

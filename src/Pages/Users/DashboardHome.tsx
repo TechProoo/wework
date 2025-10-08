@@ -319,7 +319,7 @@ export const DashboardHome = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={handleExploreCourses}
-                      className="group bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-2xl font-bold text-base hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-xl flex items-center justify-center gap-2"
+                      className="group bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-2xl font-bold text-base hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-md  flex items-center justify-center gap-2"
                     >
                       <span>Explore Tutorials</span>
                       <ChevronRight

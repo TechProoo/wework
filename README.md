@@ -9,6 +9,10 @@ Designed to help organizations showcase remote work and skills programs with a c
 
 - **Responsive Design** – Optimized for mobile, tablet, and desktop.
 - **Modern Tech Stack** – React for the frontend, Node.js for backend integration.
+- **Dual Authentication System** – Separate login/signup flows for students and companies.
+- **Advanced Logout System** – Smart logout with data management options for privacy.
+- **Company Dashboard** – Complete hiring dashboard for companies with job management.
+- **Student Dashboard** – Learning platform with courses, tutorials, and job search.
 - **Reusable CSS Variables** – Easy to update colors and styles in one place.
 - **Clean Aesthetic** – Muted light grey, mauve, slate, and forest green palette.
 - **Easy Customization** – Change content, palette, and branding to match your needs.
