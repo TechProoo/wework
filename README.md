@@ -502,3 +502,39 @@ Feel free to fork the repo and submit a pull request.
 ✨ About WEWORK
 
 WEWORK is inspired by the need to connect African talent with global opportunities. It’s a starting point for landing pages promoting remote work, training programs, or tech skill initiatives.
+
+---
+
+## 🛠️ Backend progress (2025-10-28)
+
+Current development progress for the backend (wework_backend):
+
+- Prisma schema updates:
+  - Added a `Tutorial` model and `CourseLevel` enum.
+  - Extended `Course` and `Lesson` shapes to include `isPublished`, `duration` (seconds), `content`, `videoUrl`, and timestamps.
+
+- Courses feature work:
+  - Implemented nested creation flows so creating/importing a Course also creates an associated Tutorial and Lessons (with optional Quizzes and Questions).
+  - `CoursesService` updated: create, importCourse, createLesson, updateLesson (keeps course.duration in sync), lesson/tutorial CRUD, and quiz creation for lessons.
+
+- Validation and DTOs:
+  - Added/updated DTOs with `class-validator` so Nest's ValidationPipe preserves and validates nested request bodies.
+
+- Controllers & responses:
+  - Controller endpoints added for courses/tutorials/lessons/quizzes.
+  - Standardized response shape implemented for core course CRUD endpoints (returns `{ statusCode, message, data }`).
+
+- Tests and verification:
+  - Unit tests updated for the controller and service. All backend tests pass locally (8 test suites, 20 tests at the time of update).
+  - A REST-client `.http` file was prepared to exercise the full course import workflow manually.
+
+- Database / deployment notes:
+  - The project uses Supabase (Postgres) via Prisma. A connectivity issue (Prisma P1001) was diagnosed: host DNS returned only an IPv6 (AAAA) record and the local environment had no IPv6 route, preventing Prisma migrations from running locally.
+  - Suggested workarounds: run migrations from a CI or cloud runner that has IPv6 connectivity, use the Supabase SQL editor to apply migration SQL, or run migrations from a host with IPv6 enabled.
+
+- Remaining / next steps:
+  1. Standardize response shapes for the remaining controller endpoints (tutorial/lesson/quiz endpoints) and update controller unit tests accordingly.
+  2. Regenerate Prisma client (npx prisma generate) and apply migrations to the Supabase instance (via CI or SQL editor if local IPv6 isn't available).
+  3. Add controller-level Jest tests for tutorial/lesson/quiz endpoints (mocking CoursesService) and consider end-to-end supertest flows against a test database or a mocked Prisma client.
+
+If you want, I can standardize the remaining controller endpoints and add the matching unit tests in the next patch.
