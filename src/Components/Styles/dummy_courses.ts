@@ -9,7 +9,7 @@ export const dummyCourses = [
     rating: 4.9,
     reviews: 1250,
     price: "Free",
-    owner: "Jane Doe",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=Web+Dev",
   },
   {
@@ -21,7 +21,7 @@ export const dummyCourses = [
     rating: 4.7,
     reviews: 980,
     price: "$19",
-    owner: "John Smith",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=Python+DS",
   },
   {
@@ -33,7 +33,7 @@ export const dummyCourses = [
     rating: 4.8,
     reviews: 760,
     price: "Free",
-    owner: "Alex Kim",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=UI+UX",
   },
   {
@@ -45,7 +45,7 @@ export const dummyCourses = [
     rating: 4.6,
     reviews: 540,
     price: "$49",
-    owner: "Priya Patel",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=ML+AI",
   },
   {
@@ -57,7 +57,7 @@ export const dummyCourses = [
     rating: 4.5,
     reviews: 620,
     price: "$29",
-    owner: "Carlos Ruiz",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=Mobile+App",
   },
   {
@@ -69,7 +69,7 @@ export const dummyCourses = [
     rating: 4.4,
     reviews: 410,
     price: "$39",
-    owner: "Fatima Al-Sayed",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=Cybersecurity",
   },
   {
@@ -81,7 +81,7 @@ export const dummyCourses = [
     rating: 4.7,
     reviews: 800,
     price: "$35",
-    owner: "Michael Lee",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=AWS+Cloud",
   },
   {
@@ -93,7 +93,7 @@ export const dummyCourses = [
     rating: 4.3,
     reviews: 350,
     price: "Free",
-    owner: "Sara Novak",
+    owner: "wework",
     image: "https://placehold.co/320x180?text=Marketing",
   },
 ];

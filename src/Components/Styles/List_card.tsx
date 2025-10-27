@@ -75,7 +75,7 @@ export const List_card: React.FC<ListCardProps> = ({ courses }) => {
                     size={16}
                     className={`${bookmarked[course.id] ? "fill-current" : ""}`}
                     style={{
-                      color: bookmarked[course.id] ? "#c0a9bd" : "#94a7ae",
+                      color: bookmarked[course.id] ? "#000000" : "#94a7ae",
                     }}
                   />
                 </button>
