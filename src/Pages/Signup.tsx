@@ -15,28 +15,9 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { Button } from "../Components/Styles/Button";
+import type { CompanyData, StudentData } from "../types/auth";
 
-interface StudentData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  university: string;
-  major: string;
-  graduationYear: string;
-}
 
-interface CompanyData {
-  companyName: string;
-  industry: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  website: string;
-  companySize: string;
-  description: string;
-}
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
