@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
+import type { login as LoginDto, StudentData } from "../types/auth";
+import * as authApi from "../api/Students/authApi";
 
 interface User {
   id: string;
@@ -28,11 +30,12 @@ interface AuthContextType {
     email: string,
     password: string
   ) => Promise<{ success: boolean; error?: string }>;
-  logout: (clearAllData?: boolean) => void;
+  logout: (clearAllData?: boolean) => Promise<void> | void;
   signup: (
-    userData: any,
+    userData: Partial<StudentData>,
     userType: "student" | "company"
   ) => Promise<{ success: boolean; error?: string }>;
+  updateProfile: (payload: Partial<StudentData>) => Promise<any>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -58,18 +61,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const storedUser = localStorage.getItem("wework_user");
-        const storedToken = localStorage.getItem("wework_token");
-
-        if (storedUser && storedToken) {
-          const userData = JSON.parse(storedUser);
-          setUser(userData);
+        // Try to fetch profile from backend (cookie-based auth). If it succeeds,
+        // populate user state and persist the profile locally so UI can restore quickly.
+        const profile = await authApi.getProfile();
+        if (profile) {
+          setUser(profile);
           setIsAuthenticated(true);
         }
       } catch (error) {
-        console.error("Error parsing stored user data:", error);
-        localStorage.removeItem("wework_user");
-        localStorage.removeItem("wework_token");
+        // If backend profile fetch fails, clean up stored profile and treat as logged out
+        console.info("No active session or failed to fetch profile:", error);
+        try {
+          localStorage.removeItem("wework_user");
+        } catch (e) {}
+        setUser(null);
+        setIsAuthenticated(false);
       } finally {
         setIsLoading(false);
       }
@@ -83,97 +89,76 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     password: string
   ): Promise<{ success: boolean; error?: string }> => {
     try {
-      // Get stored users from localStorage
-      const storedUsers = localStorage.getItem("wework_users");
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-
-      // Find user with matching email and password
-      const foundUser = users.find(
-        (u: any) => u.email === email && u.password === password
-      );
-
-      if (!foundUser) {
-        return { success: false, error: "Invalid email or password" };
+      setIsLoading(true);
+      const res = await authApi.login({ email, password } as LoginDto);
+      const profile = res.data;
+      if (profile) {
+        setUser(profile);
+        setIsAuthenticated(true);
+        try {
+          localStorage.setItem("wework_user", JSON.stringify(profile));
+        } catch (e) {}
+        return { success: true };
       }
-
-      // Create user session
-      const userSession = {
-        id: foundUser.id,
-        email: foundUser.email,
-        userType: foundUser.userType,
-        firstName: foundUser.firstName,
-        lastName: foundUser.lastName,
-        companyName: foundUser.companyName,
-        contactPersonName: foundUser.contactPersonName,
-      };
-
-      // Store session
-      localStorage.setItem("wework_user", JSON.stringify(userSession));
-      localStorage.setItem("wework_token", "mock_jwt_token_" + Date.now());
-
-      setUser(userSession);
-      setIsAuthenticated(true);
-
-      return { success: true };
-    } catch (error) {
-      console.error("Login error:", error);
-      return { success: false, error: "An error occurred during login" };
+      return { success: false, error: res.message || "Login failed" };
+    } catch (err: any) {
+      return { success: false, error: err?.message || "Login failed" };
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signup = async (
-    userData: any,
+    userData: Partial<StudentData>,
     userType: "student" | "company"
   ): Promise<{ success: boolean; error?: string }> => {
     try {
-      // Get existing users
-      const storedUsers = localStorage.getItem("wework_users");
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-
-      // Check if email already exists
-      const existingUser = users.find((u: any) => u.email === userData.email);
-      if (existingUser) {
-        return { success: false, error: "Email already registered" };
+      setIsLoading(true);
+      // Call backend signup
+      await authApi.signUp(userData as StudentData);
+      // Optionally auto-login: call login() using provided credentials if available
+      void userType; // keep the parameter to match interface (not used client-side)
+      if (userData.email && (userData as any).password) {
+        return await login(userData.email, (userData as any).password);
       }
-
-      // Create new user
-      const newUser = {
-        id:
-          "user_" + Date.now() + "_" + Math.random().toString(36).substr(2, 9),
-        email: userData.email,
-        password: userData.password,
-        userType,
-        createdAt: new Date().toISOString(),
-        ...userData,
+      return { success: true };
+    } catch (err: any) {
+      console.error("Signup error:", err);
+      return {
+        success: false,
+        error: err?.message || "An error occurred during signup",
       };
-
-      // Add to users array
-      users.push(newUser);
-      localStorage.setItem("wework_users", JSON.stringify(users));
-
-      // Auto-login after signup
-      const loginResult = await login(userData.email, userData.password);
-
-      return loginResult;
-    } catch (error) {
-      console.error("Signup error:", error);
-      return { success: false, error: "An error occurred during signup" };
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const logout = (clearAllData = false) => {
-    // Always remove current session
-    localStorage.removeItem("wework_user");
-    localStorage.removeItem("wework_token");
-
-    // If clearAllData is true, remove all stored user data
-    if (clearAllData) {
-      localStorage.removeItem("wework_users");
-      console.log("All user data cleared from localStorage");
+  const logout = async (_clearAllData = false) => {
+    try {
+      await authApi.logout();
+    } catch (e) {
+      console.info("logout request failed:", e);
     }
 
+    try {
+      localStorage.removeItem("wework_user");
+    } catch (e) {}
+
+    // clearAllData is ignored when not using localStorage guest data
     setUser(null);
     setIsAuthenticated(false);
+  };
+
+  const updateProfile = async (payload: Partial<StudentData>) => {
+    try {
+      const updated = await authApi.updateProfile(payload);
+      if (updated) {
+        setUser(updated.data || updated);
+      }
+      return updated;
+    } catch (err: any) {
+      throw err;
+    }
   };
 
   const value: AuthContextType = {
@@ -183,6 +168,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     signup,
+    updateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
