@@ -30,6 +30,9 @@ import CompanyDashboard from "./Pages/Company/DashboardPage";
 import CompanyLogin from "./Pages/Company/LoginPage";
 import CompanySignup from "./Pages/Company/SignupPage";
 
+// CHANGED THE BACKEND URL
+
+
 function App() {
   return (
     <>
