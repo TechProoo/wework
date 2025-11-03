@@ -65,7 +65,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // populate user state and persist the profile locally so UI can restore quickly.
         const profile = await authApi.getProfile();
         // Only treat as authenticated if profile contains identifying fields
-        if (profile && (profile.data)) {
+        if (profile && profile.data) {
           setUser(profile.data);
           setIsAuthenticated(true);
         }
@@ -88,17 +88,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; data?: StudentData; error?: string }> => {
     try {
       setIsLoading(true);
+
+      // Call backend login
       const res = await authApi.login({ email, password } as LoginDto);
-      const profile = res?.data;
-      if (profile && (profile.id || profile.email)) {
+      console.log("Result is: ", res)
+
+      // Safely extract user data (depends on your API response shape)
+      const profile = res?.data?.data ?? null;
+      
+
+      if (profile.statusCode === 200) {
         setUser(profile);
+        console.log("Profile is:", profile)
         setIsAuthenticated(true);
         return { success: true, data: profile };
       }
 
-      // If profile is null it means the backend did not return/allow the cookie-based
-      // session to be read immediately. Return an error so callers can handle it.
-      return { success: false, error: "Failed to fetch profile after login" };
+      // Handle unexpected empty response
+      return { success: false, error: "Failed to fetch profile after login." };
     } catch (err: any) {
       return { success: false, error: err?.message || "Login failed" };
     } finally {
