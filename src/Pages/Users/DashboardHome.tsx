@@ -40,6 +40,7 @@ interface Tutorial {
 
 export const DashboardHome = () => {
   const { user, isLoading } = useAuth();
+  console.log(user)
   const navigate = useNavigate();
   const [showRightSidebar, setShowRightSidebar] = useState(false);
 
@@ -135,9 +136,7 @@ export const DashboardHome = () => {
 
         <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
           <span className="text-white text-xs lg:text-sm font-semibold">
-            {user.userType === "student"
-              ? user.firstName?.[0] || "U"
-              : user.companyName?.[0] || "C"}
+            {user.firstName?.[0]}
           </span>
         </div>
       </div>

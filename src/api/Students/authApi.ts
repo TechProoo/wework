@@ -20,7 +20,7 @@ export async function signUp(formData: StudentData) {
     });
     // Signup returns created user in response.data. We do not set any client-side token here.
     return {
-      ...response.data,
+      response,
     };
   } catch (error: any) {
     const actualError = error?.response?.data || error?.data || {};
@@ -34,6 +34,39 @@ export async function signUp(formData: StudentData) {
   }
 }
 
+export async function getProfile() {
+  try {
+    console.log("Getting profile");
+    const res = await httpClient.get("/students/profile");
+    // Log the full response and the parsed data so it's easy to inspect in the browser console
+    if (res.status < 200 || res.status >= 300) {
+      throw new Error("Could not resolve profile");
+    }
+    return res.data;
+  } catch (error: any) {
+    // Log error details to help debug why the request failed (network / 401 / CORS / cookie issues)
+    console.error("getProfile error:", {
+      status: error?.response?.status,
+      data: error?.response?.data,
+      message: error?.message,
+    });
+    console.log(error)
+    // If unauthorized, return null so callers can treat as unauthenticated.
+    const status =
+      error?.response?.status ||
+      error?.status ||
+      error?.response?.data?.statusCode;
+    if (status === 401 || status === 403) {
+      return null;
+    }
+    const actualError = error?.response?.data || {};
+    throw {
+      statusCode: actualError.statusCode || 500,
+      message: actualError.message || "Failed to fetch profile",
+    };
+  }
+}
+
 /**
  * Sends login request to backend
  * @param data - Login credentials
@@ -43,15 +76,18 @@ export async function signUp(formData: StudentData) {
 export async function login(data: login) {
   try {
     const response = await httpClient.post("/students/login", data);
-    // Server sets an HttpOnly cookie with the access token. We can't read that in JS.
-    // Return the login response and also fetch the current profile so the frontend
-    // immediately has authenticated user data.
+    console.log("login response:", response.status, response.data);
+    // After login, the server sets an HttpOnly cookie. Fetch the profile
+    // so the frontend immediately has the authenticated user data.
     const profile = await getProfile();
+    console.log("ddddd", profile);
+
     return {
       data: profile,
-      message: response.data?.message || "Login successful",
+      message: response.data?.message || "Login successful,i think",
     };
   } catch (error: any) {
+    console.error("Login error:", error);
     const actualError = error?.response?.data || error?.data || {};
     throw {
       statusCode: actualError.statusCode || 500,
@@ -70,19 +106,6 @@ export async function logout() {
     // ignore logout errors
   }
   // Server clears the cookie. No client-side token stored when using HttpOnly cookies.
-}
-
-export async function getProfile() {
-  try {
-    const res = await httpClient.get("/students/profile");
-    return res.data;
-  } catch (error: any) {
-    const actualError = error?.response?.data || {};
-    throw {
-      statusCode: actualError.statusCode || 500,
-      message: actualError.message || "Failed to fetch profile",
-    };
-  }
 }
 
 export async function updateProfile(payload: Partial<StudentData>) {

@@ -9,7 +9,7 @@ import {
   Building2,
   Star,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -27,6 +27,10 @@ export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   // Apply auth layout class to remove navbar padding
   useEffect(() => {
@@ -70,7 +74,20 @@ export const Login = () => {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    // focus first invalid field for better UX
+    const keys = Object.keys(newErrors);
+    if (keys.length > 0) {
+      const first = keys[0];
+      setTimeout(() => {
+        if (first === "email") {
+          emailRef.current?.focus();
+        } else if (first === "password") {
+          passwordRef.current?.focus();
+        }
+      }, 50);
+    }
+
+    return keys.length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,13 +99,13 @@ export const Login = () => {
 
     try {
       const result = await login(formData.email, formData.password);
+      console.log(result)
 
       if (result.success) {
-        alert("Login successful! Welcome back to WeWork.");
-
-        // Redirect to intended page or dashboard
+        // show inline success and redirect shortly after
+        setSuccessMessage("Welcome back — signing you in...");
         const from = location.state?.from?.pathname || "/dashboard";
-        navigate(from, { replace: true });
+        setTimeout(() => navigate(from, { replace: true }), 700);
       } else {
         setErrors({ submit: result.error || "Login failed" });
       }
@@ -168,18 +185,29 @@ export const Login = () => {
                     Email Address
                   </label>
                   <input
+                    ref={emailRef}
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-4 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg"
+                    aria-invalid={!!errors.email}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-4 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg disabled:opacity-60"
                     placeholder="Enter your email address"
                     required
                   />
                   {errors.email && (
-                    <p className="mt-2 text-sm text-red-500 flex items-center gap-1">
-                      <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+                    <p
+                      id="email-error"
+                      className="mt-2 text-sm text-red-500 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <span
+                        className="w-1 h-1 bg-red-500 rounded-full"
+                        aria-hidden
+                      />
                       {errors.email}
                     </p>
                   )}
@@ -195,12 +223,18 @@ export const Login = () => {
                   </label>
                   <div className="relative">
                     <input
+                      ref={passwordRef}
                       type={showPassword ? "text" : "password"}
                       id="password"
                       name="password"
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-4 pr-12 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg"
+                      aria-invalid={!!errors.password}
+                      aria-describedby={
+                        errors.password ? "password-error" : undefined
+                      }
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-4 pr-12 bg-white border-2 border-slate-200 rounded-xl focus:border-forest-400 focus:ring-0 transition-colors duration-200 placeholder-slate-400 text-lg disabled:opacity-60"
                       placeholder="Enter your password"
                       required
                     />
@@ -213,8 +247,15 @@ export const Login = () => {
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="mt-2 text-sm text-red-500 flex items-center gap-1">
-                      <span className="w-1 h-1 bg-red-500 rounded-full"></span>
+                    <p
+                      id="password-error"
+                      className="mt-2 text-sm text-red-500 flex items-center gap-1"
+                      role="alert"
+                    >
+                      <span
+                        className="w-1 h-1 bg-red-500 rounded-full"
+                        aria-hidden
+                      />
                       {errors.password}
                     </p>
                   )}
@@ -245,24 +286,49 @@ export const Login = () => {
                 </div>
 
                 {/* Enhanced Error Display */}
-                {errors.submit && (
-                  <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                    <p className="text-red-600 text-sm font-medium flex items-center gap-2">
-                      <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-                      {errors.submit}
-                    </p>
-                  </div>
-                )}
+                {/* Error and Success Banners (live region) */}
+                <div aria-live="polite" className="min-h-[1.5rem]">
+                  {errors.submit && (
+                    <div
+                      className="bg-red-50 border border-red-200 rounded-xl p-4"
+                      role="alert"
+                    >
+                      <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 bg-red-500 rounded-full"
+                          aria-hidden
+                        />
+                        {errors.submit}
+                      </p>
+                    </div>
+                  )}
+
+                  {successMessage && (
+                    <div
+                      className="bg-emerald-50 border border-emerald-200 rounded-xl p-4"
+                      role="status"
+                    >
+                      <p className="text-emerald-700 text-sm font-medium flex items-center gap-2">
+                        <span
+                          className="w-2 h-2 bg-emerald-500 rounded-full"
+                          aria-hidden
+                        />
+                        {successMessage}
+                      </p>
+                    </div>
+                  )}
+                </div>
 
                 {/* Enhanced Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                   className="w-full bg-gradient-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? (
-                    <div className="flex items-center gap-3">
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    <div className="flex items-center gap-3" aria-hidden>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       <span>Signing In...</span>
                     </div>
                   ) : (

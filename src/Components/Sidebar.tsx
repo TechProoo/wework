@@ -29,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-
+  const userType = user?.userType ?? "student";
   // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       icon: <Home size={20} />,
       path: "/dashboard",
     },
-    ...(user?.userType === "student"
+    ...(userType === "student"
       ? [
           {
             id: "courses",
@@ -234,14 +234,14 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             }`}
           >
             <p className="text-sm sm:text-base font-bold text-[var(--color-text)] truncate whitespace-nowrap mb-0.5">
-              {user?.userType === "student"
+              {userType === "student"
                 ? `${user?.firstName} ${user?.lastName}`
                 : user?.companyName || user?.email}
             </p>
             <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--color-text)]">
               <div className="flex items-center gap-1.5">
                 <div className="w-2 h-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full shadow-sm"></div>
-                <span className="font-medium capitalize">{user?.userType}</span>
+                <span className="font-medium capitalize">{"USER"}</span>
               </div>
               <span className="text-[var(--color-slate)]">•</span>
               <span className="text-[var(--color-slate)] font-medium">
@@ -373,11 +373,18 @@ export const Sidebar: React.FC<SidebarProps> = () => {
         )}
       </button>
 
-      {/* Mobile Overlay */}
-      {isMobileOpen && isMobile && (
+      {/* Mobile Overlay - always in DOM so opacity can transition smoothly */}
+      {isMobile && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-[35] backdrop-blur-sm animate-in fade-in duration-300"
+          aria-hidden={!isMobileOpen}
           onClick={() => setIsMobileOpen(false)}
+          className={`fixed inset-0 z-[35] backdrop-blur-sm transition-opacity duration-300 ease-out pointer-events-${
+            isMobileOpen ? "auto" : "none"
+          } ${
+            isMobileOpen
+              ? "bg-black bg-opacity-50 opacity-100"
+              : "bg-black bg-opacity-0 opacity-0"
+          }`}
         />
       )}
 
@@ -385,7 +392,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       <aside
         data-sidebar
         className={`
-        fixed top-0 left-0 z-[40] h-screen bg-white border-r border-gray-200 shadow-2xl transition-all duration-300 ease-out group
+        fixed top-0 left-0 z-[40] h-screen bg-white border-r border-gray-200 shadow-2xl group
         ${
           // Mobile behavior
           isMobile
@@ -399,9 +406,9 @@ export const Sidebar: React.FC<SidebarProps> = () => {
         }
       `}
         style={{
-          transition: isMobile
-            ? "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)"
-            : "width 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+          transition:
+            "transform 300ms cubic-bezier(0.4, 0, 0.2, 1), width 300ms cubic-bezier(0.4, 0, 0.2, 1)",
+          willChange: "transform, width, opacity",
         }}
       >
         <SidebarContent />

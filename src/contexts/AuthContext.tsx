@@ -29,7 +29,7 @@ interface AuthContextType {
   login: (
     email: string,
     password: string
-  ) => Promise<{ success: boolean; error?: string }>;
+  ) => Promise<{ success: boolean; data?: StudentData; error?: string }>;
   logout: (clearAllData?: boolean) => Promise<void> | void;
   signup: (
     userData: Partial<StudentData>,
@@ -64,16 +64,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Try to fetch profile from backend (cookie-based auth). If it succeeds,
         // populate user state and persist the profile locally so UI can restore quickly.
         const profile = await authApi.getProfile();
-        if (profile) {
-          setUser(profile);
+        // Only treat as authenticated if profile contains identifying fields
+        if (profile && (profile.data)) {
+          setUser(profile.data);
           setIsAuthenticated(true);
         }
       } catch (error) {
-        // If backend profile fetch fails, clean up stored profile and treat as logged out
+        // If backend profile fetch fails, treat as logged out
         console.info("No active session or failed to fetch profile:", error);
-        try {
-          localStorage.removeItem("wework_user");
-        } catch (e) {}
         setUser(null);
         setIsAuthenticated(false);
       } finally {
@@ -87,20 +85,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (
     email: string,
     password: string
-  ): Promise<{ success: boolean; error?: string }> => {
+  ): Promise<{ success: boolean; data?: StudentData; error?: string }> => {
     try {
       setIsLoading(true);
       const res = await authApi.login({ email, password } as LoginDto);
-      const profile = res.data;
-      if (profile) {
+      const profile = res?.data;
+      if (profile && (profile.id || profile.email)) {
         setUser(profile);
         setIsAuthenticated(true);
-        try {
-          localStorage.setItem("wework_user", JSON.stringify(profile));
-        } catch (e) {}
-        return { success: true };
+        return { success: true, data: profile };
       }
-      return { success: false, error: res.message || "Login failed" };
+
+      // If profile is null it means the backend did not return/allow the cookie-based
+      // session to be read immediately. Return an error so callers can handle it.
+      return { success: false, error: "Failed to fetch profile after login" };
     } catch (err: any) {
       return { success: false, error: err?.message || "Login failed" };
     } finally {
@@ -139,10 +137,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } catch (e) {
       console.info("logout request failed:", e);
     }
-
-    try {
-      localStorage.removeItem("wework_user");
-    } catch (e) {}
 
     // clearAllData is ignored when not using localStorage guest data
     setUser(null);
