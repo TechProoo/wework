@@ -99,12 +99,13 @@ export const Login = () => {
 
     try {
       const result = await login(formData.email, formData.password);
-      console.log(result)
+      console.log(result);
 
       if (result.success) {
         // show inline success and redirect shortly after
         setSuccessMessage("Welcome back — signing you in...");
-        const from = location.state?.from?.pathname || "/dashboard";
+        // default to the student's dashboard
+        const from = location.state?.from?.pathname || "/users/dashboard";
         setTimeout(() => navigate(from, { replace: true }), 700);
       } else {
         setErrors({ submit: result.error || "Login failed" });

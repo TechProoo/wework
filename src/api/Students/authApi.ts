@@ -42,7 +42,8 @@ export async function getProfile() {
     if (res.status < 200 || res.status >= 300) {
       throw new Error("Could not resolve profile");
     }
-    return res.data;
+    console.log(res)
+    return res;
   } catch (error: any) {
     // Log error details to help debug why the request failed (network / 401 / CORS / cookie issues)
     console.error("getProfile error:", {
