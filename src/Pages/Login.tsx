@@ -105,7 +105,7 @@ export const Login = () => {
         // show inline success and redirect shortly after
         setSuccessMessage("Welcome back — signing you in...");
         // default to the student's dashboard
-        const from = location.state?.from?.pathname || "/users/dashboard";
+        const from = location.state?.from?.pathname || "/dashboard";
         setTimeout(() => navigate(from, { replace: true }), 700);
       } else {
         setErrors({ submit: result.error || "Login failed" });
