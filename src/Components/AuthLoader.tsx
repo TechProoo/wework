@@ -8,7 +8,7 @@ export const AuthLoader: React.FC = () => {
       className="min-h-screen flex items-center justify-center"
       style={{
         background: "var(--color-bg)",
-        position: "relative",
+        position: "fixed",
         overflow: "hidden",
       }}
     >
