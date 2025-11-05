@@ -12,6 +12,7 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -105,14 +106,19 @@ export const Login = () => {
       if (result.success) {
         // show inline success and redirect shortly after
         setSuccessMessage("Welcome back — signing you in...");
+        toast.success("Welcome back! Redirecting to your dashboard...");
         // default to the student's dashboard
         const from = location.state?.from?.pathname || "/dashboard";
         setTimeout(() => navigate(from, { replace: true }), 700);
       } else {
-        setErrors({ submit: result.error || "Login failed" });
+        const errorMsg = result.error || "Login failed";
+        setErrors({ submit: errorMsg });
+        toast.error(errorMsg);
       }
     } catch (error) {
-      setErrors({ submit: "An error occurred during login" });
+      const errorMsg = "An error occurred during login";
+      setErrors({ submit: errorMsg });
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
