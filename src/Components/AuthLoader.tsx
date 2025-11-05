@@ -1,6 +1,7 @@
 import React from "react";
 
 export const AuthLoader: React.FC = () => {
+  console.log("[AuthLoader] rendered");
   return (
     <div
       role="status"

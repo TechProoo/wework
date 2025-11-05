@@ -98,8 +98,9 @@ export const Login = () => {
     setIsSubmitting(true);
 
     try {
+      console.log("[Login] handleSubmit: calling login for", formData.email);
       const result = await login(formData.email, formData.password);
-      console.log(result);
+      console.log("[Login] handleSubmit: login result", result);
 
       if (result.success) {
         // show inline success and redirect shortly after

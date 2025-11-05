@@ -58,7 +58,12 @@ const CompanyLogin = () => {
 
     setIsLoading(true);
     try {
+      console.log(
+        "[CompanyLogin] handleSubmit: calling login for",
+        formData.email
+      );
       const result = await login(formData.email, formData.password);
+      console.log("[CompanyLogin] handleSubmit: login result", result);
 
       if (result.success) {
         navigate("/company/dashboard");
