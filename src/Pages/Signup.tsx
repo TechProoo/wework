@@ -18,8 +18,6 @@ import { Button } from "../Components/Styles/Button";
 import type { CompanyData, StudentData } from "../types/auth";
 import toast from "react-hot-toast";
 
-
-
 const Signup: React.FC = () => {
   const navigate = useNavigate();
   const { signup } = useAuth();
@@ -139,7 +137,9 @@ const Signup: React.FC = () => {
 
       if (result.success) {
         // Success! AuthContext automatically logs in the user
-        toast.success("Account created successfully! Redirecting to your dashboard...");
+        toast.success(
+          "Account created successfully! Redirecting to your dashboard..."
+        );
         // Redirect to student dashboard
         navigate("/dashboard");
       } else {
@@ -168,7 +168,9 @@ const Signup: React.FC = () => {
 
       if (result.success) {
         // Success! AuthContext automatically logs in the user
-        toast.success("Company account created successfully! Redirecting to your dashboard...");
+        toast.success(
+          "Company account created successfully! Redirecting to your dashboard..."
+        );
         // Redirect to company dashboard
         navigate("/company/dashboard");
       } else {
