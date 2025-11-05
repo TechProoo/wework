@@ -5,56 +5,35 @@ export const AuthLoader: React.FC = () => {
     <div
       role="status"
       aria-label="Loading"
-      className="min-h-screen flex items-center justify-center"
-      style={{
-        background: "var(--color-bg)",
-        position: "fixed",
-        overflow: "hidden",
-      }}
+      className="fixed inset-0 flex min-h-screen items-center justify-center overflow-hidden bg-[var(--color-bg)]"
     >
-      {/* Decorative flowing blobs to match platform theme (purely visual) */}
+      {/* Decorative background blobs */}
       <div
         aria-hidden
+        className="absolute right-[-10%] top-[-12%] w-[28rem] h-[28rem] rounded-full opacity-10 blur-[72px]"
         style={{
-          position: "absolute",
-          right: "-10%",
-          top: "-12%",
-          width: "28rem",
-          height: "28rem",
           background: "var(--color-accent)",
-          opacity: 0.08,
-          borderRadius: "50%",
-          filter: "blur(72px)",
           transform: "rotate(12deg)",
         }}
       />
-
       <div
         aria-hidden
+        className="absolute left-[-14%] bottom-[-14%] w-[36rem] h-[36rem] rounded-full opacity-10 blur-[96px]"
         style={{
-          position: "absolute",
-          left: "-14%",
-          bottom: "-14%",
-          width: "36rem",
-          height: "36rem",
           background: "var(--color-primary)",
-          opacity: 0.06,
-          borderRadius: "50%",
-          filter: "blur(96px)",
           transform: "rotate(-8deg)",
         }}
       />
 
+      {/* Loader Core */}
       <div className="relative w-28 h-28">
         {/* Rotating gradient ring */}
         <svg
-          className="w-full h-full"
+          className="w-full h-full animate-spin-smooth"
           viewBox="0 0 100 100"
-          style={{ animation: "spin 1.1s linear infinite" }}
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Use CSS variables provided by the platform to match colors */}
             <linearGradient id="lg" x1="0" x2="1">
               <stop offset="0%" stopColor="var(--color-primary)" />
               <stop offset="50%" stopColor="var(--color-accent)" />
@@ -88,14 +67,20 @@ export const AuthLoader: React.FC = () => {
 
         {/* Pulsing center gem */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-forest-500 to-mauve-500 shadow-xl animate-pulse" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] shadow-xl animate-pulse" />
         </div>
-
-        {/* Inline keyframes to ensure spin works without Tailwind customization */}
-        <style>{`
-          @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
-        `}</style>
       </div>
+
+      {/* Local keyframes for smoother spin */}
+      <style>{`
+        @keyframes spin-smooth {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .animate-spin-smooth {
+          animation: spin-smooth 1.1s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };

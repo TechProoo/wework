@@ -89,6 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
 
+      console.log(studentData)
       // Call backend login
       const res = await authApi.login({ email, password } as LoginDto);
       console.log("Result is: ", res)
