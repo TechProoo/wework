@@ -40,19 +40,21 @@ export async function signUp(formData: StudentData) {
 
 export async function getProfile() {
   try {
-    console.log("Getting profile");
+    console.log("Getting profile from:", httpClient.defaults.baseURL);
+    console.log("withCredentials:", httpClient.defaults.withCredentials);
     const res = await httpClient.get("/students/profile");
-    console.log(res);
+    console.log("Profile response:", res.status, res.data);
     // Log the full response and the parsed data so it's easy to inspect in the browser console
     if (res.status < 200 || res.status >= 300) {
       throw new Error("Could not resolve profile");
     }
-    console.log(res);
     return res;
   } catch (error: any) {
     // Log error details to help debug why the request failed (network / 401 / CORS / cookie issues)
     console.error("getProfile error:");
     console.log(error);
+    console.log("Error response headers:", error?.response?.headers);
+    console.log("Error config:", error?.config);
     // If unauthorized, return null so callers can treat as unauthenticated.
     const status =
       error?.response?.status ||
@@ -80,10 +82,13 @@ export async function getProfile() {
  */
 export async function login(data: login) {
   try {
-    console.log();
+    console.log("Attempting login to:", httpClient.defaults.baseURL);
     const response = await httpClient.post("/students/login", data);
 
     console.log("login response:", response.status, response.data);
+    console.log("login response headers:", response.headers);
+    console.log("Set-Cookie header:", response.headers['set-cookie']);
+    
     // After login, the server sets an HttpOnly cookie. Fetch the profile
     // so the frontend immediately has the authenticated user data.
     const profile = await getProfile();
