@@ -61,17 +61,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
+        console.log("[AuthContext] checkAuthStatus: starting");
         // Try to fetch profile from backend (cookie-based auth). If it succeeds,
         // populate user state and persist the profile locally so UI can restore quickly.
         const profile = await authApi.getProfile();
+        console.log("[AuthContext] checkAuthStatus: profile response", profile);
         // Only treat as authenticated if profile contains identifying fields
         if (profile && profile.data) {
           setUser(profile.data);
+          console.log(
+            "[AuthContext] checkAuthStatus: authenticated user set",
+            profile.data
+          );
           setIsAuthenticated(true);
         }
       } catch (error) {
         // If backend profile fetch fails, treat as logged out
-        console.info("No active session or failed to fetch profile:", error);
+        console.info(
+          "[AuthContext] checkAuthStatus: failed to fetch profile",
+          error
+        );
         setUser(null);
         setIsAuthenticated(false);
       } finally {
@@ -89,18 +98,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
 
-      console.log(studentData)
+      console.log("[AuthContext] login: calling authApi.login for", email);
       // Call backend login
       const res = await authApi.login({ email, password } as LoginDto);
-      console.log("Result is: ", res)
+      console.log("[AuthContext] login: authApi.login result", res);
 
-      // Safely extract user data (depends on your API response shape)
-      const profile = res?.data?.data ?? null;
-      
+      // authApi.login returns { data: profileResponse, message }
+      // profileResponse is the axios response from getProfile, so drill safely
+      const profile =
+        res?.data?.data?.data ?? res?.data?.data ?? res?.data ?? null;
+      console.log("[AuthContext] login: extracted profile", profile);
 
-      if (profile.statusCode === 200) {
+      if (profile) {
         setUser(profile);
-        console.log("Profile is:", profile)
+        console.log("[AuthContext] login: authenticated user set", profile);
         setIsAuthenticated(true);
         return { success: true, data: profile };
       }
@@ -120,8 +131,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
+      console.log(
+        "[AuthContext] signup: calling authApi.signUp",
+        userData?.email
+      );
       // Call backend signup
       await authApi.signUp(userData as StudentData);
+      console.log(
+        "[AuthContext] signup: signUp returned, attempting auto-login if credentials provided"
+      );
       // Optionally auto-login: call login() using provided credentials if available
       void userType; // keep the parameter to match interface (not used client-side)
       if (userData.email && (userData as any).password) {
@@ -141,7 +159,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = async (_clearAllData = false) => {
     try {
+      console.log("[AuthContext] logout: calling authApi.logout");
       await authApi.logout();
+      console.log("[AuthContext] logout: authApi.logout completed");
     } catch (e) {
       console.info("logout request failed:", e);
     }
@@ -152,13 +172,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const updateProfile = async (payload: Partial<StudentData>) => {
+    console.log(
+      "[AuthContext] updateProfile: calling authApi.updateProfile",
+      payload
+    );
     try {
       const updated = await authApi.updateProfile(payload);
+      console.log("[AuthContext] updateProfile: response", updated);
       if (updated) {
         setUser(updated.data || updated);
       }
       return updated;
     } catch (err: any) {
+      console.error("[AuthContext] updateProfile: failed", err);
       throw err;
     }
   };

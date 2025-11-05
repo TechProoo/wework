@@ -10,6 +10,11 @@ export const CompanyProtectedRoute: React.FC<CompanyProtectedRouteProps> = ({
   children,
 }) => {
   const { isAuthenticated, isLoading, user } = useAuth();
+  console.log("[CompanyProtectedRoute] auth state", {
+    isAuthenticated,
+    isLoading,
+    user,
+  });
 
   if (isLoading) {
     return <AuthLoader />;
