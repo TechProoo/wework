@@ -1,5 +1,6 @@
 import type { login, StudentData } from "../../types/auth";
 import { httpClient } from "../axiosClient";
+import toast from "react-hot-toast";
 
 /**
  * Sends signup request to backend
@@ -19,17 +20,20 @@ export async function signUp(formData: StudentData) {
       graduationYear: formData.graduationYear,
     });
     // Signup returns created user in response.data. We do not set any client-side token here.
+    toast.success("Account created successfully!");
     return {
       response,
     };
   } catch (error: any) {
     const actualError = error?.response?.data || error?.data || {};
+    const errorMessage =
+      actualError.message ||
+      actualError.cause ||
+      "Signup failed. Please try again.";
+    toast.error(errorMessage);
     throw {
       statusCode: actualError.statusCode || 500,
-      message:
-        actualError.message ||
-        actualError.cause ||
-        "Signup failed. Please try again.",
+      message: errorMessage,
     };
   }
 }
@@ -55,12 +59,15 @@ export async function getProfile() {
       error?.status ||
       error?.response?.data?.statusCode;
     if (status === 401 || status === 403) {
+      // Don't show toast for unauthorized during initial auth check
       return null;
     }
     const actualError = error?.response?.data || {};
+    const errorMessage = actualError.message || "Failed to fetch profile";
+    toast.error(errorMessage);
     throw {
       statusCode: actualError.statusCode || 500,
-      message: actualError.message || "Failed to fetch profile",
+      message: errorMessage,
     };
   }
 }
@@ -82,6 +89,10 @@ export async function login(data: login) {
     const profile = await getProfile();
     console.log("ddddd", profile);
 
+    if (profile) {
+      toast.success("Login successful! Welcome back.");
+    }
+
     return {
       data: profile,
       message: response.data?.message || "Login successful,i think",
@@ -89,12 +100,14 @@ export async function login(data: login) {
   } catch (error: any) {
     console.error("Login error:", error);
     const actualError = error?.response?.data || error?.data || {};
+    const errorMessage =
+      actualError.message ||
+      actualError.cause ||
+      "Login failed. Please try again.";
+    toast.error(errorMessage);
     throw {
       statusCode: actualError.statusCode || 500,
-      message:
-        actualError.message ||
-        actualError.cause ||
-        "Login failed. Please try again.",
+      message: errorMessage,
     };
   }
 }
@@ -102,8 +115,10 @@ export async function login(data: login) {
 export async function logout() {
   try {
     await httpClient.post("/students/logout");
+    toast.success("Logged out successfully");
   } catch (e) {
-    // ignore logout errors
+    // ignore logout errors but log them
+    console.warn("Logout request failed:", e);
   }
   // Server clears the cookie. No client-side token stored when using HttpOnly cookies.
 }
@@ -111,12 +126,15 @@ export async function logout() {
 export async function updateProfile(payload: Partial<StudentData>) {
   try {
     const res = await httpClient.patch("/students/profile", payload);
+    toast.success("Profile updated successfully!");
     return res.data;
   } catch (error: any) {
     const actualError = error?.response?.data || {};
+    const errorMessage = actualError.message || "Failed to update profile";
+    toast.error(errorMessage);
     throw {
       statusCode: actualError.statusCode || 500,
-      message: actualError.message || "Failed to update profile",
+      message: errorMessage,
     };
   }
 }
