@@ -6,13 +6,13 @@ import tailwindcss from "@tailwindcss/vite";
 // wework/vite.config.ts
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: {
-    proxy: {
-      "/students": {
-        target: "http://localhost:3000",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/students": {
+  //       target: "http://localhost:3000",
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
 });
