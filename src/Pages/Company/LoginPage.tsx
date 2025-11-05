@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Building2, Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const CompanyLogin = () => {
   const navigate = useNavigate();
@@ -66,14 +67,17 @@ const CompanyLogin = () => {
       console.log("[CompanyLogin] handleSubmit: login result", result);
 
       if (result.success) {
+        toast.success("Welcome back! Redirecting to your company dashboard...");
         navigate("/company/dashboard");
       } else {
-        setErrors({
-          general: result.error || "Login failed. Please try again.",
-        });
+        const errorMsg = result.error || "Login failed. Please try again.";
+        setErrors({ general: errorMsg });
+        toast.error(errorMsg);
       }
     } catch (error) {
-      setErrors({ general: "An unexpected error occurred. Please try again." });
+      const errorMsg = "An unexpected error occurred. Please try again.";
+      setErrors({ general: errorMsg });
+      toast.error(errorMsg);
     } finally {
       setIsLoading(false);
     }

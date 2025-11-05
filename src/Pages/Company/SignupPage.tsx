@@ -13,6 +13,7 @@ import {
   Phone,
 } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const CompanySignup = () => {
   const navigate = useNavigate();
@@ -145,14 +146,17 @@ const CompanySignup = () => {
       const result = await signup(formData, "company");
 
       if (result.success) {
+        toast.success("Company account created successfully! Redirecting to your dashboard...");
         navigate("/company/dashboard");
       } else {
-        setErrors({
-          general: result.error || "Registration failed. Please try again.",
-        });
+        const errorMsg = result.error || "Registration failed. Please try again.";
+        setErrors({ general: errorMsg });
+        toast.error(errorMsg);
       }
     } catch (error) {
-      setErrors({ general: "An unexpected error occurred. Please try again." });
+      const errorMsg = "An unexpected error occurred. Please try again.";
+      setErrors({ general: errorMsg });
+      toast.error(errorMsg);
     } finally {
       setIsLoading(false);
     }
