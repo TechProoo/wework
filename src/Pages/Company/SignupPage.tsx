@@ -146,10 +146,13 @@ const CompanySignup = () => {
       const result = await signup(formData, "company");
 
       if (result.success) {
-        toast.success("Company account created successfully! Redirecting to your dashboard...");
+        toast.success(
+          "Company account created successfully! Redirecting to your dashboard..."
+        );
         navigate("/company/dashboard");
       } else {
-        const errorMsg = result.error || "Registration failed. Please try again.";
+        const errorMsg =
+          result.error || "Registration failed. Please try again.";
         setErrors({ general: errorMsg });
         toast.error(errorMsg);
       }
