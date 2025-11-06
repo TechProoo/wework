@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { LogoutModal } from "./LogoutModal";
 
 export const Navbar = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   useEffect(() => {
     if (menuOpen) {
@@ -149,9 +148,10 @@ export const Navbar = () => {
                 Dashboard
               </NavLink>
               <button
-                onClick={() => {
-                  setShowLogoutModal(true);
+                onClick={async () => {
+                  await logout();
                   setMenuOpen(false);
+                  navigate("/login");
                 }}
                 className="comic-button-outline w-full border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 block text-center"
               >
@@ -189,7 +189,10 @@ export const Navbar = () => {
               Dashboard
             </NavLink>
             <button
-              onClick={() => setShowLogoutModal(true)}
+              onClick={async () => {
+                await logout();
+                navigate("/login");
+              }}
               className="comic-button-outline border-2 border-red-500 text-red-500 bg-transparent hover:bg-red-500 hover:text-white transition-all duration-300 px-6 py-2 rounded-lg font-bold"
             >
               Logout
@@ -221,12 +224,6 @@ export const Navbar = () => {
         onClick={() => setMenuOpen(false)}
         aria-hidden="true"
       ></div>
-
-      {/* Logout Modal */}
-      <LogoutModal
-        isOpen={showLogoutModal}
-        onClose={() => setShowLogoutModal(false)}
-      />
     </nav>
   );
 };

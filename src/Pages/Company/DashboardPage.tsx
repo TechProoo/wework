@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Building2,
   Users,
@@ -15,7 +16,6 @@ import {
   User,
 } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
-import { LogoutModal } from "../../Components/LogoutModal";
 import JobPostingsPage from "./JobPostingsPage";
 import CandidatesPage from "./CandidatesPage";
 import AnalyticsPage from "./AnalyticsPage";
@@ -45,9 +45,9 @@ interface Candidate {
 }
 
 const CompanyDashboard = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Apply company dashboard layout class to body
   useEffect(() => {
@@ -386,7 +386,10 @@ const CompanyDashboard = () => {
                   <User size={14} className="text-white md:w-4 md:h-4" />
                 </div>
                 <button
-                  onClick={() => setShowLogoutModal(true)}
+                  onClick={async () => {
+                    await logout();
+                    navigate("/company/login");
+                  }}
                   className="p-1.5 md:p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200"
                   title="Logout"
                 >
@@ -435,12 +438,6 @@ const CompanyDashboard = () => {
         {activeTab === "candidates" && <CandidatesPage />}
         {activeTab === "analytics" && <AnalyticsPage />}
       </div>
-
-      {/* Logout Modal */}
-      <LogoutModal
-        isOpen={showLogoutModal}
-        onClose={() => setShowLogoutModal(false)}
-      />
     </div>
   );
 };
