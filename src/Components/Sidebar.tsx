@@ -1,7 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { LogoutModal } from "./LogoutModal";
 import {
   Home,
   User,
@@ -23,12 +22,12 @@ import { useState, useEffect } from "react";
 interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const userType = user?.userType ?? "student";
   // Handle responsive behavior
   useEffect(() => {
@@ -95,8 +94,9 @@ export const Sidebar: React.FC<SidebarProps> = () => {
     }
   };
 
-  const handleLogout = () => {
-    setShowLogoutModal(true);
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   const sidebarItems = [
@@ -413,12 +413,6 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       >
         <SidebarContent />
       </aside>
-
-      {/* Logout Modal */}
-      <LogoutModal
-        isOpen={showLogoutModal}
-        onClose={() => setShowLogoutModal(false)}
-      />
     </>
   );
 };

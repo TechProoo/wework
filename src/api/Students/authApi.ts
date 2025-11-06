@@ -19,7 +19,7 @@ export async function signUp(formData: StudentData) {
       major: formData.major,
       graduationYear: formData.graduationYear,
     });
-    
+
     toast.success("Account created successfully!");
     return response.data;
   } catch (error: any) {
@@ -43,21 +43,21 @@ export async function signUp(formData: StudentData) {
 export async function getProfile() {
   try {
     const res = await httpClient.get("/students/profile");
-    
+
     // Backend returns { statusCode, message, data: userProfile }
     if (res.status >= 200 && res.status < 300 && res.data?.data) {
       return res.data.data; // Return the user profile directly
     }
-    
+
     throw new Error("Invalid profile response");
   } catch (error: any) {
     const status = error?.response?.status || error?.status;
-    
+
     // Don't show toast for unauthorized - this is expected during auth checks
     if (status === 401 || status === 403) {
       return null;
     }
-    
+
     // For other errors, show toast and return null
     const actualError = error?.response?.data || {};
     const errorMessage = actualError.message || "Failed to fetch profile";
@@ -76,14 +76,14 @@ export async function login(data: login) {
   try {
     // Step 1: Send login credentials
     const response = await httpClient.post("/students/login", data);
-    
+
     if (response.status !== 200) {
       throw new Error("Login failed");
     }
 
     // Step 2: Fetch profile after successful login (cookie is now set)
     const profile = await getProfile();
-    
+
     if (!profile) {
       throw new Error("Failed to fetch profile after login");
     }
@@ -97,7 +97,7 @@ export async function login(data: login) {
       actualError.cause ||
       error.message ||
       "Login failed. Please try again.";
-    
+
     toast.error(errorMessage);
     throw {
       statusCode: actualError.statusCode || 500,
@@ -128,7 +128,7 @@ export async function updateProfile(payload: Partial<StudentData>) {
   try {
     const res = await httpClient.patch("/students/profile", payload);
     toast.success("Profile updated successfully!");
-    
+
     // Backend returns { statusCode, message, data: updatedProfile }
     return res.data?.data || res.data;
   } catch (error: any) {

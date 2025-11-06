@@ -63,7 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         // Try to fetch profile from backend (cookie-based auth)
         const profile = await authApi.getProfile();
-        
+
         if (profile && profile.id) {
           setUser(profile as User);
           setIsAuthenticated(true);
@@ -73,7 +73,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       } catch (error) {
         // If backend profile fetch fails, treat as logged out
-        console.info("[AuthContext] checkAuthStatus: failed to fetch profile", error);
+        console.info(
+          "[AuthContext] checkAuthStatus: failed to fetch profile",
+          error
+        );
         setUser(null);
         setIsAuthenticated(false);
       } finally {
@@ -115,19 +118,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      
+
       // Call backend signup
       await authApi.signUp(userData as StudentData);
-      
+
       // Optionally auto-login if credentials are provided
       void userType; // keep the parameter to match interface
       if (userData.email && (userData as any).password) {
-        const loginResult = await login(userData.email, (userData as any).password);
-        return loginResult.success 
-          ? { success: true } 
+        const loginResult = await login(
+          userData.email,
+          (userData as any).password
+        );
+        return loginResult.success
+          ? { success: true }
           : { success: false, error: loginResult.error };
       }
-      
+
       return { success: true };
     } catch (err: any) {
       console.error("Signup error:", err);
@@ -154,11 +160,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const updateProfile = async (payload: Partial<StudentData>) => {
     try {
       const updated = await authApi.updateProfile(payload);
-      
+
       if (updated) {
         setUser(updated as User);
       }
-      
+
       return updated;
     } catch (err: any) {
       console.error("[AuthContext] updateProfile: failed", err);

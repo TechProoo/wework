@@ -31,7 +31,11 @@ httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (import.meta.env.DEV) {
-      console.error("[API] Response error:", error.response?.status, error.message);
+      console.error(
+        "[API] Response error:",
+        error.response?.status,
+        error.message
+      );
     }
 
     // Handle network errors
@@ -42,9 +46,13 @@ httpClient.interceptors.response.use(
     // Handle 401 Unauthorized - but don't redirect during login/profile checks
     if (error.response?.status === 401) {
       const url = error.config?.url || "";
-      
+
       // Don't redirect if we're already on login/profile endpoints
-      if (!url.includes("/login") && !url.includes("/profile") && !url.includes("/signup")) {
+      if (
+        !url.includes("/login") &&
+        !url.includes("/profile") &&
+        !url.includes("/signup")
+      ) {
         // User session expired, redirect to login
         window.location.href = "/login";
       }
