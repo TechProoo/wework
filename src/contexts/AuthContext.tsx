@@ -61,26 +61,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        console.log("[AuthContext] checkAuthStatus: starting");
-        // Try to fetch profile from backend (cookie-based auth). If it succeeds,
-        // populate user state and persist the profile locally so UI can restore quickly.
+        // Try to fetch profile from backend (cookie-based auth)
         const profile = await authApi.getProfile();
-        console.log("[AuthContext] checkAuthStatus: profile response", profile);
-        // Only treat as authenticated if profile contains identifying fields
-        if (profile && profile.data) {
-          setUser(profile.data);
-          console.log(
-            "[AuthContext] checkAuthStatus: authenticated user set",
-            profile.data
-          );
+        
+        if (profile && profile.id) {
+          setUser(profile as User);
           setIsAuthenticated(true);
+        } else {
+          setUser(null);
+          setIsAuthenticated(false);
         }
       } catch (error) {
         // If backend profile fetch fails, treat as logged out
-        console.info(
-          "[AuthContext] checkAuthStatus: failed to fetch profile",
-          error
-        );
+        console.info("[AuthContext] checkAuthStatus: failed to fetch profile", error);
         setUser(null);
         setIsAuthenticated(false);
       } finally {
@@ -98,20 +91,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       setIsLoading(true);
 
-      console.log("[AuthContext] login: calling authApi.login for", email);
-      // Call backend login
-      const res = await authApi.login({ email, password } as LoginDto);
-      console.log("[AuthContext] login: authApi.login result", res);
+      // authApi.login now returns the user profile directly
+      const profile = await authApi.login({ email, password } as LoginDto);
 
-      // authApi.login returns { data: profileResponse, message }
-      // profileResponse is the axios response from getProfile, so drill safely
-      const profile =
-        res?.data?.data?.data ?? res?.data?.data ?? res?.data ?? null;
-      console.log("[AuthContext] login: extracted profile", profile);
-
-      if (profile) {
-        setUser(profile);
-        console.log("[AuthContext] login: authenticated user set", profile);
+      if (profile && profile.id) {
+        setUser(profile as User);
         setIsAuthenticated(true);
         return { success: true, data: profile };
       }
@@ -131,20 +115,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true);
-      console.log(
-        "[AuthContext] signup: calling authApi.signUp",
-        userData?.email
-      );
+      
       // Call backend signup
       await authApi.signUp(userData as StudentData);
-      console.log(
-        "[AuthContext] signup: signUp returned, attempting auto-login if credentials provided"
-      );
-      // Optionally auto-login: call login() using provided credentials if available
-      void userType; // keep the parameter to match interface (not used client-side)
+      
+      // Optionally auto-login if credentials are provided
+      void userType; // keep the parameter to match interface
       if (userData.email && (userData as any).password) {
-        return await login(userData.email, (userData as any).password);
+        const loginResult = await login(userData.email, (userData as any).password);
+        return loginResult.success 
+          ? { success: true } 
+          : { success: false, error: loginResult.error };
       }
+      
       return { success: true };
     } catch (err: any) {
       console.error("Signup error:", err);
@@ -159,29 +142,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = async (_clearAllData = false) => {
     try {
-      console.log("[AuthContext] logout: calling authApi.logout");
       await authApi.logout();
-      console.log("[AuthContext] logout: authApi.logout completed");
     } catch (e) {
       console.info("logout request failed:", e);
     }
 
-    // clearAllData is ignored when not using localStorage guest data
     setUser(null);
     setIsAuthenticated(false);
   };
 
   const updateProfile = async (payload: Partial<StudentData>) => {
-    console.log(
-      "[AuthContext] updateProfile: calling authApi.updateProfile",
-      payload
-    );
     try {
       const updated = await authApi.updateProfile(payload);
-      console.log("[AuthContext] updateProfile: response", updated);
+      
       if (updated) {
-        setUser(updated.data || updated);
+        setUser(updated as User);
       }
+      
       return updated;
     } catch (err: any) {
       console.error("[AuthContext] updateProfile: failed", err);
