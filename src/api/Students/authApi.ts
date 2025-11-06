@@ -87,8 +87,8 @@ export async function login(data: login) {
 
     console.log("login response:", response.status, response.data);
     console.log("login response headers:", response.headers);
-    console.log("Set-Cookie header:", response.headers['set-cookie']);
-    
+    console.log("Set-Cookie header:", response.headers["set-cookie"]);
+
     // After login, the server sets an HttpOnly cookie. Fetch the profile
     // so the frontend immediately has the authenticated user data.
     const profile = await getProfile();
