@@ -2,10 +2,9 @@ import axios from "axios";
 
 // In production (Vercel), use /api which gets proxied to Railway backend
 // In development, use explicit backend URL
-const API_BASE =
-  import.meta.env.PROD
-    ? "/api" // Proxied through Vercel in production
-    : (import.meta.env as any).VITE_API_URL || "http://localhost:3000";
+const API_BASE = import.meta.env.PROD
+  ? "/api" // Proxied through Vercel in production
+  : (import.meta.env as any).VITE_API_URL || "http://localhost:3000";
 
 export const httpClient = axios.create({
   baseURL: API_BASE || undefined,

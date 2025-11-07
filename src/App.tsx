@@ -25,7 +25,6 @@ import LearningGoals from "./Pages/Users/LearningGoals";
 import Community from "./Pages/Users/Community";
 import SkillAssessmentPage from "./Pages/Users/SkillAssessmentPage";
 import PopularCoursesPage from "./Pages/Users/PopularCoursesPage";
-import TutorialViewPage from "./Pages/Users/TutorialViewPage";
 import CompanyDashboard from "./Pages/Company/DashboardPage";
 import CompanyLogin from "./Pages/Company/LoginPage";
 import CompanySignup from "./Pages/Company/SignupPage";
@@ -136,14 +135,6 @@ function App() {
           element={
             <ProtectedRoute>
               <EnrollmentPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/dashboard/tutorial/:courseId"
-          element={
-            <ProtectedRoute>
-              <TutorialViewPage />
             </ProtectedRoute>
           }
         />
