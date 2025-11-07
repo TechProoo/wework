@@ -1,10 +1,11 @@
 import axios from "axios";
 
-// Prefer explicit VITE_API_BASE_URL or VITE_API_URL; otherwise default to localhost:3000 for local dev
+// In production (Vercel), use /api which gets proxied to Railway backend
+// In development, use explicit backend URL
 const API_BASE =
-  (import.meta.env as any).VITE_API_BASE_URL ||
-  (import.meta.env as any).VITE_API_URL ||
-  "http://localhost:3000";
+  import.meta.env.PROD
+    ? "/api" // Proxied through Vercel in production
+    : (import.meta.env as any).VITE_API_URL || "http://localhost:3000";
 
 export const httpClient = axios.create({
   baseURL: API_BASE || undefined,
@@ -29,7 +30,9 @@ httpClient.interceptors.request.use(
 // Response interceptor - handle common errors
 httpClient.interceptors.response.use(
   (response) => {
-    console.log(`[API] Response ${response.status} from ${response.config.url}`);
+    console.log(
+      `[API] Response ${response.status} from ${response.config.url}`
+    );
     return response;
   },
   (error) => {
