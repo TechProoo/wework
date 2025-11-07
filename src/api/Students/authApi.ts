@@ -42,26 +42,33 @@ export async function signUp(formData: StudentData) {
  */
 export async function getProfile() {
   try {
+    console.log("[authApi] getProfile: fetching profile from backend");
     const res = await httpClient.get("/students/profile");
+
+    console.log("[authApi] getProfile: response status", res.status);
+    console.log("[authApi] getProfile: response data", res.data);
 
     // Backend returns { statusCode, message, data: userProfile }
     if (res.status >= 200 && res.status < 300 && res.data?.data) {
+      console.log("[authApi] getProfile: profile fetched successfully");
       return res.data.data; // Return the user profile directly
     }
 
+    console.warn("[authApi] getProfile: invalid response format");
     throw new Error("Invalid profile response");
   } catch (error: any) {
     const status = error?.response?.status || error?.status;
 
+    console.log("[authApi] getProfile: error status", status);
+    console.log("[authApi] getProfile: error details", error.response?.data);
+
     // Don't show toast for unauthorized - this is expected during auth checks
     if (status === 401 || status === 403) {
+      console.log("[authApi] getProfile: unauthorized - user not logged in");
       return null;
     }
 
-    // For other errors, show toast and return null
-    const actualError = error?.response?.data || {};
-    const errorMessage = actualError.message || "Failed to fetch profile";
-    toast.error(errorMessage);
+    console.error("[authApi] getProfile: unexpected error", error);
     return null;
   }
 }
@@ -74,12 +81,12 @@ export async function getProfile() {
  */
 export async function login(data: login) {
   try {
-    console.log('[authApi] login: attempting login for', data.email);
-    
+    console.log("[authApi] login: attempting login for", data.email);
+
     // Send login credentials - backend sets cookie AND returns profile in same response
     const response = await httpClient.post("/students/login", data);
 
-    console.log('[authApi] login: response status', response.status);
+    console.log("[authApi] login: response status", response.status);
 
     if (response.status !== 200 || !response.data?.data) {
       throw new Error("Login failed - invalid response");
@@ -88,12 +95,12 @@ export async function login(data: login) {
     // Extract user profile directly from login response (no need for separate getProfile call)
     const userProfile = response.data.data;
 
-    console.log('[authApi] login: profile extracted from response');
+    console.log("[authApi] login: profile extracted from response");
 
     toast.success("Login successful! Welcome back.");
     return userProfile;
   } catch (error: any) {
-    console.error('[authApi] login: error', error);
+    console.error("[authApi] login: error", error);
 
     const actualError = error?.response?.data || error?.data || {};
     const errorMessage =
@@ -108,7 +115,8 @@ export async function login(data: login) {
       message: errorMessage,
     };
   }
-}/**
+}
+/**
  * Logs out the current user
  */
 export async function logout() {
