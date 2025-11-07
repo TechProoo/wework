@@ -15,9 +15,9 @@ export const httpClient = axios.create({
 // Request interceptor - log requests in development
 httpClient.interceptors.request.use(
   (config) => {
-    if (import.meta.env.DEV) {
-      console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`);
-    }
+    console.log(`[API] ${config.method?.toUpperCase()} ${config.url}`);
+    console.log(`[API] withCredentials: ${config.withCredentials}`);
+    console.log(`[API] baseURL: ${config.baseURL}`);
     return config;
   },
   (error) => {
@@ -28,15 +28,23 @@ httpClient.interceptors.request.use(
 
 // Response interceptor - handle common errors
 httpClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log(`[API] Response ${response.status} from ${response.config.url}`);
+    return response;
+  },
   (error) => {
-    if (import.meta.env.DEV) {
-      console.error(
-        "[API] Response error:",
-        error.response?.status,
-        error.message
-      );
-    }
+    console.error(
+      "[API] Response error:",
+      error.response?.status,
+      error.message
+    );
+    console.error("[API] Error details:", {
+      url: error.config?.url,
+      method: error.config?.method,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      data: error.response?.data,
+    });
 
     // Handle network errors
     if (!error.response) {
@@ -53,8 +61,11 @@ httpClient.interceptors.response.use(
         !url.includes("/profile") &&
         !url.includes("/signup")
       ) {
+        console.warn("[API] 401 Unauthorized - redirecting to login");
         // User session expired, redirect to login
         window.location.href = "/login";
+      } else {
+        console.log("[API] 401 on auth endpoint - not redirecting");
       }
     }
 
