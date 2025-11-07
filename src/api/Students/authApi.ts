@@ -69,28 +69,32 @@ export async function getProfile() {
 /**
  * Sends login request to backend
  * @param data - Login credentials
- * @returns User profile data
+ * @returns User profile data directly from login response
  * @throws {statusCode, message} if login fails
  */
 export async function login(data: login) {
   try {
-    // Step 1: Send login credentials
+    console.log('[authApi] login: attempting login for', data.email);
+    
+    // Send login credentials - backend sets cookie AND returns profile in same response
     const response = await httpClient.post("/students/login", data);
 
-    if (response.status !== 200) {
-      throw new Error("Login failed");
+    console.log('[authApi] login: response status', response.status);
+
+    if (response.status !== 200 || !response.data?.data) {
+      throw new Error("Login failed - invalid response");
     }
 
-    // Step 2: Fetch profile after successful login (cookie is now set)
-    const profile = await getProfile();
+    // Extract user profile directly from login response (no need for separate getProfile call)
+    const userProfile = response.data.data;
 
-    if (!profile) {
-      throw new Error("Failed to fetch profile after login");
-    }
+    console.log('[authApi] login: profile extracted from response');
 
     toast.success("Login successful! Welcome back.");
-    return profile;
+    return userProfile;
   } catch (error: any) {
+    console.error('[authApi] login: error', error);
+
     const actualError = error?.response?.data || error?.data || {};
     const errorMessage =
       actualError.message ||
@@ -104,9 +108,7 @@ export async function login(data: login) {
       message: errorMessage,
     };
   }
-}
-
-/**
+}/**
  * Logs out the current user
  */
 export async function logout() {

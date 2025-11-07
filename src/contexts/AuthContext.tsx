@@ -93,19 +93,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<{ success: boolean; data?: StudentData; error?: string }> => {
     try {
       setIsLoading(true);
+      console.log("[AuthContext] login: starting login for", email);
 
-      // authApi.login now returns the user profile directly
+      // authApi.login now returns the user profile directly (no separate getProfile call)
       const profile = await authApi.login({ email, password } as LoginDto);
+
+      console.log("[AuthContext] login: received profile from login response");
 
       if (profile && profile.id) {
         setUser(profile as User);
         setIsAuthenticated(true);
+        console.log("[AuthContext] login: user authenticated successfully");
         return { success: true, data: profile };
       }
 
       // Handle unexpected empty response
+      console.error("[AuthContext] login: no valid profile in response");
       return { success: false, error: "Failed to fetch profile after login." };
     } catch (err: any) {
+      console.error("[AuthContext] login: error", err);
       return { success: false, error: err?.message || "Login failed" };
     } finally {
       setIsLoading(false);
