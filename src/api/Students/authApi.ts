@@ -87,6 +87,11 @@ export async function login(data: login) {
     const response = await httpClient.post("/students/login", data);
 
     console.log("[authApi] login: response status", response.status);
+    console.log(
+      "[authApi] login: X-Auth-Cookie header",
+      response.headers["x-auth-cookie"] || "NOT PRESENT"
+    );
+    console.log("[authApi] login: response headers", response.headers);
 
     if (response.status !== 200 || !response.data?.data) {
       throw new Error("Login failed - invalid response");
@@ -96,6 +101,9 @@ export async function login(data: login) {
     const userProfile = response.data.data;
 
     console.log("[authApi] login: profile extracted from response");
+    console.log(
+      "[authApi] login: Cookie should now be set by browser (check DevTools > Application > Cookies)"
+    );
 
     toast.success("Login successful! Welcome back.");
     return userProfile;
