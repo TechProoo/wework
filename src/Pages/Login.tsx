@@ -125,11 +125,11 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-forest-200/20 to-mauve-200/20 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-mauve-200/20 to-forest-200/20 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-linear-to-br from-forest-200/20 to-mauve-200/20 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-linear-to-br from-mauve-200/20 to-forest-200/20 blur-3xl"></div>
       </div>
 
       {/* Enhanced Header */}
@@ -137,7 +137,7 @@ export const Login = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <Link to="/" className="flex items-center gap-3 group">
-              <span className="text-2xl font-bold bg-gradient-to-r from-forest-600 to-mauve-600 bg-clip-text">
+              <span className="text-2xl font-bold bg-linear-to-r from-forest-600 to-mauve-600 bg-clip-text">
                 WEWORK
               </span>
             </Link>
@@ -147,7 +147,7 @@ export const Login = () => {
               </span>
               <Link
                 to="/signup"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white rounded-full shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 font-medium"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white rounded-full shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 font-medium"
               >
                 <span>Sign Up</span>
                 <ArrowRight size={16} />
@@ -170,7 +170,7 @@ export const Login = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-forest-600 via-slate-700 to-forest-800 bg-clip-text text-transparent mb-4 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-forest-600 via-slate-700 to-forest-800 bg-clip-text text-transparent mb-4 leading-tight">
                 Sign In to
                 <span className="block text-mauve-600">WEWORK</span>
               </h1>
@@ -332,7 +332,7 @@ export const Login = () => {
                   type="submit"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
-                  className="w-full bg-gradient-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
+                  className="w-full bg-linear-to-r from-forest-500 to-emerald-500 hover:from-forest-600 hover:to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-3" aria-hidden>
@@ -366,7 +366,7 @@ export const Login = () => {
                   <div className="w-full border-t border-slate-200" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-500 font-medium">
+                  <span className="px-4 bg-linear-to-br from-slate-50 via-white to-slate-100 text-slate-500 font-medium">
                     or
                   </span>
                 </div>
@@ -384,7 +384,7 @@ export const Login = () => {
         </div>
 
         {/* Right Side - Enhanced Info Panel */}
-        <div className="hidden lg:flex flex-1 bg-gradient-to-br from-forest-600 via-slate-700 to-forest-800 p-8 lg:p-12 relative overflow-hidden">
+        <div className="hidden lg:flex flex-1 bg-linear-to-br from-forest-600 via-slate-700 to-forest-800 p-8 lg:p-12 relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-20 -translate-y-20"></div>
@@ -417,7 +417,7 @@ export const Login = () => {
               {/* Enhanced Stats Cards */}
               <div className="space-y-6 mb-10">
                 <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-                  <div className="w-14 h-14 bg-gradient-to-br from-mauve-400 to-mauve-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-mauve-500/30">
+                  <div className="w-14 h-14 bg-linear-to-br from-mauve-400 to-mauve-600 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-mauve-500/30">
                     <Users className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -431,7 +431,7 @@ export const Login = () => {
                 </div>
 
                 <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
+                  <div className="w-14 h-14 bg-linear-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-emerald-500/30">
                     <Target className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -445,7 +445,7 @@ export const Login = () => {
                 </div>
 
                 <div className="group flex items-start gap-4 p-5 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/15 transition-all duration-300">
-                  <div className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-yellow-500/30">
+                  <div className="w-14 h-14 bg-linear-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-yellow-500/30">
                     <Shield className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -465,7 +465,7 @@ export const Login = () => {
                   <img
                     src="/src/assets/one.jpg"
                     alt="Success story"
-                    className="w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-lg flex-shrink-0"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-lg shrink-0"
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-3">

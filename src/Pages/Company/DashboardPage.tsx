@@ -173,7 +173,7 @@ const CompanyDashboard = () => {
                 {stats.totalJobs}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl shrink-0">
               <Briefcase size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -198,7 +198,7 @@ const CompanyDashboard = () => {
                 {stats.activeJobs}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl shrink-0">
               <Target size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -219,7 +219,7 @@ const CompanyDashboard = () => {
                 {stats.totalApplicants}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl shrink-0">
               <Users size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -242,7 +242,7 @@ const CompanyDashboard = () => {
                 {stats.interviewsScheduled}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl shrink-0">
               <Calendar size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -279,7 +279,7 @@ const CompanyDashboard = () => {
                     {job.title}
                   </h4>
                   <span
-                    className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full flex-shrink-0 ${getStatusColor(
+                    className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
                       job.status
                     )}`}
                   >
@@ -291,7 +291,7 @@ const CompanyDashboard = () => {
                 </p>
                 <div className="flex items-center justify-between text-xs text-gray-500">
                   <span className="truncate">{job.applicants} applicants</span>
-                  <span className="flex-shrink-0">{job.posted}</span>
+                  <span className="shrink-0">{job.posted}</span>
                 </div>
               </div>
             ))}
@@ -314,7 +314,7 @@ const CompanyDashboard = () => {
                 key={candidate.id}
                 className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-[var(--color-light)] rounded-xl"
               >
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold text-xs md:text-sm flex-shrink-0">
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold text-xs md:text-sm shrink-0">
                   {candidate.avatar}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -335,7 +335,7 @@ const CompanyDashboard = () => {
                   </div>
                 </div>
                 <span
-                  className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full flex-shrink-0 ${getStatusColor(
+                  className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
                     candidate.status
                   )}`}
                 >
@@ -356,7 +356,7 @@ const CompanyDashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex items-center gap-3 md:gap-4 min-w-0 flex-1">
-              <div className="p-2 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex-shrink-0">
+              <div className="p-2 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl shrink-0">
                 <Building2 size={20} className="text-white md:w-6 md:h-6" />
               </div>
               <div className="min-w-0">
@@ -375,14 +375,14 @@ const CompanyDashboard = () => {
                   className="text-[var(--color-text)] md:w-5 md:h-5"
                 />
               </button>
-              <button className="px-3 py-2 md:px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+              <button className="px-3 py-2 md:px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2">
                 <Plus size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline text-sm md:text-base">
                   Post Job
                 </span>
               </button>
               <div className="flex items-center gap-2 md:gap-3 ml-2 md:ml-4 pl-2 md:pl-4 border-l border-gray-200">
-                <div className="w-7 h-7 md:w-8 md:h-8 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] rounded-full flex items-center justify-center">
+                <div className="w-7 h-7 md:w-8 md:h-8 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-primary)] rounded-full flex items-center justify-center">
                   <User size={14} className="text-white md:w-4 md:h-4" />
                 </div>
                 <button

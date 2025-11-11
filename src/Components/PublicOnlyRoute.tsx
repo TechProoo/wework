@@ -10,18 +10,22 @@ interface PublicOnlyRouteProps {
 
 export const PublicOnlyRoute: React.FC<PublicOnlyRouteProps> = ({
   children,
-  redirectTo = "/dashboard",
+  redirectTo,
 }) => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
 
   // Show loading screen while checking authentication
   if (isLoading) {
     return <AuthLoader />;
   }
 
-  // If authenticated, redirect to dashboard
+  // If authenticated, redirect to appropriate dashboard based on user type
   if (isAuthenticated) {
-    return <Navigate to={redirectTo} replace />;
+    // Use provided redirectTo, or determine based on user type
+    const finalRedirect =
+      redirectTo ||
+      (user?.userType === "company" ? "/company/dashboard" : "/dashboard");
+    return <Navigate to={finalRedirect} replace />;
   }
 
   return <>{children}</>;

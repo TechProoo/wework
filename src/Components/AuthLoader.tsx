@@ -68,7 +68,7 @@ export const AuthLoader: React.FC = () => {
 
         {/* Pulsing center gem */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] shadow-xl animate-pulse" />
+          <div className="w-8 h-8 rounded-full bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] shadow-xl animate-pulse" />
         </div>
       </div>
 

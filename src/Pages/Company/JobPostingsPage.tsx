@@ -240,7 +240,7 @@ const JobPostingsPage = () => {
             Manage your job postings and track applications
           </p>
         </div>
-        <button className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+        <button className="px-4 py-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2">
           <Plus size={16} />
           <span>Post New Job</span>
         </button>
@@ -545,7 +545,7 @@ const JobPostingsPage = () => {
                 : "Create your first job posting to start hiring"}
             </p>
             {!searchQuery && (
-              <button className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto">
+              <button className="px-4 py-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto">
                 <Plus size={16} />
                 <span>Post New Job</span>
               </button>

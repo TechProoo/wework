@@ -111,7 +111,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
               {(title || icon) && (
                 <div className="flex items-center gap-3">
                   {icon && (
-                    <div className="w-8 h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-lg flex items-center justify-center">
                       {icon}
                     </div>
                   )}

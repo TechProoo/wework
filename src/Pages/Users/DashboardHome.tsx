@@ -40,7 +40,7 @@ interface Tutorial {
 
 export const DashboardHome = () => {
   const { user, isLoading } = useAuth();
-  console.log(user)
+  console.log(user);
   const navigate = useNavigate();
   const [showRightSidebar, setShowRightSidebar] = useState(false);
 
@@ -134,7 +134,7 @@ export const DashboardHome = () => {
           <Users size={16} />
         </button>
 
-        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
           <span className="text-white text-xs lg:text-sm font-semibold">
             {user.firstName?.[0]}
           </span>
@@ -152,7 +152,7 @@ export const DashboardHome = () => {
         {/* Main Content */}
         <div className="flex-1 space-y-4 lg:space-y-6">
           {/* Enhanced Welcome Banner */}
-          <div className="relative bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-slate)] text-white p-8 lg:p-12 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="relative bg-linear-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-slate)] text-white p-8 lg:p-12 rounded-3xl shadow-2xl overflow-hidden">
             {/* Background Elements */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-20 translate-x-20"></div>
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-16 -translate-x-16"></div>
@@ -168,7 +168,7 @@ export const DashboardHome = () => {
                       <span className="text-2xl">🚀</span>
                     </div>
                     <div>
-                      <h1 className="text-2xl lg:text-4xl font-bold bg-gradient-to-r from-white via-[var(--color-light)] to-white bg-clip-text text-transparent">
+                      <h1 className="text-2xl lg:text-4xl font-bold bg-linear-to-r from-white via-[var(--color-light)] to-white bg-clip-text text-transparent">
                         Welcome to WEWORK!
                       </h1>
                       <p className="text-white/80 text-sm lg:text-base">
@@ -233,7 +233,7 @@ export const DashboardHome = () => {
                   <div
                     className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 ${category.color.replace(
                       "bg-",
-                      "bg-gradient-to-br from-"
+                      "bg-linear-to-br from-"
                     )} to-transparent`}
                   ></div>
 
@@ -298,13 +298,13 @@ export const DashboardHome = () => {
             </div>
 
             {continueWatching.length === 0 ? (
-              <div className="bg-gradient-to-br from-[var(--color-light)] to-white rounded-3xl p-12 text-center border border-[var(--color-slate)]/20 relative overflow-hidden">
+              <div className="bg-linear-to-br from-[var(--color-light)] to-white rounded-3xl p-12 text-center border border-[var(--color-slate)]/20 relative overflow-hidden">
                 {/* Background Elements */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-accent)]/20 rounded-full -translate-y-16 translate-x-16"></div>
                 <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--color-primary)]/15 rounded-full translate-y-12 -translate-x-12"></div>
 
                 <div className="relative z-10">
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg">
                     <BookOpen size={36} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-[var(--color-text)] mb-3">
@@ -318,7 +318,7 @@ export const DashboardHome = () => {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={handleExploreCourses}
-                      className="group bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-2xl font-bold text-base hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-md  flex items-center justify-center gap-2"
+                      className="group bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-2xl font-bold text-base hover:shadow-lg transition-all duration-300 transform hover:scale-105 shadow-md  flex items-center justify-center gap-2"
                     >
                       <span>Explore Tutorials</span>
                       <ChevronRight
@@ -352,9 +352,9 @@ export const DashboardHome = () => {
             {upcomingTutorials.length === 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-light)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-[var(--color-light)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-16 h-16 mx-auto mb-6 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <BookOpen size={28} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors">
@@ -366,7 +366,7 @@ export const DashboardHome = () => {
                     </p>
                     <button
                       onClick={handleExploreCourses}
-                      className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:shadow-lg"
+                      className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:shadow-lg"
                     >
                       Explore Now
                     </button>
@@ -374,9 +374,9 @@ export const DashboardHome = () => {
                 </div>
 
                 <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-accent)]/30 transform hover:-translate-y-1 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-[var(--color-accent)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-16 h-16 mx-auto mb-6 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-primary)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <Target size={28} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-accent)] transition-colors">
@@ -388,7 +388,7 @@ export const DashboardHome = () => {
                     </p>
                     <Link
                       to="/dashboard/goals"
-                      className="w-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-primary)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:shadow-lg block"
+                      className="w-full bg-linear-to-r from-[var(--color-accent)] to-[var(--color-primary)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:shadow-lg block"
                     >
                       Start Planning
                     </Link>
@@ -411,9 +411,9 @@ export const DashboardHome = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Web Development Tutorial */}
               <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <span className="text-white text-2xl font-bold">💻</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">
@@ -428,7 +428,7 @@ export const DashboardHome = () => {
                     onClick={() =>
                       navigate("/dashboard/courses/enroll/front-end-tutorial")
                     }
-                    className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+                    className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
                   >
                     Explore
                   </button>
@@ -437,9 +437,9 @@ export const DashboardHome = () => {
 
               {/* UI/UX Design Tutorial */}
               <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <span className="text-white text-2xl font-bold">🎨</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">
@@ -456,7 +456,7 @@ export const DashboardHome = () => {
                         "/dashboard/courses/enroll/ui-ux-design-tutorial"
                       )
                     }
-                    className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+                    className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
                   >
                     Explore
                   </button>
@@ -465,9 +465,9 @@ export const DashboardHome = () => {
 
               {/* Data Science Tutorial */}
               <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-linear-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <span className="text-white text-2xl font-bold">📊</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[var(--color-primary)] transition-colors">
@@ -484,7 +484,7 @@ export const DashboardHome = () => {
                         "/dashboard/courses/enroll/data-science-tutorial"
                       )
                     }
-                    className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
+                    className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-3 px-6 rounded-2xl font-bold text-sm hover:shadow-lg transition-all duration-300 group-hover:scale-105"
                   >
                     Explore
                   </button>
@@ -517,9 +517,9 @@ export const DashboardHome = () => {
             )}
 
             {/* Profile Welcome Card */}
-            <div className="login-card bg-gradient-to-br from-[var(--color-light)] to-white border border-[var(--color-slate)]/20 rounded-3xl p-6 shadow-lg">
+            <div className="login-card bg-linear-to-br from-[var(--color-light)] to-white border border-[var(--color-slate)]/20 rounded-3xl p-6 shadow-lg">
               <div className="flex items-center gap-3 lg:gap-4">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
                   <span className="text-white text-sm lg:text-base font-semibold">
                     {user.userType === "student"
                       ? user.firstName?.[0] || "U"
@@ -552,7 +552,7 @@ export const DashboardHome = () => {
                     Complete your setup journey
                   </p>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
                   <BarChart3 size={20} className="text-white" />
                 </div>
               </div>
@@ -599,7 +599,7 @@ export const DashboardHome = () => {
                 </div>
               </div>
 
-              <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200">
+              <div className="mt-6 p-4 bg-linear-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold text-blue-700">

@@ -97,7 +97,7 @@ export const Contact = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-light)] relative">
+      <section className="py-20 px-4 bg-linear-to-br from-[var(--color-bg)] to-[var(--color-light)] relative">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-20 h-20 bg-[var(--color-primary)] rounded-full"></div>
           <div className="absolute top-40 right-20 w-16 h-16 bg-[var(--color-accent)] rounded-full"></div>

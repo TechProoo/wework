@@ -11,13 +11,19 @@ export interface StudentData {
 
 export interface CompanyData {
   companyName: string;
-  industry: string;
+  contactPersonName?: string;
+  phone?: string;
+  industry?: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  website: string;
-  companySize: string;
-  description: string;
+  confirmPassword?: string;
+  website?: string;
+  companySize?: string;
+  description?: string;
+  // Additional fields returned from backend on login/profile
+  id?: string;
+  createdAt?: string;
+  jobs?: any[];
 }
 
 export interface login {

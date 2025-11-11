@@ -37,7 +37,9 @@ export const Consultation = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
     if (type === "checkbox") {
@@ -112,7 +114,9 @@ export const Consultation = () => {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Consultation request submitted successfully! We'll contact you within 24 hours.");
+      alert(
+        "Consultation request submitted successfully! We'll contact you within 24 hours."
+      );
       // Reset form
       setFormData({
         firstName: "",
@@ -157,7 +161,8 @@ export const Consultation = () => {
     {
       icon: <Target className="w-6 h-6" />,
       title: "Career Roadmap",
-      description: "Receive a clear path to achieve your tech career objectives",
+      description:
+        "Receive a clear path to achieve your tech career objectives",
     },
     {
       icon: <GraduationCap className="w-6 h-6" />,
@@ -176,7 +181,7 @@ export const Consultation = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white py-20 px-4">
+      <div className="bg-linear-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
             <Calendar className="w-4 h-4" />
@@ -184,13 +189,13 @@ export const Consultation = () => {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Get Your Free
-            <span className="block bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               Career Consultation
             </span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
-            Speak with our expert career counselors to discover your perfect tech career path
-            and the best courses to get you there.
+            Speak with our expert career counselors to discover your perfect
+            tech career path and the best courses to get you there.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
@@ -216,7 +221,8 @@ export const Consultation = () => {
             What You'll Get from Your Consultation
           </h2>
           <p className="text-lg text-center mb-12 text-[var(--color-secondary)] max-w-2xl mx-auto">
-            Our expert counselors will work with you to create a personalized roadmap for your tech career success.
+            Our expert counselors will work with you to create a personalized
+            roadmap for your tech career success.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
@@ -230,7 +236,9 @@ export const Consultation = () => {
                 <h3 className="text-xl font-bold mb-2 text-[var(--color-text)]">
                   {benefit.title}
                 </h3>
-                <p className="text-[var(--color-secondary)]">{benefit.description}</p>
+                <p className="text-[var(--color-secondary)]">
+                  {benefit.description}
+                </p>
               </div>
             ))}
           </div>
@@ -260,12 +268,16 @@ export const Consultation = () => {
                         value={formData.firstName}
                         onChange={handleInputChange}
                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] ${
-                          errors.firstName ? "border-red-500" : "border-gray-300"
+                          errors.firstName
+                            ? "border-red-500"
+                            : "border-gray-300"
                         }`}
                         placeholder="Enter your first name"
                       />
                       {errors.firstName && (
-                        <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.firstName}
+                        </p>
                       )}
                     </div>
                     <div>
@@ -283,7 +295,9 @@ export const Consultation = () => {
                         placeholder="Enter your last name"
                       />
                       {errors.lastName && (
-                        <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.lastName}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -305,7 +319,9 @@ export const Consultation = () => {
                         placeholder="your.email@example.com"
                       />
                       {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.email}
+                        </p>
                       )}
                     </div>
                     <div>
@@ -323,7 +339,9 @@ export const Consultation = () => {
                         placeholder="+1 (555) 123-4567"
                       />
                       {errors.phone && (
-                        <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.phone}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -338,19 +356,25 @@ export const Consultation = () => {
                       value={formData.currentStatus}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] ${
-                        errors.currentStatus ? "border-red-500" : "border-gray-300"
+                        errors.currentStatus
+                          ? "border-red-500"
+                          : "border-gray-300"
                       }`}
                     >
                       <option value="">Select your current status</option>
                       <option value="student">Student</option>
                       <option value="graduate">Recent Graduate</option>
                       <option value="professional">Working Professional</option>
-                      <option value="career-change">Looking for Career Change</option>
+                      <option value="career-change">
+                        Looking for Career Change
+                      </option>
                       <option value="entrepreneur">Entrepreneur</option>
                       <option value="unemployed">Currently Unemployed</option>
                     </select>
                     {errors.currentStatus && (
-                      <p className="text-red-500 text-sm mt-1">{errors.currentStatus}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.currentStatus}
+                      </p>
                     )}
                   </div>
 
@@ -366,7 +390,9 @@ export const Consultation = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                     >
                       <option value="">Select your experience level</option>
-                      <option value="complete-beginner">Complete Beginner</option>
+                      <option value="complete-beginner">
+                        Complete Beginner
+                      </option>
                       <option value="some-exposure">Some Exposure</option>
                       <option value="intermediate">Intermediate</option>
                       <option value="advanced">Advanced</option>
@@ -381,21 +407,31 @@ export const Consultation = () => {
                     </label>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {["Video Call", "Phone Call", "In-Person"].map((type) => (
-                        <label key={type} className="flex items-center space-x-3 cursor-pointer">
+                        <label
+                          key={type}
+                          className="flex items-center space-x-3 cursor-pointer"
+                        >
                           <input
                             type="radio"
                             name="consultationType"
                             value={type.toLowerCase().replace(" ", "-")}
-                            checked={formData.consultationType === type.toLowerCase().replace(" ", "-")}
+                            checked={
+                              formData.consultationType ===
+                              type.toLowerCase().replace(" ", "-")
+                            }
                             onChange={handleInputChange}
                             className="w-4 h-4 text-[var(--color-primary)] border-gray-300 focus:ring-[var(--color-primary)]"
                           />
-                          <span className="text-[var(--color-text)]">{type}</span>
+                          <span className="text-[var(--color-text)]">
+                            {type}
+                          </span>
                         </label>
                       ))}
                     </div>
                     {errors.consultationType && (
-                      <p className="text-red-500 text-sm mt-1">{errors.consultationType}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.consultationType}
+                      </p>
                     )}
                   </div>
 
@@ -412,7 +448,9 @@ export const Consultation = () => {
                     >
                       <option value="">Select preferred time</option>
                       <option value="morning">Morning (9 AM - 12 PM)</option>
-                      <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+                      <option value="afternoon">
+                        Afternoon (12 PM - 5 PM)
+                      </option>
                       <option value="evening">Evening (5 PM - 8 PM)</option>
                       <option value="flexible">I'm Flexible</option>
                     </select>
@@ -425,14 +463,21 @@ export const Consultation = () => {
                     </label>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {techInterests.map((interest) => (
-                        <label key={interest} className="flex items-center space-x-2 cursor-pointer">
+                        <label
+                          key={interest}
+                          className="flex items-center space-x-2 cursor-pointer"
+                        >
                           <input
                             type="checkbox"
-                            checked={formData.specificInterests.includes(interest)}
+                            checked={formData.specificInterests.includes(
+                              interest
+                            )}
                             onChange={() => handleInterestToggle(interest)}
                             className="w-4 h-4 text-[var(--color-primary)] border-gray-300 rounded focus:ring-[var(--color-primary)]"
                           />
-                          <span className="text-sm text-[var(--color-text)]">{interest}</span>
+                          <span className="text-sm text-[var(--color-text)]">
+                            {interest}
+                          </span>
                         </label>
                       ))}
                     </div>
@@ -454,7 +499,9 @@ export const Consultation = () => {
                       placeholder="Tell us about your career goals and what you hope to achieve..."
                     />
                     {errors.goals && (
-                      <p className="text-red-500 text-sm mt-1">{errors.goals}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.goals}
+                      </p>
                     )}
                   </div>
 
@@ -487,18 +534,27 @@ export const Consultation = () => {
                       />
                       <span className="text-sm text-[var(--color-text)]">
                         I agree to the{" "}
-                        <Link to="/terms" className="text-[var(--color-primary)] underline">
+                        <Link
+                          to="/terms"
+                          className="text-[var(--color-primary)] underline"
+                        >
                           Terms of Service
                         </Link>{" "}
                         and{" "}
-                        <Link to="/privacy" className="text-[var(--color-primary)] underline">
+                        <Link
+                          to="/privacy"
+                          className="text-[var(--color-primary)] underline"
+                        >
                           Privacy Policy
                         </Link>
-                        . I consent to being contacted about this consultation. *
+                        . I consent to being contacted about this consultation.
+                        *
                       </span>
                     </label>
                     {errors.agreeToTerms && (
-                      <p className="text-red-500 text-sm mt-1">{errors.agreeToTerms}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.agreeToTerms}
+                      </p>
                     )}
                   </div>
 
@@ -510,7 +566,9 @@ export const Consultation = () => {
                       isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >
-                    {isSubmitting ? "Booking Your Consultation..." : "Book Free Consultation"}
+                    {isSubmitting
+                      ? "Booking Your Consultation..."
+                      : "Book Free Consultation"}
                   </button>
                 </form>
               </div>
@@ -519,28 +577,34 @@ export const Consultation = () => {
             {/* Sidebar Info */}
             <div className="space-y-6">
               {/* Consultation Info */}
-              <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white p-6 rounded-xl">
+              <div className="bg-linear-to-br from-[var(--color-primary)] to-[var(--color-secondary)] text-white p-6 rounded-xl">
                 <h3 className="text-xl font-bold mb-4">What to Expect</h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <Clock className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                    <Clock className="w-5 h-5 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-medium">30 Minutes</p>
-                      <p className="text-sm opacity-80">Focused discussion about your goals</p>
+                      <p className="text-sm opacity-80">
+                        Focused discussion about your goals
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <User className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                    <User className="w-5 h-5 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-medium">Expert Counselor</p>
-                      <p className="text-sm opacity-80">Industry professional with 10+ years experience</p>
+                      <p className="text-sm opacity-80">
+                        Industry professional with 10+ years experience
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Target className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                    <Target className="w-5 h-5 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-medium">Personalized Plan</p>
-                      <p className="text-sm opacity-80">Custom roadmap for your success</p>
+                      <p className="text-sm opacity-80">
+                        Custom roadmap for your success
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -550,20 +614,28 @@ export const Consultation = () => {
               <div className="bg-white p-6 rounded-xl shadow-lg border">
                 <div className="flex items-center gap-1 mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
                 <p className="text-[var(--color-text)] mb-3">
-                  "The consultation completely changed my perspective on my career path. 
-                  The counselor helped me identify the perfect courses for my goals!"
+                  "The consultation completely changed my perspective on my
+                  career path. The counselor helped me identify the perfect
+                  courses for my goals!"
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-white font-bold">
                     A
                   </div>
                   <div>
-                    <p className="font-medium text-[var(--color-text)]">Amara K.</p>
-                    <p className="text-sm text-[var(--color-secondary)]">Software Developer</p>
+                    <p className="font-medium text-[var(--color-text)]">
+                      Amara K.
+                    </p>
+                    <p className="text-sm text-[var(--color-secondary)]">
+                      Software Developer
+                    </p>
                   </div>
                 </div>
               </div>
@@ -603,19 +675,23 @@ export const Consultation = () => {
             {[
               {
                 question: "Is the consultation really free?",
-                answer: "Yes! Our 30-minute career consultation is completely free with no hidden costs or obligations.",
+                answer:
+                  "Yes! Our 30-minute career consultation is completely free with no hidden costs or obligations.",
               },
               {
                 question: "How soon can I book a consultation?",
-                answer: "We typically have availability within 24-48 hours. Our team will contact you to schedule at your preferred time.",
+                answer:
+                  "We typically have availability within 24-48 hours. Our team will contact you to schedule at your preferred time.",
               },
               {
                 question: "What should I prepare for the consultation?",
-                answer: "Just bring yourself and any questions about your career goals. We'll handle the rest!",
+                answer:
+                  "Just bring yourself and any questions about your career goals. We'll handle the rest!",
               },
               {
                 question: "Can I reschedule my consultation?",
-                answer: "Absolutely! Contact us at least 24 hours in advance and we'll be happy to reschedule.",
+                answer:
+                  "Absolutely! Contact us at least 24 hours in advance and we'll be happy to reschedule.",
               },
             ].map((faq, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-md">
@@ -630,19 +706,26 @@ export const Consultation = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-16 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white">
+      <div className="py-16 px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Transform Your Career?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of successful professionals who started their journey with a free consultation.
+            Join thousands of successful professionals who started their journey
+            with a free consultation.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <a href="#consultation-form" className="bg-white text-[var(--color-primary)] px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors">
+            <a
+              href="#consultation-form"
+              className="bg-white text-[var(--color-primary)] px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors"
+            >
               Book Your Free Session
             </a>
-            <Link to="/courses" className="border-2 border-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-[var(--color-primary)] transition-colors">
+            <Link
+              to="/courses"
+              className="border-2 border-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:text-[var(--color-primary)] transition-colors"
+            >
               Browse Our Courses
             </Link>
           </div>

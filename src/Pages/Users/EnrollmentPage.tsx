@@ -363,7 +363,7 @@ export const EnrollmentPage = () => {
                         <div key={index} className="flex items-start gap-3">
                           <CheckCircle
                             size={20}
-                            className="text-green-500 mt-0.5 flex-shrink-0"
+                            className="text-green-500 mt-0.5 shrink-0"
                           />
                           <span className="text-gray-700">{item}</span>
                         </div>
@@ -379,7 +379,7 @@ export const EnrollmentPage = () => {
                     <ul className="space-y-2">
                       {course.requirements.map((req, index) => (
                         <li key={index} className="flex items-start gap-3">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 shrink-0"></div>
                           <span className="text-gray-700">{req}</span>
                         </li>
                       ))}
@@ -445,7 +445,7 @@ export const EnrollmentPage = () => {
               {activeTab === "instructor" && (
                 <div className="space-y-6">
                   <div className="flex items-start gap-6">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center">
+                    <div className="w-24 h-24 rounded-full bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center">
                       <span className="text-white text-2xl font-bold">TP</span>
                     </div>
                     <div className="flex-1">
@@ -585,7 +585,7 @@ export const EnrollmentPage = () => {
               <button
                 onClick={handleEnrollNow}
                 disabled={isEnrolling}
-                className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none mb-4"
+                className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none mb-4"
               >
                 {isEnrolling ? "Enrolling..." : "Enroll Now"}
               </button>
@@ -786,7 +786,7 @@ export const EnrollmentPage = () => {
               <button
                 onClick={handleCompleteEnrollment}
                 disabled={isEnrolling}
-                className="w-full mt-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full mt-6 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {isEnrolling ? (
                   <div className="flex items-center justify-center gap-2">

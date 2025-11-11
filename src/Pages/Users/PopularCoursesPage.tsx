@@ -330,7 +330,7 @@ const PopularCoursesPage = () => {
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 left-4">
-          <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+          <span className="bg-linear-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
             <TrendingUp size={12} />
             Popular
           </span>
@@ -373,7 +373,7 @@ const PopularCoursesPage = () => {
         </p>
 
         <div className="flex items-center gap-2 mb-3">
-          <div className="w-6 h-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
+          <div className="w-6 h-6 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
             <span className="text-white text-xs font-bold">TP</span>
           </div>
           <span className="text-sm font-medium text-gray-700">
@@ -426,7 +426,7 @@ const PopularCoursesPage = () => {
             </div>
             <button
               onClick={() => handleEnroll(course.id)}
-              className=" bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-sm text-white hover:shadow-lg flex items-center gap-2 px-5 py-2 rounded-xl"
+              className=" bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-sm text-white hover:shadow-lg flex items-center gap-2 px-5 py-2 rounded-xl"
             >
               Start Tutorial
               <ArrowRight size={16} />
@@ -440,14 +440,14 @@ const PopularCoursesPage = () => {
   const CourseListItem = ({ course }: { course: Course }) => (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-lg transition-all duration-300">
       <div className="flex gap-6">
-        <div className="relative w-48 h-32 flex-shrink-0 overflow-hidden rounded-xl">
+        <div className="relative w-48 h-32 shrink-0 overflow-hidden rounded-xl">
           <img
             src={course.thumbnail}
             alt={course.title}
             className="w-full h-full object-cover"
           />
           <div className="absolute top-2 left-2">
-            <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+            <span className="bg-linear-to-r from-orange-500 to-red-500 text-white px-2 py-1 rounded-full text-xs font-bold flex items-center gap-1">
               <TrendingUp size={10} />
               Popular
             </span>
@@ -484,7 +484,7 @@ const PopularCoursesPage = () => {
           </p>
 
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-6 h-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
+            <div className="w-6 h-6 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
               <span className="text-white text-xs font-bold">TP</span>
             </div>
             <span className="text-sm font-medium text-gray-700">
@@ -522,7 +522,7 @@ const PopularCoursesPage = () => {
               </div>
               <button
                 onClick={() => handleEnroll(course.id)}
-                className="comic-button bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white hover:shadow-lg flex items-center gap-2"
+                className="comic-button bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white hover:shadow-lg flex items-center gap-2"
               >
                 Start Tutorial
                 <ArrowRight size={16} />
@@ -546,10 +546,10 @@ const PopularCoursesPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-10">
         {/* Popular Courses Stats */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-400/10 to-orange-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-orange-400/10 to-orange-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 group-hover:scale-110">
                 <TrendingUp size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -568,7 +568,7 @@ const PopularCoursesPage = () => {
               </p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-orange-500 to-red-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-orange-500 to-red-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "100%" }}
                 ></div>
               </div>
@@ -578,10 +578,10 @@ const PopularCoursesPage = () => {
 
         {/* Total Students */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-blue-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-blue-400/10 to-blue-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
                 <Users size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -602,7 +602,7 @@ const PopularCoursesPage = () => {
               </p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "85%" }}
                 ></div>
               </div>
@@ -612,10 +612,10 @@ const PopularCoursesPage = () => {
 
         {/* Average Rating */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-yellow-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-400/10 to-yellow-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-yellow-400/10 to-yellow-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-500/25 group-hover:shadow-yellow-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-yellow-500/25 group-hover:shadow-yellow-500/40 transition-all duration-300 group-hover:scale-110">
                 <Star size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -637,7 +637,7 @@ const PopularCoursesPage = () => {
               </p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-yellow-500 to-orange-500 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-yellow-500 to-orange-500 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "95%" }}
                 ></div>
               </div>
@@ -647,7 +647,7 @@ const PopularCoursesPage = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl p-6 lg:p-8 text-white">
+      <div className="bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl p-6 lg:p-8 text-white">
         <div className="max-w-4xl">
           <h2
             className="text-xl lg:text-2xl font-bold mb-3"
@@ -814,7 +814,7 @@ const PopularCoursesPage = () => {
                 setSelectedCategory("All");
                 setSelectedLevel("All");
               }}
-              className="comic-button bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white hover:shadow-lg"
+              className="comic-button bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white hover:shadow-lg"
             >
               Clear Filters
             </button>

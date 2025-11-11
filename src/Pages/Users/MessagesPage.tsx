@@ -230,7 +230,7 @@ export const MessagesPage = () => {
             } flex-col w-full lg:w-80 border-r border-gray-100`}
           >
             {/* Header */}
-            <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]">
+            <div className="p-6 border-b border-gray-100 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h1 className="text-xl font-bold text-white">Messages</h1>
@@ -263,7 +263,7 @@ export const MessagesPage = () => {
             <div className="flex-1 overflow-y-auto">
               {filteredConversations.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full p-6 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mb-4">
                     <MessageCircle size={24} className="text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -290,8 +290,8 @@ export const MessagesPage = () => {
                     >
                       <div className="flex items-start gap-3">
                         {/* Avatar */}
-                        <div className="relative flex-shrink-0">
-                          <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
+                        <div className="relative shrink-0">
+                          <div className="w-12 h-12 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
                             {conversation.avatar}
                           </div>
                           {conversation.isOnline && (
@@ -305,7 +305,7 @@ export const MessagesPage = () => {
                             <h4 className="font-semibold text-gray-900 truncate">
                               {conversation.name}
                             </h4>
-                            <span className="text-xs text-gray-500 flex-shrink-0">
+                            <span className="text-xs text-gray-500 shrink-0">
                               {conversation.timestamp}
                             </span>
                           </div>
@@ -358,7 +358,7 @@ export const MessagesPage = () => {
                       </button>
 
                       <div className="relative">
-                        <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
+                        <div className="w-10 h-10 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
                           {selectedConv.avatar}
                         </div>
                         {selectedConv.isOnline && (
@@ -395,7 +395,7 @@ export const MessagesPage = () => {
                       <div
                         className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
                           message.isFromMe
-                            ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white"
+                            ? "bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white"
                             : "bg-white border border-gray-200 text-gray-900"
                         }`}
                       >
@@ -444,7 +444,7 @@ export const MessagesPage = () => {
                     <button
                       onClick={handleSendMessage}
                       disabled={!newMessage.trim()}
-                      className="p-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="p-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Send size={18} />
                     </button>
@@ -455,7 +455,7 @@ export const MessagesPage = () => {
               /* No Conversation Selected */
               <div className="flex-1 flex items-center justify-center bg-gray-50">
                 <div className="text-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-20 h-20 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-6">
                     <MessageCircle size={32} className="text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">

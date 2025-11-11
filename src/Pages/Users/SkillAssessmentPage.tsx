@@ -234,11 +234,11 @@ const SkillAssessmentPage = () => {
   if (showResults) {
     return (
       <DashboardLayout>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
           <div className="max-w-4xl mx-auto py-8 px-4">
             {/* Results Header */}
             <div className="bg-white rounded-2xl shadow-sm p-8 mb-6 text-center">
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
                 <Award size={40} className="text-white" />
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -387,7 +387,7 @@ const SkillAssessmentPage = () => {
               </button>
               <button
                 onClick={() => navigate("/dashboard/courses")}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
               >
                 <BookOpen size={20} />
                 Explore Courses
@@ -402,7 +402,7 @@ const SkillAssessmentPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
         <div className="max-w-2xl mx-auto py-8 px-4">
           {/* Header */}
           <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
@@ -418,7 +418,7 @@ const SkillAssessmentPage = () => {
             {/* Progress Bar */}
             <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
               <div
-                className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500"
+                className="bg-linear-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
@@ -488,7 +488,7 @@ const SkillAssessmentPage = () => {
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
                 !hasAnswer
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg"
+                  : "bg-linear-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg"
               }`}
             >
               {currentStep === questions.length - 1 ? "View Results" : "Next"}

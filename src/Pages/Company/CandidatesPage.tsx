@@ -343,7 +343,7 @@ const CandidatesPage = () => {
                 {totalCandidates}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl shrink-0">
               <Users size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -366,7 +366,7 @@ const CandidatesPage = () => {
                 {newCandidates}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl shrink-0">
               <FileText size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -385,7 +385,7 @@ const CandidatesPage = () => {
                 {inInterviews}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl shrink-0">
               <MessageSquare size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -408,7 +408,7 @@ const CandidatesPage = () => {
                 {shortlisted}
               </p>
             </div>
-            <div className="p-2 md:p-3 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl flex-shrink-0">
+            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl shrink-0">
               <Star size={16} className="text-white md:w-5 md:h-5" />
             </div>
           </div>
@@ -612,7 +612,7 @@ const CandidatesPage = () => {
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                     {/* Candidate Info */}
                     <div className="flex items-start gap-4 min-w-0 flex-1">
-                      <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                      <div className="w-12 h-12 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center text-white font-semibold text-sm shrink-0">
                         {candidate.avatar}
                       </div>
 
@@ -626,7 +626,7 @@ const CandidatesPage = () => {
                               {candidate.position}
                             </p>
                           </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
+                          <div className="flex items-center gap-2 shrink-0">
                             <div className="flex items-center gap-1">
                               <Star
                                 size={14}
@@ -643,7 +643,7 @@ const CandidatesPage = () => {
                           <div className="flex items-center gap-1.5 min-w-0">
                             <MapPin
                               size={12}
-                              className="text-gray-400 flex-shrink-0"
+                              className="text-gray-400 shrink-0"
                             />
                             <span className="truncate">
                               {candidate.location}
@@ -652,7 +652,7 @@ const CandidatesPage = () => {
                           <div className="flex items-center gap-1.5 min-w-0">
                             <Briefcase
                               size={12}
-                              className="text-gray-400 flex-shrink-0"
+                              className="text-gray-400 shrink-0"
                             />
                             <span className="truncate">
                               {candidate.experience}
@@ -661,7 +661,7 @@ const CandidatesPage = () => {
                           <div className="flex items-center gap-1.5 min-w-0">
                             <Clock
                               size={12}
-                              className="text-gray-400 flex-shrink-0"
+                              className="text-gray-400 shrink-0"
                             />
                             <span className="truncate">
                               Applied{" "}
@@ -673,7 +673,7 @@ const CandidatesPage = () => {
                           <div className="flex items-center gap-1.5 min-w-0">
                             <Mail
                               size={12}
-                              className="text-gray-400 flex-shrink-0"
+                              className="text-gray-400 shrink-0"
                             />
                             <span className="truncate">{candidate.email}</span>
                           </div>
@@ -718,7 +718,7 @@ const CandidatesPage = () => {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 shrink-0">
                       <button className="p-2 text-gray-500 hover:text-[var(--color-primary)] hover:bg-[var(--color-light)] rounded-lg transition-all">
                         <Eye size={16} />
                       </button>

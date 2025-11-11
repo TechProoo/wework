@@ -217,7 +217,7 @@ export const Notification = () => {
             } border-r border-gray-200 flex flex-col`}
           >
             {/* Search and Filters */}
-            <div className="p-3 md:p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+            <div className="p-3 md:p-4 border-b border-gray-200 bg-linear-to-r from-gray-50 to-white">
               <div className="space-y-3">
                 <div className="relative">
                   <Search
@@ -240,7 +240,7 @@ export const Notification = () => {
                       onClick={() => setSelectedFilter(filter.id)}
                       className={`px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium transition-all duration-300 ${
                         selectedFilter === filter.id
-                          ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white shadow-lg"
+                          ? "bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white shadow-lg"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
@@ -268,7 +268,7 @@ export const Notification = () => {
                 <div className="flex items-center justify-center h-full p-8">
                   <div className="text-center space-y-6 max-w-md mx-auto">
                     <div className="relative">
-                      <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                      <div className="w-20 h-20 bg-linear-to-br from-blue-500 via-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto shadow-lg">
                         <Bell size={36} className="text-white" />
                       </div>
                       <div className="absolute -top-1 -right-1 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
@@ -341,7 +341,7 @@ export const Notification = () => {
                       <div className="flex items-start gap-3">
                         {/* Notification Icon */}
                         <div
-                          className={`flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br ${getNotificationColor(
+                          className={`shrink-0 w-10 h-10 rounded-xl bg-linear-to-br ${getNotificationColor(
                             notification.type
                           )} flex items-center justify-center text-white shadow-lg`}
                         >
@@ -365,7 +365,7 @@ export const Notification = () => {
                                 {notification.isImportant && (
                                   <Star
                                     size={14}
-                                    className="text-yellow-500 flex-shrink-0"
+                                    className="text-yellow-500 shrink-0"
                                   />
                                 )}
                               </div>
@@ -417,7 +417,7 @@ export const Notification = () => {
 
                         {/* Unread indicator */}
                         {!notification.isRead && (
-                          <div className="flex-shrink-0 w-2 h-2 bg-[var(--color-primary)] rounded-full"></div>
+                          <div className="shrink-0 w-2 h-2 bg-[var(--color-primary)] rounded-full"></div>
                         )}
                       </div>
                     </div>
@@ -435,7 +435,7 @@ export const Notification = () => {
                   ? "w-full"
                   : "hidden"
                 : "w-full lg:w-1/2"
-            } flex flex-col bg-gradient-to-br from-gray-50 to-white`}
+            } flex flex-col bg-linear-to-br from-gray-50 to-white`}
           >
             {selectedNotification ? (
               <>
@@ -451,7 +451,7 @@ export const Notification = () => {
                       </button>
                     )}
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getNotificationColor(
+                      className={`w-12 h-12 rounded-xl bg-linear-to-br ${getNotificationColor(
                         selectedNotification.type
                       )} flex items-center justify-center text-white shadow-lg`}
                     >
@@ -577,7 +577,7 @@ export const Notification = () => {
                     {selectedNotification.actionUrl &&
                       selectedNotification.actionText && (
                         <div className="flex gap-3">
-                          <button className="flex-1 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                          <button className="flex-1 px-6 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
                             {selectedNotification.actionText}
                             <ExternalLink size={16} />
                           </button>
@@ -593,7 +593,7 @@ export const Notification = () => {
               /* No Notification Selected */
               <div className="flex-1 flex items-center justify-center p-8">
                 <div className="text-center space-y-4 max-w-sm">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto">
                     <Bell size={32} className="text-white" />
                   </div>
                   <div>

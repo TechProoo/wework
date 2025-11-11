@@ -339,7 +339,7 @@ export const CategoryPage = () => {
     >
       {/* Category Hero Section */}
       <div
-        className={`relative bg-gradient-to-r ${category.gradient} rounded-2xl shadow-2xl border border-gray-200 p-8 text-white overflow-hidden mb-8`}
+        className={`relative bg-linear-to-r ${category.gradient} rounded-2xl shadow-2xl border border-gray-200 p-8 text-white overflow-hidden mb-8`}
       >
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-tr-full"></div>
@@ -630,7 +630,7 @@ export const CategoryPage = () => {
             >
               <div className="flex flex-col lg:flex-row gap-6">
                 {/* Course Image */}
-                <div className="lg:w-64 flex-shrink-0">
+                <div className="lg:w-64 shrink-0">
                   <div className="relative">
                     <img
                       src={course.thumbnail}
