@@ -236,10 +236,10 @@ export const JobsPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mt-10">
         {/* Total Applications */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
                 <Briefcase size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -261,10 +261,10 @@ export const JobsPage = () => {
 
         {/* Pending Applications */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-accent)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-accent)]/10 to-[var(--color-slate)]/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-[var(--color-accent)]/10 to-[var(--color-slate)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-accent)]/25 group-hover:shadow-[var(--color-accent)]/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-accent)]/25 group-hover:shadow-[var(--color-accent)]/40 transition-all duration-300 group-hover:scale-110">
                 <Clock size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -286,10 +286,10 @@ export const JobsPage = () => {
 
         {/* Interviews Scheduled */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 group-hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover:scale-110">
                 <Calendar size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -311,10 +311,10 @@ export const JobsPage = () => {
 
         {/* Offers Received */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-green-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/10 to-green-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-green-400/10 to-green-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:shadow-green-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:shadow-green-500/40 transition-all duration-300 group-hover:scale-110">
                 <Target size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -337,7 +337,7 @@ export const JobsPage = () => {
 
       {/* Enhanced Tab Navigation */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-        <div className="flex relative bg-gradient-to-r from-gray-50 to-white p-2">
+        <div className="flex relative bg-linear-to-r from-gray-50 to-white p-2">
           <div className="flex w-full relative bg-gray-100 rounded-xl p-1">
             <button
               onClick={() => setActiveTab("applications")}
@@ -376,7 +376,7 @@ export const JobsPage = () => {
       </div>
 
       {/* Enhanced Search and Filters */}
-      <div className="bg-gradient-to-br from-white to-[var(--color-light)] rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-6 lg:p-8">
+      <div className="bg-linear-to-br from-white to-[var(--color-light)] rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-6 lg:p-8">
         <div className="space-y-6">
           {/* Search Header */}
           <div className="flex items-center justify-between">
@@ -497,7 +497,7 @@ export const JobsPage = () => {
 
       {/* Welcome Banner for New Users */}
       {activeTab === "applications" && applications.length === 0 && (
-        <div className="relative bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-slate)] rounded-2xl shadow-2xl border border-[var(--color-slate)]/20 p-8 text-white overflow-hidden">
+        <div className="relative bg-linear-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-slate)] rounded-2xl shadow-2xl border border-[var(--color-slate)]/20 p-8 text-white overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-tr-full"></div>
           <div className="absolute top-1/2 right-1/4 w-2 h-2 bg-[var(--color-accent)]/40 rounded-full animate-pulse"></div>
@@ -541,16 +541,16 @@ export const JobsPage = () => {
           {filteredApplications.map((application) => (
             <div
               key={application.id}
-              className="group relative bg-gradient-to-r from-white to-[var(--color-light)]/50 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+              className="group relative bg-linear-to-r from-white to-[var(--color-light)]/50 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-xl hover:border-[var(--color-primary)]/30 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
             >
               {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent rounded-bl-full"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-[var(--color-primary)]/5 to-transparent rounded-bl-full"></div>
 
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-6">
                     <div className="relative">
-                      <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <Building size={24} className="text-white" />
                       </div>
                       <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-white border-2 border-[var(--color-slate)]/20 rounded-full flex items-center justify-center">
@@ -647,10 +647,10 @@ export const JobsPage = () => {
 
                 {/* Enhanced Next Step */}
                 {application.nextStep && (
-                  <div className="relative bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 mb-6 overflow-hidden">
+                  <div className="relative bg-linear-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 mb-6 overflow-hidden">
                     <div className="absolute top-0 right-0 w-20 h-20 bg-blue-100/50 rounded-bl-full"></div>
                     <div className="relative z-10 flex items-start gap-3">
-                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                         <TrendingUp size={16} className="text-white" />
                       </div>
                       <div>
@@ -698,7 +698,7 @@ export const JobsPage = () => {
                       <Eye size={16} />
                       View Details
                     </button>
-                    <button className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <button className="flex items-center gap-2 px-6 py-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                       <FileText size={16} />
                       Manage
                     </button>
@@ -713,10 +713,10 @@ export const JobsPage = () => {
           {filteredJobs.map((job) => (
             <div
               key={job.id}
-              className="group relative bg-gradient-to-r from-white to-[var(--color-light)]/30 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-2xl hover:border-[var(--color-primary)]/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+              className="group relative bg-linear-to-r from-white to-[var(--color-light)]/30 rounded-2xl shadow-lg border border-[var(--color-slate)]/20 p-8 hover:shadow-2xl hover:border-[var(--color-primary)]/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
             >
               {/* Background decorations */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[var(--color-primary)]/10 to-transparent rounded-bl-full"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-[var(--color-primary)]/10 to-transparent rounded-bl-full"></div>
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent rounded-tr-full"></div>
 
               <div className="relative z-10">
@@ -724,8 +724,8 @@ export const JobsPage = () => {
                   <div className="flex items-start gap-6 flex-1">
                     <div className="relative flex flex-col sm:flex-row gap-4 sm:gap-6 items-start w-full">
                       {/* Logo */}
-                      <div className="relative flex-shrink-0">
-                        <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <div className="relative shrink-0">
+                        <div className="w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                           <Building size={24} className="text-white" />
                         </div>
                         <div className="absolute -top-2 -right-2 w-6 h-6 bg-white border-2 border-[var(--color-primary)]/20 rounded-full flex items-center justify-center">
@@ -738,7 +738,7 @@ export const JobsPage = () => {
                           <h3 className="text-lg sm:text-xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300">
                             {job.title}
                           </h3>
-                          <span className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                          <span className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-3 py-1 rounded-full text-xs font-bold shadow-sm">
                             {job.match}% Match
                           </span>
                           {job.match > 90 && (
@@ -875,7 +875,7 @@ export const JobsPage = () => {
                       <span className="hidden xs:inline">View Details</span>
                       <span className="inline xs:hidden">Details</span>
                     </button>
-                    <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-semibold">
+                    <button className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 font-semibold">
                       <Send size={16} />
                       <span className="hidden xs:inline">Apply Now</span>
                       <span className="inline xs:hidden">Apply</span>
@@ -885,7 +885,7 @@ export const JobsPage = () => {
 
                 {/* Quick Apply Preview */}
                 {job.match > 85 && (
-                  <div className="mt-4 p-4 bg-gradient-to-r from-[var(--color-light)] to-white border border-[var(--color-primary)]/20 rounded-xl">
+                  <div className="mt-4 p-4 bg-linear-to-r from-[var(--color-light)] to-white border border-[var(--color-primary)]/20 rounded-xl">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-[var(--color-primary)] rounded-lg flex items-center justify-center">
                         <Target size={16} className="text-white" />
@@ -926,7 +926,7 @@ export const JobsPage = () => {
               : "Try adjusting your search criteria to discover more opportunities."}
           </p>
           {activeTab === "discover" && (
-            <button className="px-4 py-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-lg hover:shadow-md transition-all duration-300">
+            <button className="px-4 py-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-lg hover:shadow-md transition-all duration-300">
               Browse All Jobs
             </button>
           )}

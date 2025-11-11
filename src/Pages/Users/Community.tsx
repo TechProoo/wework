@@ -191,7 +191,7 @@ const Community = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-sm p-8 mb-6">
           <div className="flex items-center justify-between mb-6">
@@ -219,7 +219,7 @@ const Community = () => {
 
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-xl">
+            <div className="bg-linear-to-r from-blue-500 to-blue-600 text-white p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">{posts.length}</div>
@@ -228,7 +228,7 @@ const Community = () => {
                 <MessageCircle size={24} className="text-blue-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-xl">
+            <div className="bg-linear-to-r from-green-500 to-green-600 text-white p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">{studyGroups.length}</div>
@@ -237,7 +237,7 @@ const Community = () => {
                 <BookOpen size={24} className="text-green-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-xl">
+            <div className="bg-linear-to-r from-purple-500 to-purple-600 text-white p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">127</div>
@@ -246,7 +246,7 @@ const Community = () => {
                 <Star size={24} className="text-purple-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-xl">
+            <div className="bg-linear-to-r from-orange-500 to-orange-600 text-white p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">89%</div>
@@ -264,7 +264,7 @@ const Community = () => {
             {/* Create Post */}
             <div className="bg-white rounded-2xl shadow-sm p-6">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
+                <div className="w-12 h-12 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
                   YO
                 </div>
                 <input
@@ -278,7 +278,7 @@ const Community = () => {
                 <button
                   onClick={handleCreatePost}
                   disabled={newPostContent.trim() === ""}
-                  className="p-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="p-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send size={20} />
                 </button>
@@ -307,7 +307,7 @@ const Community = () => {
                   className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-md transition-all duration-300"
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
+                    <div className="w-12 h-12 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold">
                       {post.author.avatar}
                     </div>
                     <div className="flex-1">
@@ -419,7 +419,7 @@ const Community = () => {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-300"
+                        className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-300"
                         style={{
                           width: `${(group.members / group.maxMembers) * 100}%`,
                         }}

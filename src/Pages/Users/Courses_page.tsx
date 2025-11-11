@@ -363,10 +363,10 @@ export const CoursesPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mt-10">
         {/* Enrolled Courses Card */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-400/10 to-blue-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-blue-400/10 to-blue-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 transition-all duration-300 group-hover:scale-110">
                 <BookOpen size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -387,7 +387,7 @@ export const CoursesPage = () => {
               </p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-blue-500 to-blue-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "0%" }}
                 ></div>
               </div>
@@ -397,10 +397,10 @@ export const CoursesPage = () => {
 
         {/* Completed Courses Card */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-green-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-400/10 to-green-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-green-400/10 to-green-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:shadow-green-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/25 group-hover:shadow-green-500/40 transition-all duration-300 group-hover:scale-110">
                 <CheckCircle size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -419,7 +419,7 @@ export const CoursesPage = () => {
               <p className="text-sm font-medium text-gray-600">Completed</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-green-500 to-green-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-green-500 to-green-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "0%" }}
                 ></div>
               </div>
@@ -429,10 +429,10 @@ export const CoursesPage = () => {
 
         {/* In Progress Card */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-400/10 to-orange-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-orange-400/10 to-orange-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 transition-all duration-300 group-hover:scale-110">
                 <TrendingUp size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -449,7 +449,7 @@ export const CoursesPage = () => {
               <p className="text-sm font-medium text-gray-600">In Progress</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-orange-500 to-orange-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "0%" }}
                 ></div>
               </div>
@@ -459,10 +459,10 @@ export const CoursesPage = () => {
 
         {/* Certificates Card */}
         <div className="group relative bg-white rounded-2xl shadow-md border border-gray-200 p-6 hover:shadow-xl hover:border-purple-200 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-400/10 to-purple-600/5 rounded-bl-3xl"></div>
+          <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-br from-purple-400/10 to-purple-600/5 rounded-bl-3xl"></div>
           <div className="relative z-10">
             <div className="flex items-center justify-between mb-5">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300 group-hover:scale-110">
+              <div className="w-14 h-14 bg-linear-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300 group-hover:scale-110">
                 <Award size={22} className="text-white" />
               </div>
               <div className="flex flex-col items-end">
@@ -481,7 +481,7 @@ export const CoursesPage = () => {
               <p className="text-sm font-medium text-gray-600">Certificates</p>
               <div className="w-full bg-gray-100 rounded-full h-1.5 mt-3">
                 <div
-                  className="bg-gradient-to-r from-purple-500 to-purple-600 h-1.5 rounded-full transition-all duration-500"
+                  className="bg-linear-to-r from-purple-500 to-purple-600 h-1.5 rounded-full transition-all duration-500"
                   style={{ width: "0%" }}
                 ></div>
               </div>
@@ -492,7 +492,7 @@ export const CoursesPage = () => {
 
       {/* Welcome Banner for New Users */}
       {enrolledCourses.length === 0 && (
-        <div className="bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl p-6 lg:p-8 text-white">
+        <div className="bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl p-6 lg:p-8 text-white">
           <div className="max-w-3xl">
             <h2
               className="text-xl lg:text-2xl font-bold mb-3"
@@ -541,7 +541,7 @@ export const CoursesPage = () => {
                 className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-lg flex items-center justify-center shrink-0">
                     <BookOpen size={24} className="text-white" />
                   </div>
                   <div className="flex-1">
@@ -554,7 +554,7 @@ export const CoursesPage = () => {
                     <div className="flex items-center gap-2">
                       <div className="flex-1 bg-gray-200 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-300"
+                          className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-300"
                           style={{ width: `${course.progress}%` }}
                         ></div>
                       </div>
@@ -594,7 +594,7 @@ export const CoursesPage = () => {
                   .getElementById("courses-section")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+              className="bg-linear-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
             >
               <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <span className="text-white text-lg">💻</span>
@@ -627,7 +627,7 @@ export const CoursesPage = () => {
                   .getElementById("courses-section")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+              className="bg-linear-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
             >
               <div className="w-12 h-12 mx-auto mb-3 bg-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <span className="text-white text-lg">🎨</span>
@@ -660,7 +660,7 @@ export const CoursesPage = () => {
                   .getElementById("courses-section")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
+              className="bg-linear-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4 text-center hover:shadow-md transition-all duration-300 cursor-pointer group"
             >
               <div className="w-12 h-12 mx-auto mb-3 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <span className="text-white text-lg">📊</span>
@@ -802,7 +802,7 @@ export const CoursesPage = () => {
               className="bg-gray-50 rounded-xl overflow-hidden hover:shadow-md transition-all duration-300 group cursor-pointer"
             >
               <div className="relative">
-                <div className="w-full h-48 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center">
+                <div className="w-full h-48 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] flex items-center justify-center">
                   <BookOpen size={48} className="text-white opacity-80" />
                 </div>
                 <div className="absolute top-4 left-4">
@@ -860,7 +860,7 @@ export const CoursesPage = () => {
                 </p>
 
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center">
                     <User size={14} className="text-white" />
                   </div>
                   <span className="text-sm text-gray-700 font-medium">

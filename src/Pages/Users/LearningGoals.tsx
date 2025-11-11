@@ -251,7 +251,7 @@ export const LearningGoals = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
         {/* Modern Header Section */}
         <div className="bg-white rounded-2xl shadow-sm p-8 mb-6">
           <div className="flex items-center justify-between mb-6">
@@ -267,7 +267,7 @@ export const LearningGoals = () => {
             </div>
             <button
               onClick={() => setShowAddGoal(true)}
-              className="flex items-center gap-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+              className="flex items-center gap-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
             >
               <Plus size={20} />
               Create Goal
@@ -276,7 +276,7 @@ export const LearningGoals = () => {
 
           {/* Enhanced Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl">
+            <div className="bg-linear-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">{totalGoals}</div>
@@ -285,7 +285,7 @@ export const LearningGoals = () => {
                 <Target size={24} className="text-blue-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 rounded-xl">
+            <div className="bg-linear-to-r from-orange-500 to-orange-600 text-white p-6 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">{inProgressGoals}</div>
@@ -294,7 +294,7 @@ export const LearningGoals = () => {
                 <Zap size={24} className="text-orange-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-xl">
+            <div className="bg-linear-to-r from-green-500 to-green-600 text-white p-6 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">{completedGoals}</div>
@@ -303,7 +303,7 @@ export const LearningGoals = () => {
                 <Trophy size={24} className="text-green-200" />
               </div>
             </div>
-            <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-xl">
+            <div className="bg-linear-to-r from-purple-500 to-purple-600 text-white p-6 rounded-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-2xl font-bold">
@@ -324,7 +324,7 @@ export const LearningGoals = () => {
         <div>
           {goals.length === 0 ? (
             <div className="bg-white rounded-2xl shadow-sm p-12 text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-6">
                 <Target size={32} className="text-white" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">
@@ -336,7 +336,7 @@ export const LearningGoals = () => {
               </p>
               <button
                 onClick={() => setShowAddGoal(true)}
-                className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto"
+                className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center gap-2 mx-auto"
               >
                 <Plus size={20} />
                 Create Your First Goal
@@ -353,7 +353,7 @@ export const LearningGoals = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"></div>
+                        <div className="w-3 h-3 rounded-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)]"></div>
                         <h3 className="text-lg font-bold text-gray-900 leading-tight">
                           {goal.title}
                         </h3>
@@ -404,7 +404,7 @@ export const LearningGoals = () => {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-500"
+                        className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full transition-all duration-500"
                         style={{ width: `${goal.progress}%` }}
                       ></div>
                     </div>
@@ -483,7 +483,7 @@ export const LearningGoals = () => {
                     {goal.tutorialId && (
                       <button
                         onClick={() => handleStartTutorial(goal.tutorialId!)}
-                        className="flex-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-2.5 px-4 rounded-xl font-medium transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 text-sm"
+                        className="flex-1 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-2.5 px-4 rounded-xl font-medium transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2 text-sm"
                       >
                         <Play size={16} />
                         Start Learning
@@ -501,7 +501,7 @@ export const LearningGoals = () => {
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center">
                   <Target size={20} className="text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">
@@ -625,7 +625,7 @@ export const LearningGoals = () => {
                 </button>
                 <button
                   onClick={handleAddGoal}
-                  className="flex-1 px-6 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 px-6 py-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Plus size={20} />
                   Create Goal
@@ -791,7 +791,7 @@ export const LearningGoals = () => {
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full"
+                              className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] h-2 rounded-full"
                               style={{ width: `${goal.progress}%` }}
                             ></div>
                           </div>
@@ -836,7 +836,7 @@ export const LearningGoals = () => {
 
         {/* Notification Toast */}
         {notification && (
-          <div className="fixed top-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-2xl shadow-lg z-50 animate-fade-in">
+          <div className="fixed top-6 right-6 bg-linear-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-2xl shadow-lg z-50 animate-fade-in">
             <div className="flex items-center gap-3">
               <CheckCircle size={20} />
               <span className="font-semibold">{notification}</span>

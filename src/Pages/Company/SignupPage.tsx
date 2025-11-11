@@ -81,22 +81,21 @@ const CompanySignup = () => {
   const validateStep1 = () => {
     const newErrors: any = {};
 
+    // Required: companyName
     if (!formData.companyName) {
       newErrors.companyName = "Company name is required";
     }
 
-    if (!formData.contactPersonName) {
-      newErrors.contactPersonName = "Contact person name is required";
-    }
-
+    // Required: email
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
 
-    if (!formData.phone) {
-      newErrors.phone = "Phone number is required";
+    // Optional: website validation only if provided
+    if (formData.website && !/^https?:\/\/.+/.test(formData.website)) {
+      newErrors.website = "Website must be a valid URL (http:// or https://)";
     }
 
     setErrors(newErrors);
@@ -106,20 +105,14 @@ const CompanySignup = () => {
   const validateStep2 = () => {
     const newErrors: any = {};
 
-    if (!formData.industry) {
-      newErrors.industry = "Industry is required";
-    }
-
-    if (!formData.companySize) {
-      newErrors.companySize = "Company size is required";
-    }
-
+    // Required: password (minimum 6 characters per backend)
     if (!formData.password) {
       newErrors.password = "Password is required";
-    } else if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
     }
 
+    // Required: confirmPassword
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
@@ -166,7 +159,7 @@ const CompanySignup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[var(--color-light)] via-white to-[var(--color-light)] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-[var(--color-light)] via-white to-[var(--color-light)] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back Button */}
         <Link
@@ -181,7 +174,7 @@ const CompanySignup = () => {
         <div className="bg-white rounded-3xl shadow-xl border border-[var(--color-slate)]/20 p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-2xl mb-4">
               <Building2 size={28} className="text-white" />
             </div>
             <h1 className="text-2xl font-bold text-[var(--color-text)] mb-2">
@@ -279,7 +272,7 @@ const CompanySignup = () => {
                     htmlFor="contactPersonName"
                     className="block text-sm font-medium text-[var(--color-text)] mb-2"
                   >
-                    Contact Person Name *
+                    Contact Person Name (Optional)
                   </label>
                   <div className="relative">
                     <User
@@ -343,7 +336,7 @@ const CompanySignup = () => {
                     htmlFor="phone"
                     className="block text-sm font-medium text-[var(--color-text)] mb-2"
                   >
-                    Phone Number *
+                    Phone Number (Optional)
                   </label>
                   <div className="relative">
                     <Phone
@@ -387,14 +380,21 @@ const CompanySignup = () => {
                       value={formData.website}
                       onChange={handleInputChange}
                       placeholder="https://company.com"
-                      className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors"
+                      className={`w-full pl-12 pr-4 py-4 border rounded-2xl focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-colors ${
+                        errors.website ? "border-red-300" : "border-gray-200"
+                      }`}
                     />
                   </div>
+                  {errors.website && (
+                    <p className="mt-2 text-sm text-red-600">
+                      {errors.website}
+                    </p>
+                  )}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 px-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-2xl hover:shadow-lg transition-all duration-300"
+                  className="w-full py-4 px-6 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-2xl hover:shadow-lg transition-all duration-300"
                 >
                   Continue
                 </button>
@@ -409,7 +409,7 @@ const CompanySignup = () => {
                     htmlFor="industry"
                     className="block text-sm font-medium text-[var(--color-text)] mb-2"
                   >
-                    Industry *
+                    Industry (Optional)
                   </label>
                   <select
                     id="industry"
@@ -440,7 +440,7 @@ const CompanySignup = () => {
                     htmlFor="companySize"
                     className="block text-sm font-medium text-[var(--color-text)] mb-2"
                   >
-                    Company Size *
+                    Company Size (Optional)
                   </label>
                   <div className="relative">
                     <Users
@@ -570,7 +570,7 @@ const CompanySignup = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="flex-1 py-4 px-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 py-4 px-6 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-2xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isLoading ? "Creating Account..." : "Create Account"}
                   </button>

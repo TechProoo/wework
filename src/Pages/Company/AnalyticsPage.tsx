@@ -142,7 +142,7 @@ const AnalyticsPage = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
         <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl">
+            <div className="p-2 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl">
               <Users size={16} className="text-white" />
             </div>
             <div className="flex items-center gap-1">
@@ -168,7 +168,7 @@ const AnalyticsPage = () => {
 
         <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl">
+            <div className="p-2 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl">
               <Clock size={16} className="text-white" />
             </div>
             <div className="flex items-center gap-1">
@@ -194,7 +194,7 @@ const AnalyticsPage = () => {
 
         <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2 bg-gradient-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl">
+            <div className="p-2 bg-linear-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl">
               <Target size={16} className="text-white" />
             </div>
             <div className="flex items-center gap-1">
@@ -220,7 +220,7 @@ const AnalyticsPage = () => {
 
         <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
           <div className="flex items-center justify-between mb-3">
-            <div className="p-2 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl">
+            <div className="p-2 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl">
               <Award size={16} className="text-white" />
             </div>
             <div className="flex items-center gap-1">
@@ -352,7 +352,7 @@ const AnalyticsPage = () => {
             {topSources.map((source, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]" />
+                  <div className="w-3 h-3 rounded-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-[var(--color-text)] truncate">
                       {source.name}
@@ -362,7 +362,7 @@ const AnalyticsPage = () => {
                     </p>
                   </div>
                 </div>
-                <div className="text-right flex-shrink-0">
+                <div className="text-right shrink-0">
                   <p className="text-sm font-semibold text-[var(--color-text)]">
                     {source.percentage}%
                   </p>
@@ -408,7 +408,7 @@ const AnalyticsPage = () => {
                 </div>
                 <div className="w-full bg-gray-100 rounded-full h-2">
                   <div
-                    className="h-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full transition-all duration-300"
+                    className="h-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full transition-all duration-300"
                     style={{ width: `${stage.percentage}%` }}
                   />
                 </div>
@@ -483,7 +483,7 @@ const AnalyticsPage = () => {
               key={index}
               className="text-center p-4 bg-[var(--color-light)] rounded-xl"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-3">
+              <div className="w-12 h-12 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center mx-auto mb-3">
                 <MapPin size={20} className="text-white" />
               </div>
               <h4 className="text-sm font-medium text-[var(--color-text)] mb-1 truncate">

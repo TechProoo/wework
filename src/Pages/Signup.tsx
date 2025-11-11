@@ -190,11 +190,11 @@ const Signup: React.FC = () => {
   };
 
   const renderUserSelection = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-forest-200/20 to-mauve-200/20 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-mauve-200/20 to-forest-200/20 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-linear-to-br from-forest-200/20 to-mauve-200/20 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-linear-to-br from-mauve-200/20 to-forest-200/20 blur-3xl"></div>
       </div>
 
       <div className="w-full max-w-6xl relative z-10">
@@ -206,7 +206,7 @@ const Signup: React.FC = () => {
               Start Your Journey
             </span>
           </div>
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-forest-600 via-slate-700 to-forest-800 bg-clip-text text-transparent">
+          <h1 className="text-6xl font-bold mb-6 bg-linear-to-r from-forest-600 via-slate-700 to-forest-800 bg-clip-text text-transparent">
             Join <span className="text-mauve-600">WEWORK</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -219,28 +219,28 @@ const Signup: React.FC = () => {
         {/* Enhanced Stats Section */}
         <div className="grid md:grid-cols-3 gap-8 mb-20 max-w-4xl mx-auto">
           <div className="group text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 hover:border-forest-200 transition-all duration-300 hover:transform hover:-translate-y-2">
-            <div className="w-16 h-16 bg-gradient-to-br from-forest-500 to-forest-600 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 bg-linear-to-br from-forest-500 to-forest-600 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Users size={28} className="" />
             </div>
-            <div className="text-4xl font-bold bg-gradient-to-r from-forest-600 to-forest-700 bg-clip-text  mb-2">
+            <div className="text-4xl font-bold bg-linear-to-r from-forest-600 to-forest-700 bg-clip-text  mb-2">
               50K+
             </div>
             <div className="text-slate-600 font-medium">Active Users</div>
           </div>
           <div className="group text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 hover:border-mauve-200 transition-all duration-300 hover:transform hover:-translate-y-2">
-            <div className="w-16 h-16 bg-gradient-to-br from-mauve-500 to-forest-500 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 bg-linear-to-br from-mauve-500 to-forest-500 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Globe size={28} className="" />
             </div>
-            <div className="text-4xl font-bold bg-gradient-to-r from-mauve-600 to-forest-700 bg-clip-text mb-2">
+            <div className="text-4xl font-bold bg-linear-to-r from-mauve-600 to-forest-700 bg-clip-text mb-2">
               500+
             </div>
             <div className="text-slate-600 font-medium">Companies</div>
           </div>
           <div className="group text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/20 hover:border-forest-200 transition-all duration-300 hover:transform hover:-translate-y-2">
-            <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-emerald-600 rounded-2xl mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <TrendingUp size={28} className="text-white" />
             </div>
-            <div className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent mb-2">
+            <div className="text-4xl font-bold bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent mb-2">
               95%
             </div>
             <div className="text-slate-600 font-medium">Success Rate</div>
@@ -265,10 +265,10 @@ const Signup: React.FC = () => {
             className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-white/20 cursor-pointer hover:border-forest-300 transition-all duration-500 hover:transform hover:-translate-y-3 hover:shadow-2xl overflow-hidden"
           >
             {/* Gradient background on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-forest-50/50 to-emerald-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-linear-to-br from-forest-50/50 to-emerald-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
             <div className="relative z-10 text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-forest-500 to-emerald-500 rounded-3xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="w-20 h-20 bg-linear-to-br from-forest-500 to-emerald-500 rounded-3xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <GraduationCap size={32} className="text-white" />
               </div>
               <h3 className="text-2xl font-bold text-slate-800 mb-3">
@@ -282,21 +282,21 @@ const Signup: React.FC = () => {
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-forest-600 mr-3 flex-shrink-0"
+                    className="text-forest-600 mr-3 shrink-0"
                   />
                   <span>Browse exclusive internships & jobs</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-forest-600 mr-3 flex-shrink-0"
+                    className="text-forest-600 mr-3 shrink-0"
                   />
                   <span>Create your professional portfolio</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-forest-600 mr-3 flex-shrink-0"
+                    className="text-forest-600 mr-3 shrink-0"
                   />
                   <span>Network with hiring managers</span>
                 </li>
@@ -317,10 +317,10 @@ const Signup: React.FC = () => {
             className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-white/20 cursor-pointer hover:border-mauve-300 transition-all duration-500 hover:transform hover:-translate-y-3 hover:shadow-2xl overflow-hidden"
           >
             {/* Gradient background on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-mauve-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-linear-to-br from-mauve-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
             <div className="relative z-10 text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-mauve-500 to-purple-500 rounded-3xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="w-20 h-20 bg-linear-to-br from-mauve-500 to-purple-500 rounded-3xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Building2 size={32} className="text-white" />
               </div>
               <h3 className="text-2xl font-bold text-slate-800 mb-3">
@@ -334,21 +334,21 @@ const Signup: React.FC = () => {
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-mauve-600 mr-3 flex-shrink-0"
+                    className="text-mauve-600 mr-3 shrink-0"
                   />
                   <span>Post job openings & internships</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-mauve-600 mr-3 flex-shrink-0"
+                    className="text-mauve-600 mr-3 shrink-0"
                   />
                   <span>Browse pre-screened candidates</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle
                     size={16}
-                    className="text-mauve-600 mr-3 flex-shrink-0"
+                    className="text-mauve-600 mr-3 shrink-0"
                   />
                   <span>Streamlined hiring process</span>
                 </li>
@@ -405,11 +405,11 @@ const Signup: React.FC = () => {
   );
 
   const renderStudentForm = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-emerald-50/30 flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200/30 to-forest-200/30 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-forest-200/30 to-emerald-200/30 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-linear-to-br from-emerald-200/30 to-forest-200/30 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-linear-to-br from-forest-200/30 to-emerald-200/30 blur-3xl"></div>
       </div>
 
       <div className="w-full max-w-lg relative z-10">
@@ -426,12 +426,12 @@ const Signup: React.FC = () => {
             <span className="font-medium">Back to selection</span>
           </button>
 
-          <div className="w-20 h-20 bg-gradient-to-br from-forest-500 to-emerald-500 rounded-3xl mx-auto mb-6 flex items-center justify-center">
+          <div className="w-20 h-20 bg-linear-to-br from-forest-500 to-emerald-500 rounded-3xl mx-auto mb-6 flex items-center justify-center">
             <GraduationCap size={32} className="text-white" />
           </div>
 
           <h1 className="text-4xl font-bold mb-3">
-            <span className="bg-gradient-to-r from-forest-600 to-emerald-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-forest-600 to-emerald-600 bg-clip-text text-transparent">
               Student Signup
             </span>
           </h1>
@@ -733,11 +733,11 @@ const Signup: React.FC = () => {
   );
 
   const renderCompanyForm = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-mauve-50/30 flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-mauve-50/30 flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-mauve-200/30 to-forest-200/30 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-forest-200/30 to-mauve-200/30 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-linear-to-br from-mauve-200/30 to-forest-200/30 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-linear-to-br from-forest-200/30 to-mauve-200/30 blur-3xl"></div>
       </div>
 
       <div className="w-full max-w-2xl mx-auto relative z-10">
@@ -754,11 +754,11 @@ const Signup: React.FC = () => {
             <span>Back to selection</span>
           </button>
 
-          <div className="w-20 h-20 bg-gradient-to-br from-forest-500 to-forest-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-lg shadow-forest-500/25">
+          <div className="w-20 h-20 bg-linear-to-br from-forest-500 to-forest-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-lg shadow-forest-500/25">
             <Building2 size={36} className="" />
           </div>
 
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-forest-600 to-forest-800 bg-clip-text mb-4">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-forest-600 to-forest-800 bg-clip-text mb-4">
             Create Company Account
           </h1>
           <p className="text-xl text-slate-600 max-w-lg mx-auto leading-relaxed">
@@ -1021,7 +1021,7 @@ const Signup: React.FC = () => {
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-forest-500 to-forest-600 hover:from-forest-600 hover:to-forest-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-forest-600/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full bg-linear-to-r from-forest-500 to-forest-600 hover:from-forest-600 hover:to-forest-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-forest-500/25 hover:shadow-forest-600/30 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {loading ? (
                   <div className="flex items-center justify-center gap-3">

@@ -173,7 +173,7 @@ const ConsultationPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-sm p-8 mb-6">
           <div className="flex items-center justify-between mb-6">
@@ -489,7 +489,7 @@ const ConsultationPage = () => {
                 {/* Submit Button */}
                 <button
                   onClick={handleBookSession}
-                  className="w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3"
+                  className="w-full bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3"
                 >
                   <Send size={20} />
                   Book Session
@@ -518,7 +518,7 @@ const ConsultationPage = () => {
                   </p>
                   <button
                     onClick={() => setActiveTab("book")}
-                    className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                    className="bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
                   >
                     Book Your First Session
                   </button>
@@ -597,7 +597,7 @@ const ConsultationPage = () => {
 
         {/* Notification Toast */}
         {notification && (
-          <div className="fixed top-6 right-6 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-2xl shadow-lg z-50 animate-fade-in max-w-md">
+          <div className="fixed top-6 right-6 bg-linear-to-r from-green-500 to-green-600 text-white px-6 py-4 rounded-2xl shadow-lg z-50 animate-fade-in max-w-md">
             <div className="flex items-start gap-3">
               <CheckCircle size={20} className="mt-0.5" />
               <span className="font-semibold">{notification}</span>

@@ -107,7 +107,7 @@ export const About = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-light)] relative overflow-hidden">
+      <section className="py-20 px-4 bg-linear-to-br from-[var(--color-bg)] to-[var(--color-light)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-[var(--color-primary)] rounded-full"></div>
           <div className="absolute top-40 right-20 w-24 h-24 bg-[var(--color-accent)] rounded-full"></div>
@@ -191,25 +191,25 @@ export const About = () => {
 
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 shrink-0"></div>
                     <span className="text-[var(--color-secondary)]">
                       Quality tech education and training programs
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 shrink-0"></div>
                     <span className="text-[var(--color-secondary)]">
                       Global job opportunities and remote work access
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 shrink-0"></div>
                     <span className="text-[var(--color-secondary)]">
                       Professional mentorship and career guidance
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-3 shrink-0"></div>
                     <span className="text-[var(--color-secondary)]">
                       Industry connections and networking opportunities
                     </span>
@@ -239,7 +239,7 @@ export const About = () => {
                   <li className="flex items-start gap-3">
                     <CheckCircle
                       size={20}
-                      className="text-green-500 mt-1 flex-shrink-0"
+                      className="text-green-500 mt-1 shrink-0"
                     />
                     <span className="text-[var(--color-secondary)]">
                       World-class curriculum designed by industry experts
@@ -248,7 +248,7 @@ export const About = () => {
                   <li className="flex items-start gap-3">
                     <CheckCircle
                       size={20}
-                      className="text-green-500 mt-1 flex-shrink-0"
+                      className="text-green-500 mt-1 shrink-0"
                     />
                     <span className="text-[var(--color-secondary)]">
                       Direct partnerships with 50+ global companies
@@ -257,7 +257,7 @@ export const About = () => {
                   <li className="flex items-start gap-3">
                     <CheckCircle
                       size={20}
-                      className="text-green-500 mt-1 flex-shrink-0"
+                      className="text-green-500 mt-1 shrink-0"
                     />
                     <span className="text-[var(--color-secondary)]">
                       95% job placement rate within 6 months
@@ -266,7 +266,7 @@ export const About = () => {
                   <li className="flex items-start gap-3">
                     <CheckCircle
                       size={20}
-                      className="text-green-500 mt-1 flex-shrink-0"
+                      className="text-green-500 mt-1 shrink-0"
                     />
                     <span className="text-[var(--color-secondary)]">
                       Ongoing mentorship and career support
@@ -387,7 +387,7 @@ export const About = () => {
       <WatchLearnGrow />
 
       {/* Call to Action */}
-      <section className="py-16 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
+      <section className="py-16 px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
         <div className="max-w-4xl mx-auto text-center">
           <Rocket size={48} className="mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

@@ -36,7 +36,7 @@ export const LogoutModal: React.FC<LogoutModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl">
+            <div className="p-2 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl">
               <LogOut size={20} className="text-white" />
             </div>
             <h3 className="text-lg font-semibold text-[var(--color-text)]">
@@ -82,7 +82,7 @@ export const LogoutModal: React.FC<LogoutModalProps> = ({
           <button
             onClick={() => handleLogout(false)}
             disabled={isLoggingOut}
-            className="w-full p-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full p-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             <LogOut size={18} />
             {isLoggingOut ? "Logging out..." : "Logout (Keep Data)"}
@@ -92,7 +92,7 @@ export const LogoutModal: React.FC<LogoutModalProps> = ({
           <button
             onClick={() => handleLogout(true)}
             disabled={isLoggingOut}
-            className="w-full p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full p-4 bg-linear-to-r from-red-500 to-red-600 text-white rounded-xl hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             <Trash2 size={18} />
             {isLoggingOut ? "Clearing data..." : "Logout & Clear All Data"}
@@ -102,7 +102,7 @@ export const LogoutModal: React.FC<LogoutModalProps> = ({
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-3 flex items-start gap-3">
             <AlertTriangle
               size={16}
-              className="text-yellow-600 mt-0.5 flex-shrink-0"
+              className="text-yellow-600 mt-0.5 shrink-0"
             />
             <div>
               <p className="text-sm text-yellow-800 font-medium mb-1">

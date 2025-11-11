@@ -31,7 +31,6 @@ import CompanySignup from "./Pages/Company/SignupPage";
 
 // CHANGED THE BACKEND URL
 
-
 function App() {
   return (
     <>

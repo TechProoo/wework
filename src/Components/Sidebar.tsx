@@ -174,7 +174,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
   ];
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-gradient-to-br from-[var(--color-light)] via-[var(--color-light)]/80 to-white/50 backdrop-blur-xl">
+    <div className="flex flex-col h-full bg-linear-to-br from-[var(--color-light)] via-[var(--color-light)]/80 to-white/50 backdrop-blur-xl">
       {/* Logo/Brand */}
       <div className="p-4 lg:p-6 border-b border-[var(--color-slate)]/20 bg-white/80 backdrop-blur-sm">
         <div
@@ -183,7 +183,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
           } gap-3 cursor-pointer group/logo`}
           onClick={handleSidebarToggle}
         >
-          <div className="relative w-10 h-10 sm:w-10 sm:h-10 bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 flex-shrink-0 group-hover/logo:shadow-xl group-hover/logo:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-3">
+          <div className="relative w-10 h-10 sm:w-10 sm:h-10 bg-linear-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/25 shrink-0 group-hover/logo:shadow-xl group-hover/logo:shadow-[var(--color-primary)]/40 transition-all duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-3">
             <BarChart4Icon
               color="#fff"
               size={isSmallScreen ? 18 : 18}
@@ -192,7 +192,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             <div className="absolute inset-0 bg-white/20 rounded-2xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-300"></div>
           </div>
           <span
-            className={`font-black text-xl sm:text-2xl bg-gradient-to-r from-[var(--color-text)] via-[var(--color-primary)] to-[var(--color-accent)] bg-clip-text text-transparent whitespace-nowrap overflow-hidden transition-all duration-500 ${
+            className={`font-black text-xl sm:text-2xl bg-linear-to-r from-[var(--color-text)] via-[var(--color-primary)] to-[var(--color-accent)] bg-clip-text text-transparent whitespace-nowrap overflow-hidden transition-all duration-500 ${
               isMobileOpen || !isCollapsed
                 ? "opacity-100 max-w-full transform translate-x-0"
                 : "opacity-0 max-w-0 transform -translate-x-2"
@@ -208,21 +208,21 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       </div>
 
       {/* User Info */}
-      <div className="p-4 lg:p-6 border-b border-[var(--color-slate)]/10 bg-gradient-to-r from-white/60 to-white/40 backdrop-blur-sm">
+      <div className="p-4 lg:p-6 border-b border-[var(--color-slate)]/10 bg-linear-to-r from-white/60 to-white/40 backdrop-blur-sm">
         <div
           className={`flex items-center ${
             isMobileOpen ? "justify-start" : "justify-center lg:justify-start"
           } gap-3 sm:gap-4`}
         >
-          <div className="relative flex-shrink-0 group/avatar">
-            <div className="w-11 h-11 sm:w-11 sm:h-11 bg-gradient-to-br from-[var(--color-accent)] via-[var(--color-primary)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/20 ring-2 ring-white/50 group-hover/avatar:shadow-xl group-hover/avatar:shadow-[var(--color-primary)]/30 transition-all duration-300 group-hover/avatar:scale-105">
+          <div className="relative shrink-0 group/avatar">
+            <div className="w-11 h-11 sm:w-11 sm:h-11 bg-linear-to-br from-[var(--color-accent)] via-[var(--color-primary)] to-[var(--color-slate)] rounded-2xl flex items-center justify-center shadow-lg shadow-[var(--color-primary)]/20 ring-2 ring-white/50 group-hover/avatar:shadow-xl group-hover/avatar:shadow-[var(--color-primary)]/30 transition-all duration-300 group-hover/avatar:scale-105">
               <User
                 size={isSmallScreen ? 20 : 24}
                 className="text-white drop-shadow-sm"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-2xl"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-white/30 to-transparent rounded-2xl"></div>
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full border-3 border-white shadow-sm">
+            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 sm:w-5 sm:h-5 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full border-3 border-white shadow-sm">
               <div className="w-full h-full bg-[var(--color-primary)] rounded-full animate-pulse"></div>
             </div>
           </div>
@@ -240,7 +240,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             </p>
             <div className="flex items-center gap-2 text-xs sm:text-sm text-[var(--color-text)]">
               <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full shadow-sm"></div>
+                <div className="w-2 h-2 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full shadow-sm"></div>
                 <span className="font-medium capitalize">{"USER"}</span>
               </div>
               <span className="text-[var(--color-slate)]">•</span>
@@ -268,7 +268,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
                     : "justify-center lg:justify-start"
                 } gap-3 sm:gap-4 px-1 rounded-2xl text-sm font-semibold transition-all duration-300 group relative hover:scale-[1.02] active:scale-[0.98] ${
                 isActive
-                  ? "bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-primary)]/25 transform ring-1 ring-white/20"
+                  ? "bg-linear-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-primary)]/25 transform ring-1 ring-white/20"
                   : "text-[var(--color-text)] hover:bg-white/80 hover:shadow-md hover:shadow-[var(--color-slate)]/20 hover:text-[var(--color-primary)] backdrop-blur-sm"
               }
               `;
@@ -284,7 +284,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
                 <>
                   <div
                     className={`
-                    relative flex items-center justify-center w-8 h-8 rounded-xl transition-all duration-300 flex-shrink-0
+                    relative flex items-center justify-center w-8 h-8 rounded-xl transition-all duration-300 shrink-0
                     ${
                       isActive
                         ? "bg-white/20 text-white shadow-sm"
@@ -325,10 +325,10 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       </nav>
 
       {/* Footer Actions */}
-      <div className="p-4 border-t border-[var(--color-slate)]/20 bg-gradient-to-br from-white via-[var(--color-light)]/50 to-white/30 backdrop-blur-sm space-y-2 flex-shrink-0">
+      <div className="p-4 border-t border-[var(--color-slate)]/20 bg-linear-to-br from-white via-[var(--color-light)]/50 to-white/30 backdrop-blur-sm space-y-2 shrink-0">
         <button
           onClick={handleLogout}
-          className={`flex items-center gap-3 px-4 py-3 text-slate-700 rounded-2xl hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-600 transition-all duration-300 cursor-pointer group hover:scale-[1.02] active:scale-[0.98] hover:shadow-md hover:shadow-red-200/50 w-full ${
+          className={`flex items-center gap-3 px-4 py-3 text-slate-700 rounded-2xl hover:bg-linear-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-600 transition-all duration-300 cursor-pointer group hover:scale-[1.02] active:scale-[0.98] hover:shadow-md hover:shadow-red-200/50 w-full ${
             isCollapsed && !isMobile ? "justify-center" : "justify-start"
           }`}
           title={isCollapsed && !isMobile ? "Logout" : undefined}
@@ -363,7 +363,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
           e.stopPropagation();
           setIsMobileOpen((prev) => !prev);
         }}
-        className="fixed top-1 left-1 z-[60] lg:hidden bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white p-3 rounded-xl shadow-xl border-2 border-white hover:scale-110 active:scale-95 transition-all duration-300 block"
+        className="fixed top-1 left-1 z-[60] lg:hidden bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white p-3 rounded-xl shadow-xl border-2 border-white hover:scale-110 active:scale-95 transition-all duration-300 block"
         aria-label={isMobileOpen ? "Close menu" : "Open menu"}
       >
         {isMobileOpen ? (

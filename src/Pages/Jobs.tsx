@@ -302,7 +302,7 @@ export const Jobs = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="jobs-hero-section text-center py-20 px-4 bg-gradient-to-br from-[var(--color-bg)] to-[var(--color-light)]">
+      <div className="jobs-hero-section text-center py-20 px-4 bg-linear-to-br from-[var(--color-bg)] to-[var(--color-light)]">
         <div className="max-w-4xl mx-auto">
           <span className="w-auto flex items-center justify-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-full font-semibold text-sm mb-6">
             <SatelliteDish />
@@ -621,7 +621,7 @@ export const Jobs = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-16 px-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
+      <div className="py-16 px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
         <div className="max-w-4xl mx-auto text-center">
           <Users size={48} className="mx-auto mb-6" />
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
