@@ -8,7 +8,7 @@ export interface CreateJobPayload {
   description: string;
   requirements: string[];
   salaryRange?: string;
-  status?: "OPEN" | "CLOSED" | "PAUSED";
+  status?: "OPEN" | "CLOSED" | "FILLED";
 }
 
 export interface Job {
@@ -20,7 +20,7 @@ export interface Job {
   description: string;
   requirements: string[];
   salaryRange?: string;
-  status: "OPEN" | "CLOSED" | "PAUSED";
+  status: "OPEN" | "CLOSED" | "FILLED";
   createdAt: string;
   updatedAt: string;
 }

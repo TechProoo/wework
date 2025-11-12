@@ -212,6 +212,14 @@ function App() {
             </CompanyProtectedRoute>
           }
         />
+        <Route
+          path="/company/edit-job/:jobId"
+          element={
+            <CompanyProtectedRoute>
+              <PostJobPage />
+            </CompanyProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

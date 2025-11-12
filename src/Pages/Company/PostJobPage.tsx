@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   Building2,
@@ -14,7 +14,7 @@ import {
   Globe,
   CheckCircle,
 } from "lucide-react";
-import { createJob } from "../../api/Companies/jobsApi";
+import { createJob, getJobById, updateJob } from "../../api/Companies/jobsApi";
 import type { CreateJobPayload } from "../../api/Companies/jobsApi";
 
 interface JobFormData {
@@ -37,7 +37,10 @@ interface JobFormData {
 
 const PostJobPage = () => {
   const navigate = useNavigate();
+  const { jobId } = useParams<{ jobId?: string }>();
+  const isEditMode = !!jobId;
   const [currentStep, setCurrentStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<JobFormData>({
     title: "",
     department: "",
@@ -57,6 +60,110 @@ const PostJobPage = () => {
   });
 
   const [errors, setErrors] = useState<Partial<JobFormData>>({});
+
+  // Load job data when editing
+  useEffect(() => {
+    if (isEditMode && jobId) {
+      loadJobData(jobId);
+    }
+  }, [isEditMode, jobId]);
+
+  const loadJobData = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const job = await getJobById(id);
+      if (job) {
+        // Parse the description to extract embedded data
+        const descriptionParts = job.description.split('\n\n');
+        const mainDescription = descriptionParts[0];
+        
+        // Extract department, type, etc. from description
+        let department = "";
+        let type: JobFormData["type"] = "";
+        let experienceLevel: JobFormData["experienceLevel"] = "";
+        let positions = "1";
+        let deadline = "";
+        let benefits = "";
+
+        descriptionParts.forEach(part => {
+          if (part.includes('**Department:**')) {
+            department = part.replace('**Department:**', '').trim();
+          }
+          if (part.includes('**Job Type:**')) {
+            const typeValue = part.replace('**Job Type:**', '').trim();
+            type = typeValue as JobFormData["type"];
+          }
+          if (part.includes('**Experience Level:**')) {
+            const expValue = part.replace('**Experience Level:**', '').trim();
+            experienceLevel = expValue as JobFormData["experienceLevel"];
+          }
+          if (part.includes('**Positions Available:**')) {
+            positions = part.replace('**Positions Available:**', '').trim();
+          }
+          if (part.includes('**Application Deadline:**')) {
+            deadline = part.replace('**Application Deadline:**', '').trim();
+          }
+          if (part.includes('**Benefits:**')) {
+            benefits = part.split('**Benefits:**\n')[1] || "";
+          }
+        });
+
+        // Parse requirements array back to separate fields
+        const responsibilities: string[] = [];
+        const requirements: string[] = [];
+        const skills: string[] = [];
+
+        job.requirements.forEach(req => {
+          if (req.startsWith('Responsibility:')) {
+            responsibilities.push(req.replace('Responsibility:', '').trim());
+          } else if (req.startsWith('Requirement:')) {
+            requirements.push(req.replace('Requirement:', '').trim());
+          } else if (req.startsWith('Required Skill:')) {
+            skills.push(req.replace('Required Skill:', '').trim());
+          }
+        });
+
+        // Parse salary range
+        let salaryMin = "";
+        let salaryMax = "";
+        let currency = "USD";
+
+        if (job.salaryRange) {
+          const salaryParts = job.salaryRange.split(' ');
+          if (salaryParts.length >= 3) {
+            currency = salaryParts[0];
+            const minMax = salaryParts.slice(1).join(' ').split('-');
+            if (minMax.length === 2) {
+              salaryMin = minMax[0].trim().replace(/,/g, '');
+              salaryMax = minMax[1].trim().replace(/,/g, '');
+            }
+          }
+        }
+
+        setFormData({
+          title: job.title,
+          department,
+          location: job.location || "",
+          type,
+          experienceLevel,
+          salaryMin,
+          salaryMax,
+          currency,
+          description: mainDescription,
+          responsibilities: responsibilities.join('\n'),
+          requirements: requirements.join('\n'),
+          benefits,
+          skills: skills.join(', '),
+          deadline,
+          positions,
+        });
+      }
+    } catch (error) {
+      console.error("Error loading job:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -177,14 +284,18 @@ const PostJobPage = () => {
         status: "OPEN",
       };
 
-      // Call API to create job
-      await createJob(jobPayload);
+      // Call API to create or update job
+      if (isEditMode && jobId) {
+        await updateJob(jobId, jobPayload);
+      } else {
+        await createJob(jobPayload);
+      }
 
       // Navigate back to dashboard on success
       navigate("/company/dashboard");
     } catch (error) {
       // Error handling is done in the API function
-      console.error("Error creating job:", error);
+      console.error(`Error ${isEditMode ? 'updating' : 'creating'} job:`, error);
     }
   };
 
@@ -775,19 +886,30 @@ const PostJobPage = () => {
             <span>Back to Dashboard</span>
           </button>
           <h1 className="text-3xl font-bold text-[var(--color-text)]">
-            Post a New Job
+            {isEditMode ? "Edit Job Posting" : "Post a New Job"}
           </h1>
           <p className="text-gray-600 mt-2">
-            Fill in the details to create a job posting
+            {isEditMode ? "Update the job details" : "Fill in the details to create a job posting"}
           </p>
         </div>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)] mb-4"></div>
+              <p className="text-gray-600">Loading job data...</p>
+            </div>
+          </div>
+        )}
+
         {/* Step Indicator */}
-        {renderStepIndicator()}
+        {!isLoading && renderStepIndicator()}
 
         {/* Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <form onSubmit={handleSubmit}>
+        {!isLoading && (
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <form onSubmit={handleSubmit}>
             {currentStep === 1 && renderStep1()}
             {currentStep === 2 && renderStep2()}
             {currentStep === 3 && renderStep3()}
@@ -822,12 +944,13 @@ const PostJobPage = () => {
                   className="px-8 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl font-medium hover:shadow-lg transition-all flex items-center gap-2"
                 >
                   <CheckCircle size={20} />
-                  Post Job
+                  {isEditMode ? "Update Job" : "Post Job"}
                 </button>
               )}
             </div>
           </form>
         </div>
+        )}
       </div>
     </div>
   );
