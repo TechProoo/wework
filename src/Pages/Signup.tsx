@@ -109,7 +109,7 @@ const Signup: React.FC = () => {
 
     if (!companyData.companyName.trim())
       newErrors.companyName = "Company name is required";
-    if (!companyData.industry.trim())
+    if (!companyData.industry?.trim())
       newErrors.industry = "Industry is required";
     if (!companyData.email.trim()) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(companyData.email))
