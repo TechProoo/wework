@@ -375,7 +375,10 @@ const CompanyDashboard = () => {
                   className="text-[var(--color-text)] md:w-5 md:h-5"
                 />
               </button>
-              <button className="px-3 py-2 md:px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2">
+              <button
+                onClick={() => navigate("/company/post-job")}
+                className="px-3 py-2 md:px-4 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+              >
                 <Plus size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline text-sm md:text-base">
                   Post Job
