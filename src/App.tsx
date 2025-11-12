@@ -28,6 +28,7 @@ import PopularCoursesPage from "./Pages/Users/PopularCoursesPage";
 import CompanyDashboard from "./Pages/Company/DashboardPage";
 import CompanyLogin from "./Pages/Company/LoginPage";
 import CompanySignup from "./Pages/Company/SignupPage";
+import PostJobPage from "./Pages/Company/PostJobPage";
 
 // CHANGED THE BACKEND URL
 
@@ -200,6 +201,14 @@ function App() {
           element={
             <CompanyProtectedRoute>
               <CompanyDashboard />
+            </CompanyProtectedRoute>
+          }
+        />
+        <Route
+          path="/company/post-job"
+          element={
+            <CompanyProtectedRoute>
+              <PostJobPage />
             </CompanyProtectedRoute>
           }
         />
