@@ -22,10 +22,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import JobPostingsPage from "./JobPostingsPage";
 import CandidatesPage from "./CandidatesPage";
 import AnalyticsPage from "./AnalyticsPage";
-import {
-  getMyJobs,
-  getJobApplications,
-} from "../../api/Companies/jobsApi";
+import { getMyJobs, getJobApplications } from "../../api/Companies/jobsApi";
 
 interface JobPosting {
   id: string;
@@ -36,7 +33,7 @@ interface JobPosting {
   salary: string;
   applicants: number;
   posted: string;
-  status: "Active" | "Paused" | "Closed";
+  status: "Active" | "Filled" | "Closed";
 }
 
 interface Candidate {
@@ -108,8 +105,8 @@ const CompanyDashboard = () => {
           status:
             job.status === "OPEN"
               ? "Active"
-              : job.status === "PAUSED"
-              ? "Paused"
+              : job.status === "FILLED"
+              ? "Filled"
               : "Closed",
         });
       }
@@ -199,9 +196,9 @@ const CompanyDashboard = () => {
       case "Active":
       case "New":
         return "bg-green-100 text-green-800";
-      case "Paused":
+      case "Filled":
       case "Reviewing":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-blue-100 text-blue-800";
       case "Closed":
       case "Rejected":
         return "bg-red-100 text-red-800";

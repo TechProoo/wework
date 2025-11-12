@@ -13,6 +13,7 @@ import {
   Briefcase,
   Calendar,
   XCircle,
+  CheckCircle,
 } from "lucide-react";
 import { getMyJobs, deleteJob, updateJob } from "../../api/Companies/jobsApi";
 import type { Job } from "../../api/Companies/jobsApi";
@@ -49,9 +50,9 @@ const JobPostingsPage = () => {
       case "OPEN":
       case "Active":
         return "bg-green-100 text-green-800";
-      case "PAUSED":
-      case "Paused":
-        return "bg-yellow-100 text-yellow-800";
+      case "FILLED":
+      case "Filled":
+        return "bg-blue-100 text-blue-800";
       case "CLOSED":
       case "Closed":
         return "bg-red-100 text-red-800";
@@ -104,7 +105,7 @@ const JobPostingsPage = () => {
 
   const handleStatusChange = async (
     jobId: string,
-    newStatus: "OPEN" | "CLOSED" | "PAUSED"
+    newStatus: "OPEN" | "CLOSED" | "FILLED"
   ) => {
     try {
       await updateJob(jobId, { status: newStatus });
@@ -134,7 +135,7 @@ const JobPostingsPage = () => {
   const stats = {
     total: jobs.length,
     active: jobs.filter((job) => job.status === "OPEN").length,
-    paused: jobs.filter((job) => job.status === "PAUSED").length,
+    filled: jobs.filter((job) => job.status === "FILLED").length,
     closed: jobs.filter((job) => job.status === "CLOSED").length,
   };
 
@@ -191,13 +192,13 @@ const JobPostingsPage = () => {
 
         <div className="bg-white rounded-xl p-4 border border-[var(--color-slate)]/20">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-yellow-100 rounded-lg">
-              <Clock size={16} className="text-yellow-600" />
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <CheckCircle size={16} className="text-blue-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-600">Paused</p>
+              <p className="text-xs text-gray-600">Filled</p>
               <p className="text-lg font-bold text-[var(--color-text)]">
-                {stats.paused}
+                {stats.filled}
               </p>
             </div>
           </div>
@@ -245,7 +246,7 @@ const JobPostingsPage = () => {
             >
               <option value="All">All Status</option>
               <option value="OPEN">Active</option>
-              <option value="PAUSED">Paused</option>
+              <option value="FILLED">Filled</option>
               <option value="CLOSED">Closed</option>
             </select>
 
@@ -378,8 +379,8 @@ const JobPostingsPage = () => {
                             >
                               {job.status === "OPEN"
                                 ? "Active"
-                                : job.status === "PAUSED"
-                                ? "Paused"
+                                : job.status === "FILLED"
+                                ? "Filled"
                                 : "Closed"}
                             </span>
                           </div>
@@ -397,9 +398,9 @@ const JobPostingsPage = () => {
                             <Eye size={16} />
                           </button>
                           <button
-                            onClick={() => {
-                              /* Edit job */
-                            }}
+                            onClick={() =>
+                              navigate(`/company/edit-job/${job.id}`)
+                            }
                             className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Edit"
                           >
@@ -419,13 +420,13 @@ const JobPostingsPage = () => {
                             onChange={(e) =>
                               handleStatusChange(
                                 job.id,
-                                e.target.value as "OPEN" | "CLOSED" | "PAUSED"
+                                e.target.value as "OPEN" | "CLOSED" | "FILLED"
                               )
                             }
                             className="ml-2 text-xs border border-gray-200 rounded px-2 py-1 focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)]"
                           >
                             <option value="OPEN">Active</option>
-                            <option value="PAUSED">Paused</option>
+                            <option value="FILLED">Filled</option>
                             <option value="CLOSED">Closed</option>
                           </select>
                         </div>
