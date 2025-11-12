@@ -22,7 +22,10 @@ import { useAuth } from "../../contexts/AuthContext";
 import JobPostingsPage from "./JobPostingsPage";
 import CandidatesPage from "./CandidatesPage";
 import AnalyticsPage from "./AnalyticsPage";
-import { getMyJobs, getJobApplications, type Job } from "../../api/Companies/jobsApi";
+import {
+  getMyJobs,
+  getJobApplications,
+} from "../../api/Companies/jobsApi";
 
 interface JobPosting {
   id: string;
@@ -59,7 +62,6 @@ const CompanyDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
-  const [jobs, setJobs] = useState<Job[]>([]);
   const [stats, setStats] = useState<DashboardStats>({
     totalJobs: 0,
     activeJobs: 0,
@@ -79,19 +81,20 @@ const CompanyDashboard = () => {
     try {
       // Fetch all jobs
       const jobsData = await getMyJobs();
-      setJobs(jobsData);
 
       // Calculate stats
-      const activeJobsCount = jobsData.filter(job => job.status === "OPEN").length;
-      
+      const activeJobsCount = jobsData.filter(
+        (job) => job.status === "OPEN"
+      ).length;
+
       // Fetch applications for all jobs to get total applicants
       let totalApplicants = 0;
       const jobsWithApplicants: JobPosting[] = [];
-      
+
       for (const job of jobsData.slice(0, 3)) {
         const applications = await getJobApplications(job.id);
         totalApplicants += applications.length;
-        
+
         // Transform Job to JobPosting for display
         jobsWithApplicants.push({
           id: job.id,
@@ -102,7 +105,12 @@ const CompanyDashboard = () => {
           salary: job.salaryRange || "Competitive",
           applicants: applications.length,
           posted: formatTimeAgo(job.createdAt),
-          status: job.status === "OPEN" ? "Active" : job.status === "PAUSED" ? "Paused" : "Closed",
+          status:
+            job.status === "OPEN"
+              ? "Active"
+              : job.status === "PAUSED"
+              ? "Paused"
+              : "Closed",
         });
       }
 
@@ -130,8 +138,13 @@ const CompanyDashboard = () => {
     if (diffInDays === 0) return "Today";
     if (diffInDays === 1) return "Yesterday";
     if (diffInDays < 7) return `${diffInDays} days ago`;
-    if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} week${Math.floor(diffInDays / 7) > 1 ? 's' : ''} ago`;
-    return `${Math.floor(diffInDays / 30)} month${Math.floor(diffInDays / 30) > 1 ? 's' : ''} ago`;
+    if (diffInDays < 30)
+      return `${Math.floor(diffInDays / 7)} week${
+        Math.floor(diffInDays / 7) > 1 ? "s" : ""
+      } ago`;
+    return `${Math.floor(diffInDays / 30)} month${
+      Math.floor(diffInDays / 30) > 1 ? "s" : ""
+    } ago`;
   };
 
   // Apply company dashboard layout class to body
@@ -224,7 +237,8 @@ const CompanyDashboard = () => {
           Welcome to Your Dashboard! 🎉
         </h2>
         <p className="text-base md:text-lg text-gray-600 mb-8">
-          You haven't posted any jobs yet. Let's get started with building your team!
+          You haven't posted any jobs yet. Let's get started with building your
+          team!
         </p>
 
         {/* Quick Action Cards */}
@@ -237,7 +251,8 @@ const CompanyDashboard = () => {
               Post Your First Job
             </h3>
             <p className="text-sm text-gray-600">
-              Create a job posting and start receiving applications from talented candidates
+              Create a job posting and start receiving applications from
+              talented candidates
             </p>
           </div>
 
@@ -271,7 +286,10 @@ const CompanyDashboard = () => {
           onClick={() => navigate("/company/post-job")}
           className="px-8 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-xl transition-all duration-300 flex items-center gap-3 mx-auto text-lg font-semibold group"
         >
-          <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+          <Plus
+            size={24}
+            className="group-hover:rotate-90 transition-transform duration-300"
+          />
           <span>Post Your First Job</span>
         </button>
 
@@ -309,193 +327,195 @@ const CompanyDashboard = () => {
     }
 
     return (
-    <div className="space-y-6">
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="min-w-0">
-              <p className="text-xs md:text-sm text-gray-600 mb-1">
-                Total Jobs
-              </p>
-              <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
-                {stats.totalJobs}
-              </p>
-            </div>
-            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl shrink-0">
-              <Briefcase size={16} className="text-white md:w-5 md:h-5" />
-            </div>
-          </div>
-          <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
-            <TrendingUp
-              size={12}
-              className="text-green-500 mr-1 md:w-[14px] md:h-[14px]"
-            />
-            <span className="text-green-600 truncate">
-              +12% from last month
-            </span>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="min-w-0">
-              <p className="text-xs md:text-sm text-gray-600 mb-1">
-                Active Jobs
-              </p>
-              <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
-                {stats.activeJobs}
-              </p>
-            </div>
-            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl shrink-0">
-              <Target size={16} className="text-white md:w-5 md:h-5" />
-            </div>
-          </div>
-          <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
-            <span className="text-gray-600 truncate">
-              {stats.activeJobs} of {stats.totalJobs} jobs active
-            </span>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="min-w-0">
-              <p className="text-xs md:text-sm text-gray-600 mb-1">
-                Total Applicants
-              </p>
-              <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
-                {stats.totalApplicants}
-              </p>
-            </div>
-            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl shrink-0">
-              <Users size={16} className="text-white md:w-5 md:h-5" />
-            </div>
-          </div>
-          <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
-            <TrendingUp
-              size={12}
-              className="text-green-500 mr-1 md:w-[14px] md:h-[14px]"
-            />
-            <span className="text-green-600 truncate">+8% this week</span>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="min-w-0">
-              <p className="text-xs md:text-sm text-gray-600 mb-1">
-                Interviews
-              </p>
-              <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
-                {stats.interviewsScheduled}
-              </p>
-            </div>
-            <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl shrink-0">
-              <Calendar size={16} className="text-white md:w-5 md:h-5" />
-            </div>
-          </div>
-          <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
-            <Clock
-              size={12}
-              className="text-blue-500 mr-1 md:w-[14px] md:h-[14px]"
-            />
-            <span className="text-blue-600 truncate">6 this week</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Recent Activity & Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-        {/* Recent Jobs */}
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between mb-4 md:mb-6">
-            <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">
-              Recent Job Postings
-            </h3>
-            <button className="text-[var(--color-primary)] text-xs md:text-sm font-medium hover:text-[var(--color-primary)]/80">
-              View All
-            </button>
-          </div>
-          <div className="space-y-4">
-            {recentJobs.slice(0, 3).map((job) => (
-              <div
-                key={job.id}
-                className="p-3 md:p-4 bg-[var(--color-light)] rounded-xl"
-              >
-                <div className="flex items-start justify-between mb-2 gap-2">
-                  <h4 className="font-medium text-[var(--color-text)] text-xs md:text-sm line-clamp-2">
-                    {job.title}
-                  </h4>
-                  <span
-                    className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
-                      job.status
-                    )}`}
-                  >
-                    {job.status}
-                  </span>
-                </div>
-                <p className="text-xs text-gray-600 mb-2 truncate">
-                  {job.department} • {job.location}
+      <div className="space-y-6">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0">
+                <p className="text-xs md:text-sm text-gray-600 mb-1">
+                  Total Jobs
                 </p>
-                <div className="flex items-center justify-between text-xs text-gray-500">
-                  <span className="truncate">{job.applicants} applicants</span>
-                  <span className="shrink-0">{job.posted}</span>
-                </div>
+                <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
+                  {stats.totalJobs}
+                </p>
               </div>
-            ))}
+              <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl shrink-0">
+                <Briefcase size={16} className="text-white md:w-5 md:h-5" />
+              </div>
+            </div>
+            <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
+              <TrendingUp
+                size={12}
+                className="text-green-500 mr-1 md:w-[14px] md:h-[14px]"
+              />
+              <span className="text-green-600 truncate">
+                +12% from last month
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0">
+                <p className="text-xs md:text-sm text-gray-600 mb-1">
+                  Active Jobs
+                </p>
+                <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
+                  {stats.activeJobs}
+                </p>
+              </div>
+              <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-accent)] to-[var(--color-slate)] rounded-xl shrink-0">
+                <Target size={16} className="text-white md:w-5 md:h-5" />
+              </div>
+            </div>
+            <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
+              <span className="text-gray-600 truncate">
+                {stats.activeJobs} of {stats.totalJobs} jobs active
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0">
+                <p className="text-xs md:text-sm text-gray-600 mb-1">
+                  Total Applicants
+                </p>
+                <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
+                  {stats.totalApplicants}
+                </p>
+              </div>
+              <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-slate)] to-[var(--color-primary)] rounded-xl shrink-0">
+                <Users size={16} className="text-white md:w-5 md:h-5" />
+              </div>
+            </div>
+            <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
+              <TrendingUp
+                size={12}
+                className="text-green-500 mr-1 md:w-[14px] md:h-[14px]"
+              />
+              <span className="text-green-600 truncate">+8% this week</span>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0">
+                <p className="text-xs md:text-sm text-gray-600 mb-1">
+                  Interviews
+                </p>
+                <p className="text-xl md:text-2xl font-bold text-[var(--color-text)] truncate">
+                  {stats.interviewsScheduled}
+                </p>
+              </div>
+              <div className="p-2 md:p-3 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-slate)] rounded-xl shrink-0">
+                <Calendar size={16} className="text-white md:w-5 md:h-5" />
+              </div>
+            </div>
+            <div className="mt-3 md:mt-4 flex items-center text-xs md:text-sm">
+              <Clock
+                size={12}
+                className="text-blue-500 mr-1 md:w-[14px] md:h-[14px]"
+              />
+              <span className="text-blue-600 truncate">6 this week</span>
+            </div>
           </div>
         </div>
 
-        {/* Top Candidates */}
-        <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
-          <div className="flex items-center justify-between mb-4 md:mb-6">
-            <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">
-              Top Candidates
-            </h3>
-            <button className="text-[var(--color-primary)] text-xs md:text-sm font-medium hover:text-[var(--color-primary)]/80">
-              View All
-            </button>
-          </div>
-          <div className="space-y-4">
-            {topCandidates.slice(0, 3).map((candidate) => (
-              <div
-                key={candidate.id}
-                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-[var(--color-light)] rounded-xl"
-              >
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold text-xs md:text-sm shrink-0">
-                  {candidate.avatar}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-[var(--color-text)] text-xs md:text-sm truncate">
-                    {candidate.name}
-                  </h4>
-                  <p className="text-xs text-gray-600 truncate">
-                    {candidate.experience} • {candidate.location}
-                  </p>
-                  <div className="flex items-center gap-1 mt-1">
-                    <Star
-                      size={10}
-                      className="text-yellow-500 fill-current md:w-3 md:h-3"
-                    />
-                    <span className="text-xs text-gray-600">
-                      {candidate.rating}
+        {/* Recent Activity & Quick Actions */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+          {/* Recent Jobs */}
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">
+                Recent Job Postings
+              </h3>
+              <button className="text-[var(--color-primary)] text-xs md:text-sm font-medium hover:text-[var(--color-primary)]/80">
+                View All
+              </button>
+            </div>
+            <div className="space-y-4">
+              {recentJobs.slice(0, 3).map((job) => (
+                <div
+                  key={job.id}
+                  className="p-3 md:p-4 bg-[var(--color-light)] rounded-xl"
+                >
+                  <div className="flex items-start justify-between mb-2 gap-2">
+                    <h4 className="font-medium text-[var(--color-text)] text-xs md:text-sm line-clamp-2">
+                      {job.title}
+                    </h4>
+                    <span
+                      className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
+                        job.status
+                      )}`}
+                    >
+                      {job.status}
                     </span>
                   </div>
+                  <p className="text-xs text-gray-600 mb-2 truncate">
+                    {job.department} • {job.location}
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span className="truncate">
+                      {job.applicants} applicants
+                    </span>
+                    <span className="shrink-0">{job.posted}</span>
+                  </div>
                 </div>
-                <span
-                  className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
-                    candidate.status
-                  )}`}
+              ))}
+            </div>
+          </div>
+
+          {/* Top Candidates */}
+          <div className="bg-white rounded-2xl p-4 md:p-6 border border-[var(--color-slate)]/20 shadow-sm">
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">
+                Top Candidates
+              </h3>
+              <button className="text-[var(--color-primary)] text-xs md:text-sm font-medium hover:text-[var(--color-primary)]/80">
+                View All
+              </button>
+            </div>
+            <div className="space-y-4">
+              {topCandidates.slice(0, 3).map((candidate) => (
+                <div
+                  key={candidate.id}
+                  className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-[var(--color-light)] rounded-xl"
                 >
-                  {candidate.status}
-                </span>
-              </div>
-            ))}
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-linear-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center text-white font-semibold text-xs md:text-sm shrink-0">
+                    {candidate.avatar}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-medium text-[var(--color-text)] text-xs md:text-sm truncate">
+                      {candidate.name}
+                    </h4>
+                    <p className="text-xs text-gray-600 truncate">
+                      {candidate.experience} • {candidate.location}
+                    </p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <Star
+                        size={10}
+                        className="text-yellow-500 fill-current md:w-3 md:h-3"
+                      />
+                      <span className="text-xs text-gray-600">
+                        {candidate.rating}
+                      </span>
+                    </div>
+                  </div>
+                  <span
+                    className={`px-1.5 py-0.5 md:px-2 md:py-1 text-xs font-medium rounded-full shrink-0 ${getStatusColor(
+                      candidate.status
+                    )}`}
+                  >
+                    {candidate.status}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     );
   };
 

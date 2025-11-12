@@ -14,7 +14,6 @@ import {
   Globe,
   CheckCircle,
 } from "lucide-react";
-import toast from "react-hot-toast";
 import { createJob } from "../../api/Companies/jobsApi";
 import type { CreateJobPayload } from "../../api/Companies/jobsApi";
 
@@ -73,7 +72,7 @@ const PostJobPage = () => {
   };
 
   const validateStep = (step: number): boolean => {
-    const newErrors: Partial<JobFormData> = {};
+    const newErrors: Partial<Record<keyof JobFormData, string>> = {};
 
     if (step === 1) {
       if (!formData.title.trim()) newErrors.title = "Job title is required";
@@ -89,9 +88,7 @@ const PostJobPage = () => {
         newErrors.salaryMin = "Minimum salary is required";
       if (!formData.salaryMax.trim())
         newErrors.salaryMax = "Maximum salary is required";
-      if (
-        parseFloat(formData.salaryMin) >= parseFloat(formData.salaryMax)
-      ) {
+      if (parseFloat(formData.salaryMin) >= parseFloat(formData.salaryMax)) {
         newErrors.salaryMax = "Maximum salary must be greater than minimum";
       }
     } else if (step === 3) {
@@ -103,7 +100,7 @@ const PostJobPage = () => {
         newErrors.requirements = "Requirements are required";
     }
 
-    setErrors(newErrors);
+    setErrors(newErrors as Partial<JobFormData>);
     return Object.keys(newErrors).length === 0;
   };
 
@@ -148,15 +145,17 @@ const PostJobPage = () => {
           .split(",")
           .map((s) => s.trim())
           .filter((s) => s.length > 0);
-        allRequirements.push(
-          ...skillsArray.map((s) => `Required Skill: ${s}`)
-        );
+        allRequirements.push(...skillsArray.map((s) => `Required Skill: ${s}`));
       }
 
       // Construct salary range
       const salaryRange =
         formData.salaryMin && formData.salaryMax
-          ? `${formData.currency} ${parseInt(formData.salaryMin).toLocaleString()} - ${parseInt(formData.salaryMax).toLocaleString()}`
+          ? `${formData.currency} ${parseInt(
+              formData.salaryMin
+            ).toLocaleString()} - ${parseInt(
+              formData.salaryMax
+            ).toLocaleString()}`
           : undefined;
 
       // Prepare job payload for API
@@ -164,7 +163,15 @@ const PostJobPage = () => {
         title: formData.title,
         location: formData.location || undefined,
         remote: formData.type === "Remote",
-        description: `${formData.description}\n\n**Department:** ${formData.department}\n**Job Type:** ${formData.type}\n**Experience Level:** ${formData.experienceLevel}\n**Positions Available:** ${formData.positions}${formData.deadline ? `\n**Application Deadline:** ${formData.deadline}` : ""}${formData.benefits ? `\n\n**Benefits:**\n${formData.benefits}` : ""}`,
+        description: `${formData.description}\n\n**Department:** ${
+          formData.department
+        }\n**Job Type:** ${formData.type}\n**Experience Level:** ${
+          formData.experienceLevel
+        }\n**Positions Available:** ${formData.positions}${
+          formData.deadline
+            ? `\n**Application Deadline:** ${formData.deadline}`
+            : ""
+        }${formData.benefits ? `\n\n**Benefits:**\n${formData.benefits}` : ""}`,
         requirements: allRequirements,
         salaryRange,
         status: "OPEN",
@@ -236,16 +243,24 @@ const PostJobPage = () => {
             <option value="">Select job title</option>
             <optgroup label="Frontend Development">
               <option value="Frontend Developer">Frontend Developer</option>
-              <option value="Senior Frontend Developer">Senior Frontend Developer</option>
-              <option value="Lead Frontend Developer">Lead Frontend Developer</option>
+              <option value="Senior Frontend Developer">
+                Senior Frontend Developer
+              </option>
+              <option value="Lead Frontend Developer">
+                Lead Frontend Developer
+              </option>
               <option value="React Developer">React Developer</option>
               <option value="Vue.js Developer">Vue.js Developer</option>
               <option value="Angular Developer">Angular Developer</option>
             </optgroup>
             <optgroup label="Backend Development">
               <option value="Backend Developer">Backend Developer</option>
-              <option value="Senior Backend Developer">Senior Backend Developer</option>
-              <option value="Lead Backend Developer">Lead Backend Developer</option>
+              <option value="Senior Backend Developer">
+                Senior Backend Developer
+              </option>
+              <option value="Lead Backend Developer">
+                Lead Backend Developer
+              </option>
               <option value="Node.js Developer">Node.js Developer</option>
               <option value="Python Developer">Python Developer</option>
               <option value="Java Developer">Java Developer</option>
@@ -253,7 +268,9 @@ const PostJobPage = () => {
             </optgroup>
             <optgroup label="Full Stack Development">
               <option value="Full Stack Developer">Full Stack Developer</option>
-              <option value="Senior Full Stack Developer">Senior Full Stack Developer</option>
+              <option value="Senior Full Stack Developer">
+                Senior Full Stack Developer
+              </option>
               <option value="MERN Stack Developer">MERN Stack Developer</option>
               <option value="MEAN Stack Developer">MEAN Stack Developer</option>
             </optgroup>
@@ -261,13 +278,17 @@ const PostJobPage = () => {
               <option value="Mobile Developer">Mobile Developer</option>
               <option value="iOS Developer">iOS Developer</option>
               <option value="Android Developer">Android Developer</option>
-              <option value="React Native Developer">React Native Developer</option>
+              <option value="React Native Developer">
+                React Native Developer
+              </option>
               <option value="Flutter Developer">Flutter Developer</option>
             </optgroup>
             <optgroup label="DevOps & Cloud">
               <option value="DevOps Engineer">DevOps Engineer</option>
               <option value="Cloud Engineer">Cloud Engineer</option>
-              <option value="Site Reliability Engineer">Site Reliability Engineer</option>
+              <option value="Site Reliability Engineer">
+                Site Reliability Engineer
+              </option>
               <option value="Platform Engineer">Platform Engineer</option>
               <option value="AWS Engineer">AWS Engineer</option>
               <option value="Azure Engineer">Azure Engineer</option>
@@ -275,7 +296,9 @@ const PostJobPage = () => {
             <optgroup label="Data & AI">
               <option value="Data Scientist">Data Scientist</option>
               <option value="Data Engineer">Data Engineer</option>
-              <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+              <option value="Machine Learning Engineer">
+                Machine Learning Engineer
+              </option>
               <option value="AI Engineer">AI Engineer</option>
               <option value="Data Analyst">Data Analyst</option>
             </optgroup>
@@ -287,17 +310,23 @@ const PostJobPage = () => {
             </optgroup>
             <optgroup label="Quality Assurance">
               <option value="QA Engineer">QA Engineer</option>
-              <option value="Test Automation Engineer">Test Automation Engineer</option>
+              <option value="Test Automation Engineer">
+                Test Automation Engineer
+              </option>
               <option value="QA Lead">QA Lead</option>
             </optgroup>
             <optgroup label="Security">
               <option value="Security Engineer">Security Engineer</option>
-              <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+              <option value="Cybersecurity Analyst">
+                Cybersecurity Analyst
+              </option>
               <option value="Penetration Tester">Penetration Tester</option>
             </optgroup>
             <optgroup label="Product & Management">
               <option value="Product Manager">Product Manager</option>
-              <option value="Technical Product Manager">Technical Product Manager</option>
+              <option value="Technical Product Manager">
+                Technical Product Manager
+              </option>
               <option value="Engineering Manager">Engineering Manager</option>
               <option value="Technical Lead">Technical Lead</option>
               <option value="Scrum Master">Scrum Master</option>
@@ -316,7 +345,8 @@ const PostJobPage = () => {
           <p className="mt-1 text-sm text-red-500">{errors.title}</p>
         )}
         <p className="mt-1 text-xs text-gray-500">
-          Don't see your role? You can type a custom title after selecting "Other"
+          Don't see your role? You can type a custom title after selecting
+          "Other"
         </p>
       </div>
 
@@ -572,7 +602,11 @@ const PostJobPage = () => {
         <p className="text-sm text-blue-800">
           <strong>Salary Range Preview:</strong>{" "}
           {formData.salaryMin && formData.salaryMax
-            ? `${formData.currency} ${parseInt(formData.salaryMin).toLocaleString()} - ${parseInt(formData.salaryMax).toLocaleString()} per year`
+            ? `${formData.currency} ${parseInt(
+                formData.salaryMin
+              ).toLocaleString()} - ${parseInt(
+                formData.salaryMax
+              ).toLocaleString()} per year`
             : "Enter salary range above"}
         </p>
       </div>
@@ -669,10 +703,7 @@ const PostJobPage = () => {
           Required Skills (comma-separated)
         </label>
         <div className="relative">
-          <FileText
-            className="absolute left-3 top-3 text-gray-400"
-            size={18}
-          />
+          <FileText className="absolute left-3 top-3 text-gray-400" size={18} />
           <textarea
             name="skills"
             value={formData.skills}
@@ -706,7 +737,11 @@ const PostJobPage = () => {
             <DollarSign size={16} />
             <span>
               {formData.salaryMin && formData.salaryMax
-                ? `${formData.currency} ${parseInt(formData.salaryMin).toLocaleString()} - ${parseInt(formData.salaryMax).toLocaleString()}`
+                ? `${formData.currency} ${parseInt(
+                    formData.salaryMin
+                  ).toLocaleString()} - ${parseInt(
+                    formData.salaryMax
+                  ).toLocaleString()}`
                 : "Salary not specified"}
             </span>
           </div>
