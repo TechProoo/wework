@@ -15,6 +15,8 @@ import {
   CheckCircle,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { createJob } from "../../api/Companies/jobsApi";
+import type { CreateJobPayload } from "../../api/Companies/jobsApi";
 
 interface JobFormData {
   title: string;
@@ -123,16 +125,59 @@ const PostJobPage = () => {
     }
 
     try {
-      // TODO: Replace with actual API call
-      console.log("Submitting job posting:", formData);
+      // Parse requirements and responsibilities into arrays
+      const requirementsArray = formData.requirements
+        .split("\n")
+        .map((r) => r.trim())
+        .filter((r) => r.length > 0);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const responsibilitiesArray = formData.responsibilities
+        .split("\n")
+        .map((r) => r.trim())
+        .filter((r) => r.length > 0);
 
-      toast.success("Job posted successfully!");
+      // Combine responsibilities and requirements for the backend
+      const allRequirements = [
+        ...responsibilitiesArray.map((r) => `Responsibility: ${r}`),
+        ...requirementsArray.map((r) => `Requirement: ${r}`),
+      ];
+
+      // Add skills if provided
+      if (formData.skills.trim()) {
+        const skillsArray = formData.skills
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0);
+        allRequirements.push(
+          ...skillsArray.map((s) => `Required Skill: ${s}`)
+        );
+      }
+
+      // Construct salary range
+      const salaryRange =
+        formData.salaryMin && formData.salaryMax
+          ? `${formData.currency} ${parseInt(formData.salaryMin).toLocaleString()} - ${parseInt(formData.salaryMax).toLocaleString()}`
+          : undefined;
+
+      // Prepare job payload for API
+      const jobPayload: CreateJobPayload = {
+        title: formData.title,
+        location: formData.location || undefined,
+        remote: formData.type === "Remote",
+        description: `${formData.description}\n\n**Department:** ${formData.department}\n**Job Type:** ${formData.type}\n**Experience Level:** ${formData.experienceLevel}\n**Positions Available:** ${formData.positions}${formData.deadline ? `\n**Application Deadline:** ${formData.deadline}` : ""}${formData.benefits ? `\n\n**Benefits:**\n${formData.benefits}` : ""}`,
+        requirements: allRequirements,
+        salaryRange,
+        status: "OPEN",
+      };
+
+      // Call API to create job
+      await createJob(jobPayload);
+
+      // Navigate back to dashboard on success
       navigate("/company/dashboard");
     } catch (error) {
-      toast.error("Failed to post job. Please try again.");
+      // Error handling is done in the API function
+      console.error("Error creating job:", error);
     }
   };
 
