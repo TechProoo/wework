@@ -14,11 +14,15 @@ import {
   Briefcase,
   LogOut,
   User,
+  Rocket,
+  FileText,
+  UserPlus,
 } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
 import JobPostingsPage from "./JobPostingsPage";
 import CandidatesPage from "./CandidatesPage";
 import AnalyticsPage from "./AnalyticsPage";
+import { getMyJobs, getJobApplications, type Job } from "../../api/Companies/jobsApi";
 
 interface JobPosting {
   id: string;
@@ -44,10 +48,91 @@ interface Candidate {
   status: "New" | "Reviewing" | "Interviewing" | "Hired" | "Rejected";
 }
 
+interface DashboardStats {
+  totalJobs: number;
+  activeJobs: number;
+  totalApplicants: number;
+  interviewsScheduled: number;
+}
+
 const CompanyDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [stats, setStats] = useState<DashboardStats>({
+    totalJobs: 0,
+    activeJobs: 0,
+    totalApplicants: 0,
+    interviewsScheduled: 0,
+  });
+  const [recentJobs, setRecentJobs] = useState<JobPosting[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch dashboard data from backend
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    setIsLoading(true);
+    try {
+      // Fetch all jobs
+      const jobsData = await getMyJobs();
+      setJobs(jobsData);
+
+      // Calculate stats
+      const activeJobsCount = jobsData.filter(job => job.status === "OPEN").length;
+      
+      // Fetch applications for all jobs to get total applicants
+      let totalApplicants = 0;
+      const jobsWithApplicants: JobPosting[] = [];
+      
+      for (const job of jobsData.slice(0, 3)) {
+        const applications = await getJobApplications(job.id);
+        totalApplicants += applications.length;
+        
+        // Transform Job to JobPosting for display
+        jobsWithApplicants.push({
+          id: job.id,
+          title: job.title,
+          department: "Engineering", // Default since backend doesn't have department
+          location: job.location || (job.remote ? "Remote" : "Not specified"),
+          type: job.remote ? "Remote" : "Full-time",
+          salary: job.salaryRange || "Competitive",
+          applicants: applications.length,
+          posted: formatTimeAgo(job.createdAt),
+          status: job.status === "OPEN" ? "Active" : job.status === "PAUSED" ? "Paused" : "Closed",
+        });
+      }
+
+      setRecentJobs(jobsWithApplicants);
+
+      setStats({
+        totalJobs: jobsData.length,
+        activeJobs: activeJobsCount,
+        totalApplicants,
+        interviewsScheduled: 0, // Will be implemented when interview feature is added
+      });
+    } catch (error) {
+      console.error("Failed to fetch dashboard data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatTimeAgo = (dateString: string): string => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMs = now.getTime() - date.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if (diffInDays === 0) return "Today";
+    if (diffInDays === 1) return "Yesterday";
+    if (diffInDays < 7) return `${diffInDays} days ago`;
+    if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} week${Math.floor(diffInDays / 7) > 1 ? 's' : ''} ago`;
+    return `${Math.floor(diffInDays / 30)} month${Math.floor(diffInDays / 30) > 1 ? 's' : ''} ago`;
+  };
 
   // Apply company dashboard layout class to body
   useEffect(() => {
@@ -60,49 +145,6 @@ const CompanyDashboard = () => {
   }, []);
 
   // Sample data - replace with real API calls
-  const stats = {
-    totalJobs: 12,
-    activeJobs: 8,
-    totalApplicants: 156,
-    interviewsScheduled: 24,
-  };
-
-  const recentJobs: JobPosting[] = [
-    {
-      id: "1",
-      title: "Senior Frontend Developer",
-      department: "Engineering",
-      location: "Remote",
-      type: "Full-time",
-      salary: "$80,000 - $120,000",
-      applicants: 42,
-      posted: "2 days ago",
-      status: "Active",
-    },
-    {
-      id: "2",
-      title: "UX Designer",
-      department: "Design",
-      location: "Lagos, Nigeria",
-      type: "Full-time",
-      salary: "$60,000 - $90,000",
-      applicants: 28,
-      posted: "5 days ago",
-      status: "Active",
-    },
-    {
-      id: "3",
-      title: "Product Manager",
-      department: "Product",
-      location: "Hybrid",
-      type: "Full-time",
-      salary: "$90,000 - $130,000",
-      applicants: 33,
-      posted: "1 week ago",
-      status: "Paused",
-    },
-  ];
-
   const topCandidates: Candidate[] = [
     {
       id: "1",
@@ -159,7 +201,114 @@ const CompanyDashboard = () => {
     }
   };
 
-  const renderOverviewTab = () => (
+  // Check if company has any data
+  const hasData = stats.totalJobs > 0 || stats.totalApplicants > 0;
+
+  const renderEmptyState = () => (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="text-center max-w-2xl mx-auto px-4">
+        {/* Animated Icon */}
+        <div className="relative mb-8">
+          <div className="w-24 h-24 md:w-32 md:h-32 mx-auto bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/10 rounded-full flex items-center justify-center animate-pulse">
+            <div className="w-20 h-20 md:w-28 md:h-28 bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-accent)]/20 rounded-full flex items-center justify-center">
+              <Rocket
+                size={40}
+                className="text-[var(--color-primary)] md:w-14 md:h-14"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Welcome Message */}
+        <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-4">
+          Welcome to Your Dashboard! 🎉
+        </h2>
+        <p className="text-base md:text-lg text-gray-600 mb-8">
+          You haven't posted any jobs yet. Let's get started with building your team!
+        </p>
+
+        {/* Quick Action Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+          <div className="bg-white rounded-2xl p-6 border border-[var(--color-slate)]/20 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <FileText size={24} className="text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-[var(--color-text)] mb-2">
+              Post Your First Job
+            </h3>
+            <p className="text-sm text-gray-600">
+              Create a job posting and start receiving applications from talented candidates
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 border border-[var(--color-slate)]/20 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <UserPlus size={24} className="text-green-600" />
+            </div>
+            <h3 className="font-semibold text-[var(--color-text)] mb-2">
+              Review Candidates
+            </h3>
+            <p className="text-sm text-gray-600">
+              Once you post jobs, review and manage candidate applications here
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl p-6 border border-[var(--color-slate)]/20 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <BarChart3 size={24} className="text-purple-600" />
+            </div>
+            <h3 className="font-semibold text-[var(--color-text)] mb-2">
+              Track Analytics
+            </h3>
+            <p className="text-sm text-gray-600">
+              Monitor your hiring metrics and optimize your recruitment process
+            </p>
+          </div>
+        </div>
+
+        {/* CTA Button */}
+        <button
+          onClick={() => navigate("/company/post-job")}
+          className="px-8 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl hover:shadow-xl transition-all duration-300 flex items-center gap-3 mx-auto text-lg font-semibold group"
+        >
+          <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+          <span>Post Your First Job</span>
+        </button>
+
+        {/* Help Text */}
+        <p className="mt-6 text-sm text-gray-500">
+          Need help? Check out our{" "}
+          <a href="#" className="text-[var(--color-primary)] hover:underline">
+            quick start guide
+          </a>{" "}
+          or{" "}
+          <a href="#" className="text-[var(--color-primary)] hover:underline">
+            contact support
+          </a>
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderOverviewTab = () => {
+    // Show loading state
+    if (isLoading) {
+      return (
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--color-primary)] mb-4"></div>
+            <p className="text-gray-600">Loading dashboard...</p>
+          </div>
+        </div>
+      );
+    }
+
+    // Show empty state if no data
+    if (!hasData) {
+      return renderEmptyState();
+    }
+
+    return (
     <div className="space-y-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
@@ -347,7 +496,8 @@ const CompanyDashboard = () => {
         </div>
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-light)]">
