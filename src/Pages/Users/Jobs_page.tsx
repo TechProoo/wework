@@ -1,5 +1,6 @@
 import { DashboardLayout } from "../../Components/DashboardLayout";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Briefcase,
   Search,
@@ -57,6 +58,7 @@ interface JobListing {
 }
 
 export const JobsPage = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"applications" | "discover">(
     "applications"
   );
@@ -527,8 +529,17 @@ export const JobsPage = () => {
               >
                 Explore Jobs
               </button>
-              <button className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30">
+              <button
+                onClick={() => navigate("/dashboard/build-profile")}
+                className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30"
+              >
                 Build Profile
+              </button>
+              <button
+                onClick={() => navigate("/dashboard/job-profile")}
+                className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30"
+              >
+                View Profile
               </button>
             </div>
           </div>
