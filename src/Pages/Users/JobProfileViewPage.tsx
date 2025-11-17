@@ -18,6 +18,7 @@ import {
   ArrowLeft,
   Trash2,
   ExternalLink,
+  DownloadCloud,
 } from "lucide-react";
 import { jobProfileAPI } from "../../api/Students/jobProfile";
 import type { JobProfileData } from "../../api/Students/jobProfile";
@@ -50,6 +51,7 @@ export const JobProfileViewPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [saveSuccess, setShowSuccess] = useState(false);
   const [currentSkill, setCurrentSkill] = useState("");
+  const [isDownloading, setIsDownloading] = useState(false);
 
   // Editable state
   const [editedProfile, setEditedProfile] = useState({
@@ -165,9 +167,9 @@ export const JobProfileViewPage = () => {
           editedProfile.skills.length > 0 ? editedProfile.skills : undefined,
       };
 
-  const profile = await jobProfileAPI.createOrUpdate(profileData);
-  // API returns the created/updated profile directly
-  setProfile(profile as any);
+      const profile = await jobProfileAPI.createOrUpdate(profileData);
+      // API returns the created/updated profile directly
+      setProfile(profile as any);
       setIsEditing(false);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
@@ -190,6 +192,43 @@ export const JobProfileViewPage = () => {
     } catch (error: any) {
       console.error("Error deleting profile:", error);
       setError("Failed to delete profile");
+    }
+  };
+
+  const downloadResume = async () => {
+    if (!profile?.resumeUrl) return;
+    try {
+      setIsDownloading(true);
+      // Try to fetch the file and trigger a download
+      const res = await fetch(profile.resumeUrl);
+      if (!res.ok) throw new Error(`Failed to fetch resume: ${res.status}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      // derive a safe filename from URL or student's name
+      const urlParts = profile.resumeUrl.split("/");
+      let basename = urlParts[urlParts.length - 1] || "resume";
+      // strip querystring
+      basename = basename.split("?")[0];
+      if (!basename.includes(".")) {
+        // fallback to student name
+        const name = `${profile.student?.firstName || "resume"}_${profile.student?.lastName || ""}`;
+        basename = `${name}.pdf`;
+      }
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = basename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed, opening resume in new tab:", err);
+      // fallback: open in new tab
+      window.open(profile?.resumeUrl, "_blank");
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -581,19 +620,36 @@ export const JobProfileViewPage = () => {
                 </div>
               </div>
 
-              <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl hover:bg-green-100 transition-colors"
-              >
-                <FileText size={24} className="text-green-600" />
-                <div className="flex-1">
-                  <p className="font-semibold text-gray-900">View Resume</p>
-                  <p className="text-sm text-gray-600">Click to open</p>
-                </div>
-                <ExternalLink size={20} className="text-green-600" />
-              </a>
+              <div className="flex flex-col sm:flex-row items-stretch gap-3">
+                <a
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 bg-green-50 border border-green-200 rounded-xl hover:bg-green-100 transition-colors flex-1"
+                >
+                  <FileText size={24} className="text-green-600" />
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold text-gray-900">View Resume</p>
+                    <p className="text-sm text-gray-600">Click to open</p>
+                  </div>
+                  <ExternalLink size={20} className="text-green-600" />
+                </a>
+
+                <button
+                  onClick={downloadResume}
+                  disabled={isDownloading}
+                  className="flex items-center gap-3 px-5 py-3 bg-white border border-green-200 rounded-xl hover:shadow-md transition-colors disabled:opacity-60"
+                >
+                  {isDownloading ? (
+                    <div className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    <DownloadCloud size={20} className="text-green-600" />
+                  )}
+                  <span className="font-medium text-gray-900">
+                    {isDownloading ? "Downloading..." : "Download Resume"}
+                  </span>
+                </button>
+              </div>
             </div>
           )}
 
