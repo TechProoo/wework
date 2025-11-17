@@ -19,7 +19,9 @@ export const Bookmarks: React.FC = () => {
         // Fetch bookmarks from backend and then fetch job/course details
         try {
           const bms = await bookmarksApi.getBookmarks();
-          const jobIds = bms.filter((b) => b.type === "JOB").map((b) => b.targetId);
+          const jobIds = bms
+            .filter((b) => b.type === "JOB")
+            .map((b) => b.targetId);
           const courseIds = bms
             .filter((b) => b.type === "COURSE")
             .map((b) => Number(b.targetId))
@@ -62,7 +64,9 @@ export const Bookmarks: React.FC = () => {
         // bookmarked courses stored as numeric ids in localStorage
         let courseIds: number[] = [];
         try {
-          courseIds = JSON.parse(localStorage.getItem("bookmarkedCourses") || "[]");
+          courseIds = JSON.parse(
+            localStorage.getItem("bookmarkedCourses") || "[]"
+          );
         } catch (e) {
           courseIds = [];
         }

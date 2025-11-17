@@ -48,7 +48,10 @@ export const List_card: React.FC<ListCardProps> = ({ courses }) => {
           await bookmarksApi.createBookmark("COURSE", id.toString());
         }
       } catch (e) {
-        console.warn("bookmark API call failed, falling back to localStorage", e);
+        console.warn(
+          "bookmark API call failed, falling back to localStorage",
+          e
+        );
         // fallback to localStorage below
       }
     }

@@ -10,9 +10,15 @@ export interface Bookmark {
   createdAt: string;
 }
 
-export async function createBookmark(type: BookmarkType, targetId: string): Promise<Bookmark | null> {
+export async function createBookmark(
+  type: BookmarkType,
+  targetId: string
+): Promise<Bookmark | null> {
   try {
-    const res = await httpClient.post("/students/bookmarks", { type, targetId });
+    const res = await httpClient.post("/students/bookmarks", {
+      type,
+      targetId,
+    });
     if (res.status >= 200 && res.status < 300 && res.data?.data) {
       return res.data.data as Bookmark;
     }

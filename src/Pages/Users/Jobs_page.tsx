@@ -421,20 +421,29 @@ export const JobsPage = () => {
   // Toggle bookmark for a job and persist (backend when authenticated, localStorage fallback)
   const toggleJobBookmark = async (jobId: string) => {
     // optimistic UI update
-    setDiscoverJobs((prev) => prev.map((j) => (j.id === jobId ? { ...j, isBookmarked: !j.isBookmarked } : j)));
+    setDiscoverJobs((prev) =>
+      prev.map((j) =>
+        j.id === jobId ? { ...j, isBookmarked: !j.isBookmarked } : j
+      )
+    );
 
     if (isAuthenticated) {
       try {
         // check existing bookmark for this target
         const all = await bookmarksApi.getBookmarks();
-        const existing = all.find((b) => b.type === "JOB" && b.targetId === jobId);
+        const existing = all.find(
+          (b) => b.type === "JOB" && b.targetId === jobId
+        );
         if (existing) {
           await bookmarksApi.deleteBookmark(existing.id);
         } else {
           await bookmarksApi.createBookmark("JOB", jobId);
         }
       } catch (e) {
-        console.warn("bookmark API call failed, falling back to localStorage", e);
+        console.warn(
+          "bookmark API call failed, falling back to localStorage",
+          e
+        );
       }
     }
 
