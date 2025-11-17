@@ -13,7 +13,6 @@ import {
   CheckCircle,
   Sparkles,
   Calendar,
-  MapPin,
   Mail,
   GraduationCap,
   ArrowLeft,
@@ -22,7 +21,6 @@ import {
 } from "lucide-react";
 import { jobProfileAPI } from "../../api/Students/jobProfile";
 import type { JobProfileData } from "../../api/Students/jobProfile";
-import { useAuth } from "../../contexts/AuthContext";
 
 interface JobProfile {
   id: string;
@@ -45,7 +43,6 @@ interface JobProfile {
 
 export const JobProfileViewPage = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -93,14 +90,15 @@ export const JobProfileViewPage = () => {
       setError(null);
       const response = await jobProfileAPI.get();
 
-      // Backend returns { statusCode, message, data: profile }
-      if (response.data && response.data.data) {
-        setProfile(response.data.data);
+      // API now returns the profile object (or null) directly
+      const profile = response as any;
+      if (profile) {
+        setProfile(profile);
         setEditedProfile({
-          headline: response.data.data.headline || "",
-          bio: response.data.data.bio || "",
-          resumeUrl: response.data.data.resumeUrl || "",
-          skills: response.data.data.skills || [],
+          headline: profile.headline || "",
+          bio: profile.bio || "",
+          resumeUrl: profile.resumeUrl || "",
+          skills: profile.skills || [],
         });
       } else {
         setError("No job profile found. Create one first.");
@@ -167,9 +165,9 @@ export const JobProfileViewPage = () => {
           editedProfile.skills.length > 0 ? editedProfile.skills : undefined,
       };
 
-      const response = await jobProfileAPI.createOrUpdate(profileData);
-      // Backend returns { statusCode, message, data: profile }
-      setProfile(response.data.data);
+  const profile = await jobProfileAPI.createOrUpdate(profileData);
+  // API returns the created/updated profile directly
+  setProfile(profile as any);
       setIsEditing(false);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);

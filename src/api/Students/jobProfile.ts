@@ -31,18 +31,21 @@ export const jobProfileAPI = {
   // Create or update job profile
   createOrUpdate: async (data: JobProfileData) => {
     const response = await httpClient.post("/students/job-profile", data);
-    return response.data; // Returns { statusCode, message, data: profile }
+    // Unwrap backend wrapper and return the actual profile (or null)
+    return response.data?.data;
   },
 
   // Get current user's job profile
   get: async () => {
     const response = await httpClient.get("/students/job-profile");
-    return response.data; // Returns { statusCode, message, data: profile }
+    // response.data is { statusCode, message, data }
+    // Return the inner `data` (profile object) so callers receive JobProfile | null
+    return response.data?.data;
   },
 
   // Delete job profile
   delete: async () => {
     const response = await httpClient.delete("/students/job-profile");
-    return response.data; // Returns { statusCode, message }
+    return response.data; // keep wrapper for delete (no profile data)
   },
 };

@@ -15,7 +15,7 @@ import {
   Zap,
   ArrowLeft,
 } from "lucide-react";
-import { jobProfileAPI } from "../../api/Students/jobProfile"
+import { jobProfileAPI } from "../../api/Students/jobProfile";
 import type { JobProfileData } from "../../api/Students/jobProfile";
 
 interface JobProfile {
@@ -72,13 +72,14 @@ export const BuildProfilePage = () => {
       setIsLoading(true);
       const response = await jobProfileAPI.get();
 
-      // Backend returns { statusCode, message, data: profile }
-      if (response.data && response.data.data) {
+      // API now returns the profile object (or null) directly
+      const profile = response as any;
+      if (profile) {
         setProfile({
-          headline: response.data.data.headline || "",
-          bio: response.data.data.bio || "",
-          resumeUrl: response.data.data.resumeUrl || "",
-          skills: response.data.data.skills || [],
+          headline: profile.headline || "",
+          bio: profile.bio || "",
+          resumeUrl: profile.resumeUrl || "",
+          skills: profile.skills || [],
         });
       }
     } catch (error: any) {
