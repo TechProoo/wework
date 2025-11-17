@@ -174,10 +174,28 @@ export const JobsPage = () => {
       const jobs: CompanyJob[] = await getAllJobs();
 
       // helper to parse description and metadata blocks added by backend
+      // The backend composes a free-text intro followed by metadata lines like
+      // **Department:** Engineering
+      // **Job Type:** Remote
+      // We parse line-by-line so each metadata key extracts only its own value
       const parseDescription = (desc?: string) => {
-        const text = desc || "";
-        const parts = text.split("\n\n");
-        const main = (parts[0] || "").trim();
+        const text = (desc || "").trim();
+        if (!text) return { main: "", meta: {} };
+
+        // split into lines and normalize
+        const lines = text
+          .split(/\r?\n/)
+          .map((l) => l.trim())
+          .filter((l) => l.length > 0);
+
+        // find first line that looks like metadata (starts with **...**)
+        const metaStart = lines.findIndex((l) => /^\*\*/.test(l));
+
+        const mainLines = metaStart === -1 ? lines : lines.slice(0, metaStart);
+        const metaLines = metaStart === -1 ? [] : lines.slice(metaStart);
+
+        const main = mainLines.join(" ").trim();
+
         const meta: {
           department?: string;
           jobType?: string;
@@ -186,28 +204,19 @@ export const JobsPage = () => {
           applicationDeadline?: string;
         } = {};
 
-        parts.slice(1).forEach((part) => {
-          if (part.includes("**Department:**")) {
-            meta.department = part.replace("**Department:**", "").trim();
-          }
-          if (part.includes("**Job Type:**")) {
-            meta.jobType = part.replace("**Job Type:**", "").trim();
-          }
-          if (part.includes("**Experience Level:**")) {
-            meta.experienceLevel = part
-              .replace("**Experience Level:**", "")
-              .trim();
-          }
-          if (part.includes("**Positions Available:**")) {
-            meta.positions = part
-              .replace("**Positions Available:**", "")
-              .trim();
-          }
-          if (part.includes("**Application Deadline:**")) {
-            meta.applicationDeadline = part
-              .replace("**Application Deadline:**", "")
-              .trim();
-          }
+        const metaRegex = /^\*\*(.+?)\:\*\*\s*(.*)$/;
+        metaLines.forEach((line) => {
+          const m = line.match(metaRegex);
+          if (!m) return;
+          const key = m[1].toLowerCase().trim();
+          const value = m[2].trim();
+          if (key.includes("department")) meta.department = value;
+          if (key.includes("job type") || key.includes("jobtype"))
+            meta.jobType = value;
+          if (key.includes("experience")) meta.experienceLevel = value;
+          if (key.includes("positions")) meta.positions = value;
+          if (key.includes("application deadline"))
+            meta.applicationDeadline = value;
         });
 
         return { main, meta };
