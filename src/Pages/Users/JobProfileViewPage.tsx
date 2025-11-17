@@ -212,7 +212,9 @@ export const JobProfileViewPage = () => {
       basename = basename.split("?")[0];
       if (!basename.includes(".")) {
         // fallback to student name
-        const name = `${profile.student?.firstName || "resume"}_${profile.student?.lastName || ""}`;
+        const name = `${profile.student?.firstName || "resume"}_${
+          profile.student?.lastName || ""
+        }`;
         basename = `${name}.pdf`;
       }
 

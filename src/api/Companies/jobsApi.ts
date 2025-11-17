@@ -86,7 +86,7 @@ export async function getAllJobs(filters?: {
     if (filters?.status) params.status = filters.status;
     if (filters?.remote !== undefined) params.remote = String(filters.remote);
 
-    const response = await httpClient.get('/companies/jobs/all', { params });
+    const response = await httpClient.get("/companies/jobs/all", { params });
 
     if (response.status === 200 && response.data?.data) {
       return response.data.data;
@@ -94,7 +94,7 @@ export async function getAllJobs(filters?: {
 
     return [];
   } catch (error: any) {
-    console.error('Failed to fetch all jobs:', error);
+    console.error("Failed to fetch all jobs:", error);
     return [];
   }
 }

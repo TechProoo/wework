@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { Bookmark, Clock, Users, CheckCircle, Star } from "lucide-react";
+import * as bookmarksApi from "../../api/Students/bookmarksApi";
 // Accept courses as a prop
 
 type Course = {
@@ -26,8 +27,45 @@ export const List_card: React.FC<ListCardProps> = ({ courses }) => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const handleBookmark = (id: number) => {
-    setBookmarked((prev) => ({ ...prev, [id]: !prev[id] }));
+  const handleBookmark = async (id: number) => {
+    // optimistic UI toggle
+    setBookmarked((prev) => {
+      const next = { ...prev, [id]: !prev[id] };
+      return next;
+    });
+
+    if (isAuthenticated) {
+      try {
+        // Check if bookmark exists for this course
+        const all = await bookmarksApi.getBookmarks();
+        const existing = all.find(
+          (b) => b.type === "COURSE" && b.targetId === id.toString()
+        );
+
+        if (existing) {
+          await bookmarksApi.deleteBookmark(existing.id);
+        } else {
+          await bookmarksApi.createBookmark("COURSE", id.toString());
+        }
+      } catch (e) {
+        console.warn("bookmark API call failed, falling back to localStorage", e);
+        // fallback to localStorage below
+      }
+    }
+
+    // persist bookmarked course ids to localStorage for unauthenticated or fallback
+    setBookmarked((prev) => {
+      const ids = Object.keys(prev)
+        .filter((k) => prev[Number(k)])
+        .map((k) => Number(k));
+      try {
+        localStorage.setItem("bookmarkedCourses", JSON.stringify(ids));
+      } catch (e) {
+        console.warn("Failed to persist bookmarked courses", e);
+      }
+      return prev;
+    });
+
     console.log("bookmark toggled for course:", id);
   };
 

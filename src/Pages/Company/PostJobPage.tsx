@@ -74,9 +74,9 @@ const PostJobPage = () => {
       const job = await getJobById(id);
       if (job) {
         // Parse the description to extract embedded data
-        const descriptionParts = job.description.split('\n\n');
+        const descriptionParts = job.description.split("\n\n");
         const mainDescription = descriptionParts[0];
-        
+
         // Extract department, type, etc. from description
         let department = "";
         let type: JobFormData["type"] = "";
@@ -85,26 +85,26 @@ const PostJobPage = () => {
         let deadline = "";
         let benefits = "";
 
-        descriptionParts.forEach(part => {
-          if (part.includes('**Department:**')) {
-            department = part.replace('**Department:**', '').trim();
+        descriptionParts.forEach((part) => {
+          if (part.includes("**Department:**")) {
+            department = part.replace("**Department:**", "").trim();
           }
-          if (part.includes('**Job Type:**')) {
-            const typeValue = part.replace('**Job Type:**', '').trim();
+          if (part.includes("**Job Type:**")) {
+            const typeValue = part.replace("**Job Type:**", "").trim();
             type = typeValue as JobFormData["type"];
           }
-          if (part.includes('**Experience Level:**')) {
-            const expValue = part.replace('**Experience Level:**', '').trim();
+          if (part.includes("**Experience Level:**")) {
+            const expValue = part.replace("**Experience Level:**", "").trim();
             experienceLevel = expValue as JobFormData["experienceLevel"];
           }
-          if (part.includes('**Positions Available:**')) {
-            positions = part.replace('**Positions Available:**', '').trim();
+          if (part.includes("**Positions Available:**")) {
+            positions = part.replace("**Positions Available:**", "").trim();
           }
-          if (part.includes('**Application Deadline:**')) {
-            deadline = part.replace('**Application Deadline:**', '').trim();
+          if (part.includes("**Application Deadline:**")) {
+            deadline = part.replace("**Application Deadline:**", "").trim();
           }
-          if (part.includes('**Benefits:**')) {
-            benefits = part.split('**Benefits:**\n')[1] || "";
+          if (part.includes("**Benefits:**")) {
+            benefits = part.split("**Benefits:**\n")[1] || "";
           }
         });
 
@@ -113,13 +113,13 @@ const PostJobPage = () => {
         const requirements: string[] = [];
         const skills: string[] = [];
 
-        job.requirements.forEach(req => {
-          if (req.startsWith('Responsibility:')) {
-            responsibilities.push(req.replace('Responsibility:', '').trim());
-          } else if (req.startsWith('Requirement:')) {
-            requirements.push(req.replace('Requirement:', '').trim());
-          } else if (req.startsWith('Required Skill:')) {
-            skills.push(req.replace('Required Skill:', '').trim());
+        job.requirements.forEach((req) => {
+          if (req.startsWith("Responsibility:")) {
+            responsibilities.push(req.replace("Responsibility:", "").trim());
+          } else if (req.startsWith("Requirement:")) {
+            requirements.push(req.replace("Requirement:", "").trim());
+          } else if (req.startsWith("Required Skill:")) {
+            skills.push(req.replace("Required Skill:", "").trim());
           }
         });
 
@@ -129,13 +129,13 @@ const PostJobPage = () => {
         let currency = "USD";
 
         if (job.salaryRange) {
-          const salaryParts = job.salaryRange.split(' ');
+          const salaryParts = job.salaryRange.split(" ");
           if (salaryParts.length >= 3) {
             currency = salaryParts[0];
-            const minMax = salaryParts.slice(1).join(' ').split('-');
+            const minMax = salaryParts.slice(1).join(" ").split("-");
             if (minMax.length === 2) {
-              salaryMin = minMax[0].trim().replace(/,/g, '');
-              salaryMax = minMax[1].trim().replace(/,/g, '');
+              salaryMin = minMax[0].trim().replace(/,/g, "");
+              salaryMax = minMax[1].trim().replace(/,/g, "");
             }
           }
         }
@@ -150,10 +150,10 @@ const PostJobPage = () => {
           salaryMax,
           currency,
           description: mainDescription,
-          responsibilities: responsibilities.join('\n'),
-          requirements: requirements.join('\n'),
+          responsibilities: responsibilities.join("\n"),
+          requirements: requirements.join("\n"),
           benefits,
-          skills: skills.join(', '),
+          skills: skills.join(", "),
           deadline,
           positions,
         });
@@ -295,7 +295,10 @@ const PostJobPage = () => {
       navigate("/company/dashboard");
     } catch (error) {
       // Error handling is done in the API function
-      console.error(`Error ${isEditMode ? 'updating' : 'creating'} job:`, error);
+      console.error(
+        `Error ${isEditMode ? "updating" : "creating"} job:`,
+        error
+      );
     }
   };
 
@@ -889,7 +892,9 @@ const PostJobPage = () => {
             {isEditMode ? "Edit Job Posting" : "Post a New Job"}
           </h1>
           <p className="text-gray-600 mt-2">
-            {isEditMode ? "Update the job details" : "Fill in the details to create a job posting"}
+            {isEditMode
+              ? "Update the job details"
+              : "Fill in the details to create a job posting"}
           </p>
         </div>
 
@@ -909,47 +914,59 @@ const PostJobPage = () => {
         {/* Form */}
         {!isLoading && (
           <div className="bg-white rounded-2xl shadow-lg p-8">
-            <form onSubmit={handleSubmit}>
-            {currentStep === 1 && renderStep1()}
-            {currentStep === 2 && renderStep2()}
-            {currentStep === 3 && renderStep3()}
-            {currentStep === 4 && renderStep4()}
+            <form
+              onSubmit={handleSubmit}
+              onKeyDown={(e) => {
+                // Prevent form submission on Enter key, except for the submit button
+                if (
+                  e.key === "Enter" &&
+                  e.target instanceof HTMLElement &&
+                  e.target.tagName !== "TEXTAREA"
+                ) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              {currentStep === 1 && renderStep1()}
+              {currentStep === 2 && renderStep2()}
+              {currentStep === 3 && renderStep3()}
+              {currentStep === 4 && renderStep4()}
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
-              <button
-                type="button"
-                onClick={handlePrevious}
-                disabled={currentStep === 1}
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
-                  currentStep === 1
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-              >
-                Previous
-              </button>
-
-              {currentStep < 4 ? (
+              {/* Navigation Buttons */}
+              <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
                 <button
                   type="button"
-                  onClick={handleNext}
-                  className="px-6 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl font-medium hover:shadow-lg transition-all"
+                  onClick={handlePrevious}
+                  disabled={currentStep === 1}
+                  className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                    currentStep === 1
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  }`}
                 >
-                  Next Step
+                  Previous
                 </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="px-8 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl font-medium hover:shadow-lg transition-all flex items-center gap-2"
-                >
-                  <CheckCircle size={20} />
-                  {isEditMode ? "Update Job" : "Post Job"}
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
+
+                {currentStep < 4 ? (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="px-6 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl font-medium hover:shadow-lg transition-all"
+                  >
+                    Next Step
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="px-8 py-3 bg-linear-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white rounded-xl font-medium hover:shadow-lg transition-all flex items-center gap-2"
+                  >
+                    <CheckCircle size={20} />
+                    {isEditMode ? "Update Job" : "Post Job"}
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
         )}
       </div>
     </div>

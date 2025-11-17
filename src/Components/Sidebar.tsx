@@ -6,7 +6,6 @@ import {
   User,
   BookOpen,
   Briefcase,
-  Bell,
   Settings,
   LogOut,
   Menu,
@@ -14,7 +13,7 @@ import {
   Building,
   Users,
   Calendar,
-  MessageCircle,
+  Bookmark,
   BarChart4Icon,
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -121,6 +120,12 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             path: "/dashboard/jobs",
           },
           {
+            id: "bookmarks",
+            label: "Bookmarks",
+            icon: <Bookmark size={20} />,
+            path: "/dashboard/bookmarks",
+          },
+          {
             id: "consultations",
             label: "Consultations",
             icon: <Calendar size={20} />,
@@ -147,18 +152,18 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             path: "/dashboard/partnerships",
           },
         ]),
-    {
-      id: "notifications",
-      label: "Notifications",
-      icon: <Bell size={20} />,
-      path: "/dashboard/notifications",
-    },
-    {
-      id: "messages",
-      label: "Messages",
-      icon: <MessageCircle size={20} />,
-      path: "/dashboard/messages",
-    },
+    // {
+    //   id: "notifications",
+    //   label: "Notifications",
+    //   icon: <Bell size={20} />,
+    //   path: "/dashboard/notifications",
+    // },
+    // {
+    //   id: "messages",
+    //   label: "Messages",
+    //   icon: <MessageCircle size={20} />,
+    //   path: "/dashboard/messages",
+    // },
     {
       id: "profile",
       label: "Profile",
@@ -259,7 +264,15 @@ export const Sidebar: React.FC<SidebarProps> = () => {
             key={item.id}
             to={item.path}
             end={item.id === "dashboard"}
-            onClick={() => setIsMobileOpen(false)}
+            onClick={() => {
+              setIsMobileOpen(false);
+              // Ensure sidebar is collapsed on navigation (desktop)
+              if (!isMobile && !isCollapsed) {
+                setIsCollapsed(true);
+                document.body.classList.remove("sidebar-expanded");
+                document.dispatchEvent(new CustomEvent("sidebar-collapsed"));
+              }
+            }}
             className={({ isActive }) => {
               return `
                 flex items-center ${

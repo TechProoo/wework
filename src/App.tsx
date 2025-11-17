@@ -16,6 +16,7 @@ import { PublicOnlyRoute } from "./Components/PublicOnlyRoute";
 import { CompanyProtectedRoute } from "./Components/CompanyProtectedRoute";
 import { CoursesPage } from "./Pages/Users/Courses_page";
 import { JobsPage } from "./Pages/Users/Jobs_page";
+import { Bookmarks } from "./Pages/Users/Bookmarks";
 import { BuildProfilePage } from "./Pages/Users/BuildProfilePage";
 import { JobProfileViewPage } from "./Pages/Users/JobProfileViewPage";
 import ConsultationPage from "./Pages/Users/ConsultationPage";
@@ -97,6 +98,14 @@ function App() {
           element={
             <ProtectedRoute>
               <JobsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/bookmarks"
+          element={
+            <ProtectedRoute>
+              <Bookmarks />
             </ProtectedRoute>
           }
         />

@@ -11,10 +11,14 @@ import {
   Smartphone,
   ArrowRight,
   ArrowLeft,
-  Award,
   Star,
   BookOpen,
-  TrendingUp,
+  Sparkles,
+  Zap,
+  Brain,
+  Rocket,
+  Trophy,
+  ChevronRight,
 } from "lucide-react";
 
 interface Question {
@@ -234,268 +238,643 @@ const SkillAssessmentPage = () => {
   if (showResults) {
     return (
       <DashboardLayout>
-        <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
-          <div className="max-w-4xl mx-auto py-8 px-4">
-            {/* Results Header */}
-            <div className="bg-white rounded-2xl shadow-sm p-8 mb-6 text-center">
-              <div className="w-20 h-20 mx-auto mb-6 bg-linear-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                <Award size={40} className="text-white" />
+        <div className="min-h-screen bg-gradient-to-br from-[var(--color-light)] via-purple-50 to-blue-50 relative overflow-hidden">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--color-primary)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+            <div className="absolute top-40 right-10 w-72 h-72 bg-[var(--color-accent)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-32 left-1/2 w-72 h-72 bg-[var(--color-forest)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto py-8 px-4 relative z-10">
+            {/* Celebration Header */}
+            <div className="text-center mb-12 animate-fade-in-up">
+              <div className="relative inline-block mb-6">
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-full blur-2xl opacity-30 animate-pulse"></div>
+                <div className="relative w-32 h-32 mx-auto bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-full flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-300">
+                  <Trophy size={64} className="text-white drop-shadow-lg" />
+                  <div className="absolute -top-2 -right-2 w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                    <Sparkles size={24} className="text-white" />
+                  </div>
+                </div>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                Assessment Complete!
+
+              <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] mb-4">
+                Assessment Complete! 🎉
               </h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Based on your responses, here's your personalized skill
-                assessment and recommended learning path.
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Fantastic work! Here's your personalized skill profile and
+                recommended learning journey
               </p>
+
+              {/* Stats Summary */}
+              <div className="flex justify-center gap-8 mt-8 flex-wrap">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[var(--color-primary)] mb-1">
+                    {results.filter((r) => r.score > 0).length}
+                  </div>
+                  <div className="text-sm text-gray-600">Skills Assessed</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[var(--color-forest)] mb-1">
+                    {Math.round(
+                      results.reduce((acc, r) => acc + r.score, 0) /
+                        results.length
+                    )}
+                    %
+                  </div>
+                  <div className="text-sm text-gray-600">Avg. Proficiency</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[var(--color-accent)] mb-1">
+                    {results.filter((r) => r.level === "Advanced").length +
+                      results.filter((r) => r.level === "Intermediate").length}
+                  </div>
+                  <div className="text-sm text-gray-600">Strong Areas</div>
+                </div>
+              </div>
             </div>
 
-            {/* Skill Results */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              {results.map((result) => (
+            {/* Skill Results Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {results.map((result, index) => (
                 <div
                   key={result.category}
-                  className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
+                  className="group bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 animate-fade-in-up relative overflow-hidden"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div
-                      className={`w-12 h-12 bg-${result.color}-500 rounded-xl flex items-center justify-center`}
-                    >
-                      <result.icon size={24} className="text-white" />
+                  {/* Gradient Overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br from-${result.color}-500/5 to-${result.color}-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  ></div>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`relative w-16 h-16 bg-gradient-to-br from-${result.color}-400 to-${result.color}-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                        >
+                          <result.icon
+                            size={32}
+                            className="text-white drop-shadow"
+                          />
+                          <div className="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
+                            <span className="text-xs font-bold text-gray-700">
+                              {result.level[0]}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Level Badge */}
+                      <div
+                        className={`px-3 py-1.5 rounded-full text-xs font-bold ${
+                          result.level === "Advanced"
+                            ? "bg-gradient-to-r from-green-400 to-emerald-500 text-white"
+                            : result.level === "Intermediate"
+                            ? "bg-gradient-to-r from-blue-400 to-blue-500 text-white"
+                            : "bg-gradient-to-r from-gray-400 to-gray-500 text-white"
+                        } shadow-md`}
+                      >
+                        {result.level}
+                      </div>
                     </div>
+
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
                         {result.category}
                       </h3>
-                      <p className="text-sm text-gray-600">
-                        Current Level: {result.level}
+                      <p className="text-sm text-gray-600 mb-4">
+                        {result.score === 0
+                          ? "Not assessed yet"
+                          : `You're ${result.level.toLowerCase()} in this skill`}
                       </p>
                     </div>
-                  </div>
 
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-gray-600">Progress</span>
-                      <span className="font-semibold text-gray-900">
-                        {result.score}%
+                    {/* Progress Section */}
+                    <div className="mb-6">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-sm font-semibold text-gray-700">
+                          Proficiency
+                        </span>
+                        <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                          {result.score}%
+                        </span>
+                      </div>
+
+                      {/* Animated Progress Bar */}
+                      <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+                        <div
+                          className={`absolute inset-y-0 left-0 bg-gradient-to-r from-${result.color}-400 via-${result.color}-500 to-${result.color}-600 rounded-full transition-all duration-1000 ease-out shadow-lg`}
+                          style={{
+                            width: `${result.score}%`,
+                            animation: "shimmer 2s infinite",
+                          }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 animate-shimmer"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Star Rating */}
+                    <div className="flex items-center gap-1.5 mb-6">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          size={20}
+                          className={`transition-all duration-300 ${
+                            i < Math.floor(result.score / 20)
+                              ? `text-yellow-400 fill-yellow-400 drop-shadow-sm`
+                              : "text-gray-300"
+                          }`}
+                          style={{ transitionDelay: `${i * 50}ms` }}
+                        />
+                      ))}
+                      <span className="ml-2 text-sm font-semibold text-gray-600">
+                        {Math.floor(result.score / 20)}/5
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
-                      <div
-                        className={`bg-${result.color}-500 h-3 rounded-full transition-all duration-1000`}
-                        style={{ width: `${result.score}%` }}
-                      ></div>
-                    </div>
-                  </div>
 
-                  <div className="flex items-center gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className={`${
-                          i < Math.floor(result.score / 20)
-                            ? `text-${result.color}-500 fill-current`
-                            : "text-gray-300"
-                        }`}
+                    {/* Action Button */}
+                    <button
+                      onClick={() =>
+                        navigate(
+                          `/dashboard/category/${result.category
+                            .toLowerCase()
+                            .replace(/[^a-z]/g, "-")}`
+                        )
+                      }
+                      className={`w-full bg-gradient-to-r from-${result.color}-500 to-${result.color}-600 text-white py-3.5 px-4 rounded-xl font-bold hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group`}
+                    >
+                      <BookOpen size={18} />
+                      <span>Explore Courses</span>
+                      <ChevronRight
+                        size={18}
+                        className="group-hover:translate-x-1 transition-transform"
                       />
-                    ))}
+                    </button>
                   </div>
-
-                  <button
-                    onClick={() =>
-                      navigate(
-                        `/dashboard/category/${result.category
-                          .toLowerCase()
-                          .replace(/[^a-z]/g, "-")}`
-                      )
-                    }
-                    className={`w-full bg-${result.color}-500 text-white py-2 px-4 rounded-xl font-semibold hover:bg-${result.color}-600 transition-colors duration-300 flex items-center justify-center gap-2`}
-                  >
-                    <BookOpen size={16} />
-                    View Courses
-                  </button>
                 </div>
               ))}
             </div>
 
-            {/* Recommended Actions */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                <Target size={24} />
-                Recommended Next Steps
-              </h3>
+            {/* Recommended Next Steps */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/50 mb-8">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center shadow-lg">
+                  <Rocket size={24} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">
+                    Your Learning Journey Starts Here
+                  </h3>
+                  <p className="text-gray-600">
+                    Choose your next step and start building amazing skills
+                  </p>
+                </div>
+              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
-                  <BookOpen size={20} className="text-blue-600 mb-2" />
-                  <h4 className="font-semibold text-gray-900 mb-1">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                  className="group relative p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl border-2 border-blue-200 hover:border-[var(--color-primary)] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+                  onClick={() => navigate("/dashboard/courses")}
+                >
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-[var(--color-primary)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <ArrowRight size={20} className="text-white" />
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-forest)] rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                    <BookOpen size={28} className="text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">
                     Start Learning
                   </h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Begin with beginner courses in your interest area
+                  <p className="text-sm text-gray-700 mb-4">
+                    Begin with courses tailored to your skill level and
+                    interests
                   </p>
-                  <button
-                    onClick={() => navigate("/dashboard/courses")}
-                    className="text-blue-600 text-sm font-semibold hover:text-blue-700"
-                  >
-                    Browse Courses →
-                  </button>
+                  <div className="flex items-center text-[var(--color-primary)] font-semibold text-sm group-hover:gap-2 transition-all">
+                    <span>Browse Courses</span>
+                    <ChevronRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
                 </div>
 
-                <div className="p-4 bg-green-50 rounded-xl border border-green-200">
-                  <TrendingUp size={20} className="text-green-600 mb-2" />
-                  <h4 className="font-semibold text-gray-900 mb-1">
-                    Set Goals
+                <div
+                  className="group relative p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border-2 border-green-200 hover:border-[var(--color-forest)] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+                  onClick={() => navigate("/dashboard/goals")}
+                >
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-[var(--color-forest)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <ArrowRight size={20} className="text-white" />
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-forest)] to-[var(--color-accent)] rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                    <Target size={28} className="text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">
+                    Set Your Goals
                   </h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Create learning goals based on your results
+                  <p className="text-sm text-gray-700 mb-4">
+                    Define your learning objectives and track your progress
                   </p>
-                  <button
-                    onClick={() => navigate("/dashboard/goals")}
-                    className="text-green-600 text-sm font-semibold hover:text-green-700"
-                  >
-                    Set Goals →
-                  </button>
+                  <div className="flex items-center text-[var(--color-forest)] font-semibold text-sm group-hover:gap-2 transition-all">
+                    <span>Create Goals</span>
+                    <ChevronRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
                 </div>
 
-                <div className="p-4 bg-purple-50 rounded-xl border border-purple-200">
-                  <CheckCircle size={20} className="text-purple-600 mb-2" />
-                  <h4 className="font-semibold text-gray-900 mb-1">
-                    Get Guidance
+                <div
+                  className="group relative p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl border-2 border-purple-200 hover:border-[var(--color-accent)] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+                  onClick={() => navigate("/dashboard/consultations")}
+                >
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-[var(--color-accent)] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <ArrowRight size={20} className="text-white" />
+                  </div>
+                  <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform">
+                    <Brain size={28} className="text-white" />
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-2">
+                    Get Expert Guidance
                   </h4>
-                  <p className="text-sm text-gray-600 mb-3">
-                    Book a consultation for personalized advice
+                  <p className="text-sm text-gray-700 mb-4">
+                    Book personalized consultations with industry professionals
                   </p>
-                  <button
-                    onClick={() => navigate("/dashboard/consultations")}
-                    className="text-purple-600 text-sm font-semibold hover:text-purple-700"
-                  >
-                    Book Session →
-                  </button>
+                  <div className="flex items-center text-[var(--color-accent)] font-semibold text-sm group-hover:gap-2 transition-all">
+                    <span>Book Session</span>
+                    <ChevronRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
                 onClick={restartAssessment}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-colors"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-700 rounded-2xl font-bold hover:bg-gray-50 hover:shadow-xl transition-all duration-300 border-2 border-gray-200 hover:border-gray-300"
               >
+                <ArrowLeft
+                  size={20}
+                  className="group-hover:-translate-x-1 transition-transform"
+                />
                 Retake Assessment
               </button>
               <button
                 onClick={() => navigate("/dashboard/courses")}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
+                className="group flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] text-white rounded-2xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300"
               >
-                <BookOpen size={20} />
-                Explore Courses
-                <ArrowRight size={20} />
+                <Zap
+                  size={20}
+                  className="group-hover:rotate-12 transition-transform"
+                />
+                Start Learning Now
+                <ArrowRight
+                  size={20}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
               </button>
             </div>
           </div>
         </div>
+
+        {/* Add custom animations */}
+        <style>{`
+          @keyframes fade-in-up {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -50px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+          }
+          
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          
+          .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+          }
+          
+          .animate-blob {
+            animation: blob 7s infinite;
+          }
+          
+          .animation-delay-2000 {
+            animation-delay: 2s;
+          }
+          
+          .animation-delay-4000 {
+            animation-delay: 4s;
+          }
+          
+          .animate-shimmer {
+            animation: shimmer 2s infinite;
+          }
+        `}</style>
       </DashboardLayout>
     );
   }
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50">
-        <div className="max-w-2xl mx-auto py-8 px-4">
-          {/* Header */}
-          <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Skill Assessment
-              </h1>
-              <div className="text-sm text-gray-600">
-                {currentStep + 1} of {questions.length}
+      <div className="min-h-screen bg-gradient-to-br from-[var(--color-light)] via-purple-50 to-blue-50 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-64 h-64 bg-[var(--color-primary)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+          <div className="absolute top-40 right-10 w-64 h-64 bg-[var(--color-accent)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-20 left-1/3 w-64 h-64 bg-[var(--color-forest)]/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div className="max-w-3xl mx-auto py-8 px-4 relative z-10">
+          {/* Enhanced Header Card */}
+          <div className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8 border border-white/50 animate-fade-in-up">
+            {/* Top Section */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-2xl flex items-center justify-center shadow-xl">
+                  <Brain size={28} className="text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-black text-gray-900">
+                    Skill Assessment
+                  </h1>
+                  <p className="text-sm text-gray-600">
+                    Discover your learning path
+                  </p>
+                </div>
+              </div>
+
+              {/* Step Counter */}
+              <div className="text-center">
+                <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]">
+                  {currentStep + 1}
+                </div>
+                <div className="text-xs text-gray-500 font-semibold">
+                  of {questions.length}
+                </div>
               </div>
             </div>
 
-            {/* Progress Bar */}
-            <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
-              <div
-                className="bg-linear-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
-              ></div>
+            {/* Enhanced Progress Bar */}
+            <div className="relative mb-6">
+              <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+                <div
+                  className="h-full bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] rounded-full transition-all duration-700 ease-out relative overflow-hidden"
+                  style={{ width: `${progress}%` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0 animate-shimmer"></div>
+                </div>
+              </div>
+              <div className="flex justify-between mt-2">
+                <span className="text-xs font-semibold text-[var(--color-primary)]">
+                  {Math.round(progress)}% Complete
+                </span>
+                <span className="text-xs font-semibold text-gray-600">
+                  {questions.length - currentStep - 1} remaining
+                </span>
+              </div>
             </div>
 
-            <p className="text-gray-600">
-              Answer honestly to get personalized course recommendations that
-              match your skill level and interests.
-            </p>
+            {/* Motivational Text */}
+            <div className="flex items-center gap-2 p-4 bg-gradient-to-r from-[var(--color-light)] to-purple-50 rounded-2xl border border-[var(--color-primary)]/20">
+              <Sparkles
+                size={18}
+                className="text-[var(--color-primary)] flex-shrink-0"
+              />
+              <p className="text-sm text-gray-700 font-medium">
+                {currentStep < 3
+                  ? "Answer honestly to get personalized course recommendations tailored to you!"
+                  : currentStep < 7
+                  ? "Great progress! Your responses help us understand your learning style better."
+                  : "Almost there! Just a few more questions to complete your profile."}
+              </p>
+            </div>
           </div>
 
-          {/* Question Card */}
+          {/* Question Card with Enhanced Design */}
           {currentQuestion && (
-            <div className="bg-white rounded-2xl shadow-sm p-8 mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {currentQuestion.question}
-              </h2>
+            <div
+              className="bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8 border border-white/50 animate-fade-in-up"
+              style={{ animationDelay: "100ms" }}
+            >
+              {/* Question Header */}
+              <div className="mb-8">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                    <span className="text-white font-bold text-lg">
+                      {currentStep + 1}
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold text-gray-900 leading-tight">
+                      {currentQuestion.question}
+                    </h2>
+                    {currentQuestion.category && (
+                      <span className="inline-block mt-2 px-3 py-1 bg-gradient-to-r from-[var(--color-light)] to-purple-100 text-[var(--color-primary)] text-xs font-semibold rounded-full">
+                        {currentQuestion.category}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
 
+              {/* Answer Options */}
               <div className="space-y-3">
-                {currentQuestion.options?.map((option, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleAnswer(option)}
-                    className={`w-full p-4 text-left rounded-xl border-2 transition-all duration-300 ${
-                      answers[currentQuestion.id] === option
-                        ? "border-blue-500 bg-blue-50 text-blue-700"
-                        : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`w-4 h-4 rounded-full border-2 ${
-                          answers[currentQuestion.id] === option
-                            ? "border-blue-500 bg-blue-500"
-                            : "border-gray-300"
-                        }`}
-                      >
-                        {answers[currentQuestion.id] === option && (
-                          <div className="w-full h-full rounded-full bg-white scale-50"></div>
-                        )}
+                {currentQuestion.options?.map((option, index) => {
+                  const isSelected = answers[currentQuestion.id] === option;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => handleAnswer(option)}
+                      className={`group w-full p-5 text-left rounded-2xl border-2 transition-all duration-300 relative overflow-hidden ${
+                        isSelected
+                          ? "border-[var(--color-primary)] bg-gradient-to-r from-[var(--color-light)] to-purple-50 shadow-xl scale-[1.02]"
+                          : "border-gray-200 bg-white hover:border-[var(--color-primary)]/50 hover:bg-[var(--color-light)]/50 hover:shadow-lg hover:scale-[1.01]"
+                      }`}
+                      style={{ animationDelay: `${index * 50}ms` }}
+                    >
+                      {/* Selection Indicator */}
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`relative w-6 h-6 rounded-full border-2 flex-shrink-0 transition-all duration-300 ${
+                            isSelected
+                              ? "border-[var(--color-primary)] bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] shadow-lg"
+                              : "border-gray-300 group-hover:border-[var(--color-primary)]/50"
+                          }`}
+                        >
+                          {isSelected && (
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <CheckCircle size={24} className="text-white" />
+                            </div>
+                          )}
+                          {!isSelected && (
+                            <div className="absolute inset-1 bg-white rounded-full group-hover:bg-[var(--color-light)] transition-colors"></div>
+                          )}
+                        </div>
+
+                        <span
+                          className={`font-semibold text-base transition-colors ${
+                            isSelected
+                              ? "text-[var(--color-primary)]"
+                              : "text-gray-700 group-hover:text-[var(--color-primary)]"
+                          }`}
+                        >
+                          {option}
+                        </span>
                       </div>
-                      <span className="font-medium">{option}</span>
-                    </div>
-                  </button>
-                ))}
+
+                      {/* Hover Effect */}
+                      {isSelected && (
+                        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/5 to-[var(--color-accent)]/5 rounded-2xl"></div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Helper Text */}
+              <div className="mt-6 flex items-center gap-2 text-sm text-gray-500">
+                <Zap size={16} className="text-[var(--color-accent)]" />
+                <span>
+                  Select the option that best describes your experience
+                </span>
               </div>
             </div>
           )}
 
-          {/* Navigation */}
-          <div className="flex justify-between">
+          {/* Enhanced Navigation */}
+          <div className="flex justify-between items-center gap-4">
             <button
               onClick={prevQuestion}
               disabled={currentStep === 0}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-colors ${
+              className={`group flex items-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all duration-300 ${
                 currentStep === 0
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-white text-gray-700 hover:bg-gray-50 hover:shadow-xl border-2 border-gray-200 hover:border-gray-300"
               }`}
             >
-              <ArrowLeft size={20} />
-              Previous
+              <ArrowLeft
+                size={20}
+                className={
+                  currentStep !== 0
+                    ? "group-hover:-translate-x-1 transition-transform"
+                    : ""
+                }
+              />
+              <span>Previous</span>
             </button>
 
             <button
               onClick={nextQuestion}
               disabled={!hasAnswer}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              className={`group flex items-center gap-3 px-8 py-4 rounded-2xl font-bold transition-all duration-300 ${
                 !hasAnswer
                   ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-linear-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg"
+                  : "bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-forest)] to-[var(--color-accent)] text-white hover:shadow-2xl hover:scale-105"
               }`}
             >
-              {currentStep === questions.length - 1 ? "View Results" : "Next"}
-              <ArrowRight size={20} />
+              <span>
+                {currentStep === questions.length - 1 ? (
+                  <span className="flex items-center gap-2">
+                    <Trophy size={20} />
+                    View Results
+                  </span>
+                ) : (
+                  "Next Question"
+                )}
+              </span>
+              <ArrowRight
+                size={20}
+                className={
+                  hasAnswer
+                    ? "group-hover:translate-x-1 transition-transform"
+                    : ""
+                }
+              />
             </button>
           </div>
+
+          {/* Progress Dots */}
+          <div className="flex justify-center gap-2 mt-8">
+            {questions.map((_, index) => (
+              <div
+                key={index}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentStep
+                    ? "w-8 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)]"
+                    : index < currentStep
+                    ? "w-2 bg-green-500"
+                    : "w-2 bg-gray-300"
+                }`}
+              ></div>
+            ))}
+          </div>
         </div>
+
+        {/* Add custom animations */}
+        <style>{`
+          @keyframes fade-in-up {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes blob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -50px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(50px, 50px) scale(1.05); }
+          }
+          
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          
+          .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+          }
+          
+          .animate-blob {
+            animation: blob 7s infinite;
+          }
+          
+          .animation-delay-2000 {
+            animation-delay: 2s;
+          }
+          
+          .animation-delay-4000 {
+            animation-delay: 4s;
+          }
+          
+          .animate-shimmer {
+            animation: shimmer 2s infinite;
+          }
+        `}</style>
       </div>
     </DashboardLayout>
   );

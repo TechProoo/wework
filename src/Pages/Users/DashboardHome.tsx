@@ -9,7 +9,6 @@ import {
   ChevronRight,
   BookOpen,
   Target,
-  BarChart3,
   Home,
 } from "lucide-react";
 
@@ -89,9 +88,8 @@ export const DashboardHome = () => {
   // New user data - empty/minimal state
   const categories = [
     { name: "UI/UX Design", progress: "0/0", color: "bg-purple-500" },
-    { name: "Branding", progress: "0/0", color: "bg-blue-500" },
-    { name: "Front End", progress: "0/0", color: "bg-green-500" },
-    { name: "Marketing", progress: "0/0", color: "bg-orange-500" },
+    { name: "Web Developement", progress: "0/0", color: "bg-blue-500" },
+    { name: "Data Science", progress: "0/0", color: "bg-green-500" },
   ];
 
   const continueWatching: Course[] = [];
@@ -197,13 +195,13 @@ export const DashboardHome = () => {
                     className="group-hover:translate-x-1 transition-transform"
                   />
                 </button>
-                <button
+                {/* <button
                   onClick={() => navigate("/dashboard/community")}
                   className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl font-bold text-sm lg:text-base hover:bg-white/30 transition-all duration-300 border-2 border-white/30 hover:border-white/50 flex items-center justify-center gap-2"
                 >
                   <Users size={20} />
                   <span>Join Community</span>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -213,7 +211,7 @@ export const DashboardHome = () => {
             <div className="flex items-center justify-between mb-6">
               <div>
                 <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                  Explore Categories
+                  Explore Courses
                 </h2>
                 <p className="text-gray-600">
                   Discover your passion and build expertise in trending tech
@@ -222,7 +220,7 @@ export const DashboardHome = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
               {categories.map((category, index) => (
                 <button
                   key={index}
@@ -326,13 +324,13 @@ export const DashboardHome = () => {
                         className="group-hover:translate-x-1 transition-transform"
                       />
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => navigate("/dashboard/goals")}
                       className="bg-white text-[var(--color-primary)] px-8 py-4 rounded-2xl font-bold text-base hover:bg-[var(--color-light)] transition-all duration-300 border-2 border-[var(--color-slate)]/30 hover:border-[var(--color-primary)]/50 flex items-center justify-center gap-2"
                     >
                       <Target size={18} />
                       <span>Set Learning Goals</span>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -350,7 +348,7 @@ export const DashboardHome = () => {
             </h2>
 
             {upcomingTutorials.length === 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                 <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
                   <div className="absolute inset-0 bg-linear-to-br from-[var(--color-light)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className="relative z-10">
@@ -408,7 +406,7 @@ export const DashboardHome = () => {
               Perfect Tutorials to Get Started
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
               {/* Web Development Tutorial */}
               <div className="group bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[var(--color-primary)]/30 transform hover:-translate-y-1 relative overflow-hidden">
                 <div className="absolute inset-0 bg-linear-to-br from-[var(--color-primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -503,7 +501,7 @@ export const DashboardHome = () => {
         : "md:sticky top-10"
     }`}
         >
-          <div className="lg:sticky lg:top-10 ">
+          <div className="md:sticky md:top-10 ">
             {/* Mobile Close Button */}
             {showRightSidebar && (
               <div className="flex justify-end lg:hidden mb-4">
@@ -537,81 +535,6 @@ export const DashboardHome = () => {
                   <p className="text-xs lg:text-sm text-[var(--color-slate)]">
                     Welcome to your learning dashboard!
                   </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Enhanced Getting Started Card */}
-            <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 mt-5">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">
-                    Your Progress
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    Complete your setup journey
-                  </p>
-                </div>
-                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center">
-                  <BarChart3 size={20} className="text-white" />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-3 rounded-2xl bg-green-50 border border-green-200">
-                  <div className="w-8 h-8 bg-green-500 rounded-xl flex items-center justify-center shadow-sm">
-                    <span className="text-white text-sm font-bold">✓</span>
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-sm font-semibold text-green-700">
-                      Account Created
-                    </span>
-                    <p className="text-xs text-green-600">Welcome aboard! 🎉</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-3 rounded-2xl bg-gray-50 border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition-colors cursor-pointer">
-                  <div className="w-8 h-8 bg-gray-300 rounded-xl flex items-center justify-center">
-                    <span className="text-gray-600 text-sm">2</span>
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-sm font-medium text-gray-700">
-                      Complete Profile
-                    </span>
-                    <p className="text-xs text-gray-500">
-                      Add your skills and interests
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-3 rounded-2xl bg-gray-50 border border-gray-200 hover:bg-blue-50 hover:border-blue-200 transition-colors cursor-pointer">
-                  <div className="w-8 h-8 bg-gray-300 rounded-xl flex items-center justify-center">
-                    <span className="text-gray-600 text-sm">3</span>
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-sm font-medium text-gray-700">
-                      Enroll in First Course
-                    </span>
-                    <p className="text-xs text-gray-500">
-                      Start your learning journey
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 bg-linear-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-200">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-blue-700">
-                      25% Complete
-                    </p>
-                    <p className="text-xs text-blue-600">
-                      Keep going! You're doing great
-                    </p>
-                  </div>
-                  <div className="w-12 h-2 bg-blue-200 rounded-full overflow-hidden">
-                    <div className="w-3 h-full bg-blue-500 rounded-full"></div>
-                  </div>
                 </div>
               </div>
             </div>
