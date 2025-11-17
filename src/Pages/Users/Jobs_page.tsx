@@ -26,6 +26,9 @@ import {
   Bookmark,
   BookmarkCheck,
 } from "lucide-react";
+import { getAllJobs } from "../../api/Companies/jobsApi";
+import type { Job as CompanyJob } from "../../api/Companies/jobsApi";
+import { useEffect } from "react";
 
 interface JobApplication {
   id: string;
@@ -152,6 +155,43 @@ export const JobsPage = () => {
       match: 78,
     },
   ];
+  // jobs fetched from backend for discover tab
+  const [discoverJobs, setDiscoverJobs] = useState<JobListing[]>(jobListings);
+
+  useEffect(() => {
+    // fetch discoverable jobs when discover tab is selected
+    if (activeTab === "discover") {
+      fetchDiscoverJobs();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  const fetchDiscoverJobs = async () => {
+    try {
+      const jobs: CompanyJob[] = await getAllJobs();
+      const mapped: JobListing[] = jobs.map((j) => ({
+        id: j.id,
+        title: j.title,
+        company: (j as any).company?.companyName || "Company",
+        companyLogo: "/api/placeholder/40/40",
+        location: j.remote ? "Remote" : j.location || "",
+        // Backend doesn't expose a granular job "type" field currently; fallback to Full-time
+        type: "Full-time",
+        salary: j.salaryRange || "Competitive",
+        postedDate: j.createdAt,
+        description: j.description || "",
+        requirements: (j as any).requirements || [],
+        isBookmarked: false,
+        applicants: (j as any)._count?.applications || 0,
+        match: Math.max(70, Math.min(95, Math.floor(Math.random() * 26) + 70)),
+      }));
+      setDiscoverJobs(mapped);
+    } catch (err) {
+      console.error("Failed to load discover jobs:", err);
+    } finally {
+      // finished
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -196,7 +236,9 @@ export const JobsPage = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const filteredJobs = jobListings.filter((job) => {
+  const sourceJobs = activeTab === "discover" ? discoverJobs : jobListings;
+
+  const filteredJobs = sourceJobs.filter((job) => {
     const matchesSearch =
       job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.company.toLowerCase().includes(searchQuery.toLowerCase());
@@ -528,12 +570,6 @@ export const JobsPage = () => {
                 className="bg-white text-[var(--color-primary)] px-6 py-3 rounded-xl font-semibold hover:bg-[var(--color-light)] transition-colors shadow-lg"
               >
                 Explore Jobs
-              </button>
-              <button
-                onClick={() => navigate("/dashboard/build-profile")}
-                className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-colors border border-white/30"
-              >
-                Build Profile
               </button>
               <button
                 onClick={() => navigate("/dashboard/job-profile")}

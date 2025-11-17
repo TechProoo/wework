@@ -72,6 +72,34 @@ export async function getMyJobs(): Promise<Job[]> {
 }
 
 /**
+ * Get all public jobs (discoverable by students)
+ * Supports optional filters via query params on the server
+ */
+export async function getAllJobs(filters?: {
+  companyId?: string;
+  status?: string;
+  remote?: boolean;
+}): Promise<Job[]> {
+  try {
+    const params: any = {};
+    if (filters?.companyId) params.companyId = filters.companyId;
+    if (filters?.status) params.status = filters.status;
+    if (filters?.remote !== undefined) params.remote = String(filters.remote);
+
+    const response = await httpClient.get('/companies/jobs/all', { params });
+
+    if (response.status === 200 && response.data?.data) {
+      return response.data.data;
+    }
+
+    return [];
+  } catch (error: any) {
+    console.error('Failed to fetch all jobs:', error);
+    return [];
+  }
+}
+
+/**
  * Get a single job by ID
  * @param jobId - Job ID
  * @returns Job object
