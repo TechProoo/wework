@@ -58,6 +58,9 @@ interface JobListing {
   isBookmarked: boolean;
   applicants: number;
   match: number;
+  department?: string;
+  experienceLevel?: string;
+  applicationDeadline?: string;
 }
 
 export const JobsPage = () => {
@@ -169,27 +172,88 @@ export const JobsPage = () => {
   const fetchDiscoverJobs = async () => {
     try {
       const jobs: CompanyJob[] = await getAllJobs();
-      const mapped: JobListing[] = jobs.map((j) => ({
-        id: j.id,
-        title: j.title,
-        company: (j as any).company?.companyName || "Company",
-        companyLogo: "/api/placeholder/40/40",
-        location: j.remote ? "Remote" : j.location || "",
-        // Backend doesn't expose a granular job "type" field currently; fallback to Full-time
-        type: "Full-time",
-        salary: j.salaryRange || "Competitive",
-        postedDate: j.createdAt,
-        description: j.description || "",
-        requirements: (j as any).requirements || [],
-        isBookmarked: false,
-        applicants: (j as any)._count?.applications || 0,
-        match: Math.max(70, Math.min(95, Math.floor(Math.random() * 26) + 70)),
-      }));
+
+      // helper to parse description and metadata blocks added by backend
+      const parseDescription = (desc?: string) => {
+        const text = desc || "";
+        const parts = text.split("\n\n");
+        const main = (parts[0] || "").trim();
+        const meta: {
+          department?: string;
+          jobType?: string;
+          experienceLevel?: string;
+          positions?: string;
+          applicationDeadline?: string;
+        } = {};
+
+        parts.slice(1).forEach((part) => {
+          if (part.includes("**Department:**")) {
+            meta.department = part.replace("**Department:**", "").trim();
+          }
+          if (part.includes("**Job Type:**")) {
+            meta.jobType = part.replace("**Job Type:**", "").trim();
+          }
+          if (part.includes("**Experience Level:**")) {
+            meta.experienceLevel = part
+              .replace("**Experience Level:**", "")
+              .trim();
+          }
+          if (part.includes("**Positions Available:**")) {
+            meta.positions = part
+              .replace("**Positions Available:**", "")
+              .trim();
+          }
+          if (part.includes("**Application Deadline:**")) {
+            meta.applicationDeadline = part
+              .replace("**Application Deadline:**", "")
+              .trim();
+          }
+        });
+
+        return { main, meta };
+      };
+
+      const mapped: JobListing[] = jobs.map((j) => {
+        const { main, meta } = parseDescription(j.description);
+
+        // clean up requirement strings sent by backend (strip prefixes)
+        const cleanedRequirements: string[] = (
+          (j as any).requirements || []
+        ).map((r: string) =>
+          r
+            .replace(/^Responsibility:\s*/i, "")
+            .replace(/^Requirement:\s*/i, "")
+            .replace(/^Required Skill:\s*/i, "")
+            .trim()
+        );
+
+        return {
+          id: j.id,
+          title: j.title,
+          company: (j as any).company?.companyName || "Company",
+          companyLogo: "/api/placeholder/40/40",
+          location: j.remote ? "Remote" : j.location || "",
+          // prefer explicit metadata job type, otherwise fall back to remote flag
+          type: (meta.jobType as any) || (j.remote ? "Remote" : "Full-time"),
+          salary: j.salaryRange || "Competitive",
+          postedDate: j.createdAt,
+          description: main,
+          requirements: cleanedRequirements,
+          isBookmarked: false,
+          applicants: (j as any)._count?.applications || 0,
+          match: Math.max(
+            70,
+            Math.min(95, Math.floor(Math.random() * 26) + 70)
+          ),
+          department: meta.department,
+          experienceLevel: meta.experienceLevel,
+          applicationDeadline: meta.applicationDeadline,
+        };
+      });
+
       setDiscoverJobs(mapped);
     } catch (err) {
       console.error("Failed to load discover jobs:", err);
-    } finally {
-      // finished
     }
   };
 
@@ -507,6 +571,7 @@ export const JobsPage = () => {
                     <option value="Full-time">Full-time</option>
                     <option value="Part-time">Part-time</option>
                     <option value="Contract">Contract</option>
+                    <option value="Remote">Remote</option>
                     <option value="Internship">Internship</option>
                   </select>
                 </div>
